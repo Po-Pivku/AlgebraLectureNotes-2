@@ -1,0 +1,118 @@
+\ProvidesPackage{matanhelper}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{textcomp}
+\usepackage{tikz}
+
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+
+% Теоремы, следствия, замечания, ...
+\theoremstyle{plain}
+\newtheorem{theorem}{Теорема}[chapter]
+\newtheorem{theorem-non}{Предложение}[chapter]
+\newtheorem{statement}{Утверждение}[chapter]
+\newtheorem{lemma}[theorem]{Лемма}
+\newcounter{corollaryCounter}[theorem]
+\newtheorem{corollary}[corollaryCounter]{Следствие}
+\newtheorem*{corollary*}{Следствие}
+
+\theoremstyle{definition}
+\newtheorem*{example}{Пример}
+\newtheorem*{examples}{Примеры}
+\newtheorem*{exercise}{Упражнение}
+\newtheorem{definition}{Определение}[chapter]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Замечание}
+\newtheorem*{editremark}{Замечание (от редакторов конспекта)}
+\newtheorem*{remarks}{Замечания}
+\newtheorem*{exerciseAnswer}{Ответ на упражнение}
+
+% Нумеровать формулы по главам
+\numberwithin{equation}{chapter}
+
+% Дуги и стрелки над обозначениями кривых
+\newcommand{\overbow@any}[2]{
+   \tikz [baseline = (N.base), every node/.style={}] {
+      \node [inner sep = 0pt] (N) {$#1$};
+      \draw [line width = 0.4pt, #2] plot [smooth, tension=1.3] coordinates {
+         ($(N.north west) + (0.1ex,0)$)
+         ($(N.north)      + (0,0.5ex)$)
+         ($(N.north east) + (0,0)$)
+      };
+   }
+}
+\newcommand{\overbow}[1]{\overbow@any{#1}{-}}
+\newcommand{\overbowleft}[1]{\overbow@any{#1}{{latex[length=3mm]}-}}
+\newcommand{\overbowright}[1]{\overbow@any{#1}{-{latex[length=3mm]}}}
+
+% Числовые множества
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% Специальная команда обрамления в кружочек
+\newcommand*{\encircle}[1]{%
+  \relax%
+  \ifmmode%
+    \mathpalette\@encircle@math{#1}%
+  \else%
+    \@encircle{#1}%
+  \fi%
+}
+\newcommand*{\@encircle@math}[2]{%
+  \@encircle{$\m@th#1#2$}%
+}
+\newcommand*{\@encircle}[1]{%
+  \tikz[baseline,anchor=base] {%
+    \node[draw,circle,outer sep=0pt,inner sep=.1ex] {#1};%
+  }%
+}
+
+% Необходимость, достаточность
+\newcommand{\nec}{\encircle{$\Rightarrow$}}
+\newcommand{\suff}{\encircle{$\Leftarrow$}}
+
+% Наклонные \le и \ge
+%\renewcommand{\le}{\leqslant}
+%\renewcommand{\ge}{\geqslant}
+%\renewcommand{\leq}{\leqslant}
+%\renewcommand{\geq}{\geqslant}
+
+% Буквенные \Re и \Im
+\DeclareMathOperator{\@custom@Re}{Re}
+\DeclareMathOperator{\@custom@Im}{Im}
+\renewcommand{\Re}{\@custom@Re}
+\renewcommand{\Im}{\@custom@Im}
+
+% Еще переопределения
+\renewcommand{\emptyset}{\varnothing}
+
+% Математические операторы
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\ord}{ord}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\rom}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+\newcommand{\rmk}[1]{\noindent {\textbf{#1}}}
+
+\newcommand\bigsubset[1][1.19]{%
+   \mathrel{\vcenter{\hbox{\scalebox{#1}{$\subset$}}}}}
+
+
+\newcommand\bigsupset[1][1.19]{%
+   \mathrel{\vcenter{\hbox{\scalebox{#1}{$\supset$}}}}}
