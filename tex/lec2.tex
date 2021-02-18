@@ -1,0 +1,193 @@
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+\begin{remark}
+    Очевидно композиция гомоморфизмов --- гомоморфизм.
+\end{remark}
+
+\section{Смежные классы}
+Возьмем любую группу $G$ и любую подгруппу $H$ в ней. Введем следующее отношение: пусть $g_1, g_2 \in G$, тогда $g_1 \sim g_2$, если $\exists h \in H : g_2 = g_1 \cdot h$.
+
+\begin{statement}
+    $\sim$ --- отношение эквивалентности.
+\end{statement}
+\begin{proof}
+    \begin{equation*}
+        \begin{gathered}
+            g = g \cdot e, e \in H\\
+            g_2 = g_1 \cdot h \underset{\mathclap{h^{-1} \in H}}{\implies} g_1 = g_2 \cdot h^{-1} \\
+            \begin{cases}
+                g_2 = g_1 \cdot h \\
+                g_3 = g_2 \cdot h'
+            \end{cases}
+            \underset{\mathclap{hh' \in H}}{\implies}
+            g_3 = g_1 \cdot hh'
+        \end{gathered}
+    \end{equation*}
+\end{proof}
+
+\rmk{Обозначение}.
+\begin{equation*}
+    \begin{gathered}
+        g \in G, M \subset G\text{. Тогда }gM = \{gm \, | \, m \in M\}\\
+        g \in G, M \subset G\text{. Тогда }Mg = \{mg \, | \, m \in M\}
+    \end{gathered}
+\end{equation*}
+Легко видеть, что $[g]$, класс смежности элемента $g$ по отношению $\sim$, в точности равен множеству $gM$.
+
+\begin{definition}
+    $gH$ --- левый смежный класс(левый класс смежности),
+
+    $Hg$ --- правый смежный класс(правый класс смежности)
+\end{definition}
+
+\begin{definition}
+    Пусть $H < G$. Тогда индексом $H$ в $G$ называется $(G : H) = |G / H|$
+\end{definition}
+
+TODO()
+
+\begin{theorem-non}
+    Пусть $K < H < G$ и $(G : H) < \infty, (H : K) < \infty$. Тогда $(G : K) < \infty)$ и $(G : K) = (G : H)(H : K)$.
+\end{theorem-non}
+\begin{proof}
+    Пусть $(G : H) = k, (H : K) = l$ и $g_1, \dotsc, g_k$ --- представители всех классов в $G / H$ и $h_1, \dotsc, h_l$ --- представители всех классов в $H / K$. Докажем, что $\{g_i h_j \, | \, i = 1,\dotsc,k; j = 1,\dotsc, l\}$ --- представители всех классов в $G / K$. Для этого нужно доказать два утверждения: 1) $\forall g \in G, \, \exists i, j\colon g \in g_i h_j K$ и 2) $g_i h_j K \neq g_{i'} h_{j'} K$ при $(i, j) \neq (i', j')$. TODO().
+\end{proof}
+
+\begin{examples}
+    1. Пусть $G = S_3, H = \langle (1 2) \rangle = \{e, (1 2)\}$. Тогда:
+    \begin{equation*}
+        \begin{gathered}
+            eH = (1 2)H = H,\\
+            (1 3)H = \{(1 3), (1 2 3)\} = (1 2 3)H,\\
+            (2 3)H = \{(2 3), (1 3 2)\} = (1 3 2)H\\
+            H(1 3) = \{(1 3), (1 3 2)\}\\
+            \cdots
+        \end{gathered}
+    \end{equation*}
+\end{examples}
+
+\begin{corollary*}
+    Пусть $G$ --- конечная группа, $H < G$. Тогда $|G| = (G : H)|H|$.
+\end{corollary*}
+\begin{proof}
+    Пусть $K = \{e\}$. Тогда $(G : e) = |G|, (H : e) = |H|$. Тогда по предложению
+    \begin{equation*}
+        (G : e) = (G : H) \cdot (H : e) \implies |G| = (G : H)|H|
+    \end{equation*}
+\end{proof}
+
+\begin{theorem}[Лагранжа]
+    $|G| < \infty, H < G \implies |H| | |G|$
+\end{theorem}
+\begin{proof}
+    $|G| = |H| \cdot (G : H)$
+\end{proof}
+\begin{corollary}
+    Пусть $|G| < \infty, g \in G$. Тогда $\ord g | |G|$.
+\end{corollary}
+\begin{proof}
+    $\ord g = |\langle g \rangle|$. При этом $\langle g \rangle$ --- подгруппа $G$. Значит по теореме Лагранжа $\ord g = |\langle g \rangle| | |G|$
+\end{proof}
+\begin{corollary}
+    Пусть $|G| < \infty, g \in G$. Тогда $g^{|G|} = e$.
+\end{corollary}
+\begin{proof}
+    $|G|$ делится на $\ord g$. Значит $g^{|G|} = g^{k \cdot \ord g} = e^k = e$
+\end{proof}
+\begin{corollary}
+    Пусть $m \in \N, a \in \Z, (a, m) = 1$. Тогда $a^{\phi(m)} = 1 \pmod{m}$.
+\end{corollary}
+\begin{proof}
+    $G = (\Z /m \Z)^{*}, g = [a]_{m}$. TODO()
+\end{proof}
+
+TODO()
+
+\section{Нормальные подгруппы}
+\begin{definition}
+    Пусть $H$ --- подгруппа в $G$. $H$ называется нормальной подгруппой, если $\forall g \in G, \forall h \in H\colon ghg^{-1} \in H$.
+\end{definition}
+\rmk{Обозначение}. TODO(нормальная подгруппа)
+\begin{remark}
+    $G$ --- абелева группа. Тогда любая подгруппа $G$ --- нормальная.
+\end{remark}
+
+\begin{theorem-non}
+    Пусть $\phi\colon G \to G'$ --- гомоморфизм, тогда $\Ker \phi$ --- нормальная подгруппа $G$.
+\end{theorem-non}
+\begin{proof}
+    Пусть $h \in \Ker \phi, g \in G$. Тогда:
+    \begin{equation*}
+        \phi(ghg^{-1}) = \phi(g) \overbrace{\phi(h)}^{\mathclap{e}} \phi(g)^{-1} = e
+    \end{equation*}
+\end{proof}
+
+\begin{theorem-non}
+    Пусть $H < G$. Тогда следующие утверждения эквивалентны:
+    \begin{enumerate}
+        \item $H$ --- нормальная подгруппа $G$.
+        \item $\forall g \in G\colon gHg^{-1} \subset H$.
+        \item $\forall g \in G\colon gHg^{-1} = H$.
+        \item $\forall g \in G\colon Hg = gH$
+     \end{enumerate}
+\end{theorem-non}
+\begin{proof}
+    TODO()
+\end{proof}
+
+\begin{examples}
+    1) $\langle (1 2) \rangle$ --- не нормальная группа в $S_3$.
+
+    2) $A_3$ --- нормальная группа в $S_3$.
+\end{examples}
+\begin{remark}
+    $(G : H) = 2 \implies H \triangledown G$
+\end{remark}
+\begin{proof}
+    \begin{equation*}
+        \begin{gathered}
+            G / H = \{H, G \ H\}\\
+            H / G = \{H, G \ H\}
+        \end{gathered}
+    \end{equation*}
+\end{proof}
+
+Очевидно, пересечение набора нормальных подгрупп --- нормальная подгруппа.
+
+Пусть $H \triangle G$. Введем на $G / H$ структуру группы. TODO()...
+
+\begin{theorem-non}
+    $(G / H, \cdot)$ --- группа.
+\end{theorem-non}
+\begin{proof}
+    1) Ассоциативность очевидна, потому что верна ассоциативность для множеств. $A, B, C \subset G \implies (AB)C = A(BC)$
+
+    2) $eH$ --- нейтральный в $G / H$.
+    \begin{equation*}
+        \begin{gathered}
+            gH \cdot eH = gHH = gH\\
+            eh \cdot gH = HgH = gHH = gH
+        \end{gathered}
+    \end{equation*}
+
+    3) $g^{-1}H$ --- обратный к $gH$.
+    \begin{equation*}
+        \begin{gathered}
+            g^{-1}gH = g^{-1}gH = eH \\
+            gHg^{-1}H = eH\text{--- TODO(тут что-то написано)}
+        \end{gathered}
+    \end{equation*}
+\end{proof}
+\begin{definition}
+    $G / H$ называется факторгруппой группы $G$ по нормальной подгруппе $H$.
+\end{definition}
+
+\begin{theorem-non}
+    TODO()
+\end{theorem-non}
+
+\end{document}
