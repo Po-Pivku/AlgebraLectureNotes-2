@@ -6,5 +6,18 @@ cache:
     - $HOME/.texlive
 script:
 - mkdir _build
-# Prefix command with travis_wait x so it times out after 3 mins
 - travis_wait 3 pdflatex -output-directory _build ./main.tex
+before_deploy:
+- ls
+deploy:
+  provider: releases
+  api_key:
+    secure: FvK9j4Bzt4aCztIdU/f+0HcE9eYBDH8CxUpQKhjYvl2FhJhJoHI0i+MM4skxHVsNC2F72pVTw1BAfQIRFxXeMcPkSa6LfZDjJsOhfWcD3Das4eobb4AWLVyasbbCYZ0nNmvipZd5rFDnu1pGda45+q1DKd27m+IwsCIbbWeTmRos2YHMPScvyIPKNkTAplXT5eDuVJH/QVMzGct+w7ekg2v+wj6WQzeSYunJvFrEohLWHf0CV1hOL7DNyDmeFQRBoh3X6GxEzhLFLyeTnkvOjbLajG7MAdimiWHmjFiBvKH/qrs8B+5h8BeIIryuF3+6J/PrzUNio134zULBObUnvPx4J7hB/Pl0G972Wq4iKkpGkJJvTZrHJ9YiI/tL9saSVIochFcPiuRvs9aPCFPr/QUU6Dg88/DausTVM7I0RILGYLieg8ytlefUPgIpgEbD9ALEXjoImHL83dT9ZDMhn0lbQv7/wQ2SQLFPAZZbTigZ6PJhU22p4uzTjZNDRgS/tfjpq9h5LPzY7zrvvULrcTvV7EQddtlZu+UbK5b35urCTXeQZzWYE/Jo8n4pNqFFb/s7HsIbpJrEXryxiBW8WtedfhMFMPpraT1+/boFgApMcJo+fJUyo017fKPevogHS7joN4K8l+naNHt/Sa03+mTZcBEzDShG51asJcFCjGY=
+  file: "_build/main.pdf"
+  draft: true
+  overwrite: true
+  on:
+    repo: Po-Pivku/AlgebraLectureNotes-2
+    branch:
+        - master
+  skip_cleanup: 'true'
