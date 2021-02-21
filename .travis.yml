@@ -15,7 +15,6 @@ deploy:
     - _build/AlgebraLectureNotes2.pdf
   overwrite: true
   on:
-    tag: true
     repo: Po-Pivku/AlgebraLectureNotes-2
     branch:
         - master
