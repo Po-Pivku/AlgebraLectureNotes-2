@@ -76,7 +76,9 @@
 \newcommand{\GCD}{\text{НОД}}
 \newcommand{\LCM}{\text{НОК}}
 
-\newcommand{\rom}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+\makeatletter
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
 
 \newcommand{\rmk}[1]{\noindent {\textbf{#1}}}
 
