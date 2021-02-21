@@ -41,6 +41,52 @@ tlmgr install   \
     amsthm \
     mathtools \
     cancel \
+    exam          \
+    amsfonts      \
+    stmaryrd      \
+    amsmath       \
+    cyrillic      \
+    inputenc      \
+    babel         \
+    babel-russian \
+    hyphen-russian \
+    t2 \
+    lh \
+    cm-super \
+    euscript      \
+    latexsym \
+    showkeys \
+    pythonhighlight \
+    mdframed \
+    lipsum \
+    soul \
+    parskip \
+    graphicx \
+    mathtools \
+    stackengine \
+    tocloft \
+    xcolor \
+    hyperref \
+    tikz \
+    thmtools \
+    pdfcomment \
+    blindtext \
+    todonotes \
+    authblk \
+    import \
+    listings \
+    etoolbox \
+    datetime2 \
+    tracklang \
+    zref \
+    marginnote \
+    soulpos \
+    titlesec \
+    hyphsubst \
+    datetime2-russian \
+    bookmark \
+    pgfplots \
+    tikzsymbols \
     tikz
 
 # Keep no backups (not required, simply makes cache bigger)
