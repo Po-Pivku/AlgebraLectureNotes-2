@@ -13,7 +13,6 @@ deploy:
     secure: I900LnDIq1lgIOHnIxk3bwDsKw+ogyPyosmnsqs7p0YiS/I/zu3IPYC+vw4za9UFBCI1ChwRIQfJuIVCxz1fjdo7ztO2CryQ0DDKFhx5ZY+2u/lWW2PXdVtpmCGZma6kkz5+r7VQAAQ+XPwbMeKttuTHQuyy4hX24ehw7V+EFRvk77CrOQCo1NjXecdVPSbVmGeHrj3xQpd022pPWaIt40gioXfXk0DehPUvUa8ARWZ/xe9WpjddeUBHYsKJtO9v+LTL8YJz/R9MSz908T3ohw1LHRGkJ/47eKPDYl+3PNrpYyShwrOmMElmjQIah62InGsDMUCXE75coeZlH6EGIcnCGN/2SckU/XLfr3VZFoWB2tKfoFgMqzfUWIAlBOXv/47ZYpEb775VUlrYzh8Grl53KZtYHmGduMyrQGW4zUB+rvsMk2F8YcW+NVR49k5vcHMqOGcW/+rrYy89uTcw9TyRzvad81xHKLcd/yO+MGON05rJtycWfdCN90ECK83fQGOnCWHyvGg/KVNYWO5wPcMBgqMFKmBEbJvazO6hW/hc+phTGboshmV9O/vqlD2FJ6n+ZJYx3nKSaEuvi/SpD68SdkNaXwWFEZIDRFvd9FGaFTLz0c0KkgCH0+SXzxP5vUjM/RNbMPIQkmZYoLX0bmKzU/bUESB/ji7AzhVnAWc=
   file:
     - _build/main.pdf
-    - main.tex
   overwrite: true
   on:
     tag: true
