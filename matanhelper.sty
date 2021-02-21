@@ -4,11 +4,8 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{mathtools}
-\usepackage{textcomp}
+\usepackage{cancel}
 \usepackage{tikz}
-
-\usetikzlibrary{calc}
-\usetikzlibrary{arrows.meta}
 
 % Теоремы, следствия, замечания, ...
 \theoremstyle{plain}
@@ -35,21 +32,6 @@
 % Нумеровать формулы по главам
 \numberwithin{equation}{chapter}
 
-% Дуги и стрелки над обозначениями кривых
-\newcommand{\overbow@any}[2]{
-   \tikz [baseline = (N.base), every node/.style={}] {
-      \node [inner sep = 0pt] (N) {$#1$};
-      \draw [line width = 0.4pt, #2] plot [smooth, tension=1.3] coordinates {
-         ($(N.north west) + (0.1ex,0)$)
-         ($(N.north)      + (0,0.5ex)$)
-         ($(N.north east) + (0,0)$)
-      };
-   }
-}
-\newcommand{\overbow}[1]{\overbow@any{#1}{-}}
-\newcommand{\overbowleft}[1]{\overbow@any{#1}{{latex[length=3mm]}-}}
-\newcommand{\overbowright}[1]{\overbow@any{#1}{-{latex[length=3mm]}}}
-
 % Числовые множества
 \newcommand{\R}{\mathbb{R}}
 \renewcommand{\C}{\mathbb{C}}
@@ -75,18 +57,11 @@
   }%
 }
 
-% Необходимость, достаточность
-\newcommand{\nec}{\encircle{$\Rightarrow$}}
-\newcommand{\suff}{\encircle{$\Leftarrow$}}
-
 % Буквенные \Re и \Im
 \DeclareMathOperator{\@custom@Re}{Re}
 \DeclareMathOperator{\@custom@Im}{Im}
 \renewcommand{\Re}{\@custom@Re}
 \renewcommand{\Im}{\@custom@Im}
-
-% Еще переопределения
-\renewcommand{\emptyset}{\varnothing}
 
 % Математические операторы
 \DeclareMathOperator{\Hom}{Hom}
@@ -98,7 +73,8 @@
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\ord}{ord}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\GCD}{\text{НОД}}
+\newcommand{\LCM}{\text{НОК}}
 
 \newcommand{\rom}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
 
@@ -107,6 +83,7 @@
 \newcommand\bigsubset[1][1.19]{%
    \mathrel{\vcenter{\hbox{\scalebox{#1}{$\subset$}}}}}
 
-
 \newcommand\bigsupset[1][1.19]{%
    \mathrel{\vcenter{\hbox{\scalebox{#1}{$\supset$}}}}}
+
+\newcommand{\dvdots}{\mathop{\raisebox{-2pt}{\vdots}}}

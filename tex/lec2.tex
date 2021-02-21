@@ -9,7 +9,7 @@
 \end{remark}
 
 \section{Смежные классы}
-Возьмем любую группу $G$ и любую подгруппу $H$ в ней. Введем следующее отношение: пусть $g_1, g_2 \in G$, тогда $g_1 \sim g_2$, если $\exists h \in H : g_2 = g_1 \cdot h$.
+Возьмем любую группу $G$ и любую подгруппу $H$ в ней. Введем следующее отношение: пусть $g_1, g_2 \in G$, тогда $g_2 \sim g_1$, если $\exists \, h \in H\colon g_2 = g_1 \cdot h$.
 
 \begin{statement}
     $\sim$ --- отношение эквивалентности.
@@ -17,48 +17,94 @@
 \begin{proof}
     \begin{equation*}
         \begin{gathered}
-            g = g \cdot e, e \in H\\
-            g_2 = g_1 \cdot h \underset{\mathclap{h^{-1} \in H}}{\implies} g_1 = g_2 \cdot h^{-1} \\
+            g = g \cdot e, \, e \in H \text{ --- рефлексивность}\\
+            g_2 = g_1 \cdot h \underset{\mathclap{h^{-1} \in H}}{\implies} g_1 = g_2 \cdot h^{-1}
+            \text{ --- симметричность }\\
             \begin{cases}
                 g_2 = g_1 \cdot h \\
                 g_3 = g_2 \cdot h'
             \end{cases}
             \underset{\mathclap{hh' \in H}}{\implies}
-            g_3 = g_1 \cdot hh'
+            g_3 = g_1 \cdot hh' \text{ --- транзитивность}
         \end{gathered}
     \end{equation*}
 \end{proof}
 
-\rmk{Обозначение}.
+\rmk{Обозначения}.
 \begin{equation*}
     \begin{gathered}
+        G/_{\sim} =: G/H\text{ --- множество классов эквивалентности по данному отношению}\\
         g \in G, M \subset G\text{. Тогда }gM = \{gm \, | \, m \in M\}\\
         g \in G, M \subset G\text{. Тогда }Mg = \{mg \, | \, m \in M\}
     \end{gathered}
 \end{equation*}
-Легко видеть, что $[g]$, класс смежности элемента $g$ по отношению $\sim$, в точности равен множеству $gM$.
+Легко видеть, что $[g]$ --- класс эквивалентности элемента $g$ по отношению $\sim$, в точности равен $gH$.
 
 \begin{definition}
     $gH$ --- левый смежный класс(левый класс смежности),
 
-    $Hg$ --- правый смежный класс(правый класс смежности)
+    $Hg$ --- правый смежный класс(правый класс смежности) элемента $g$ по подгруппе $H$.
 \end{definition}
+\begin{equation*}
+    \begin{gathered}
+        G/H = \{gH, \, g \in G\}\text{ --- множество всех левых смежных классов}\\
+        H\backslash G = \{Hg, \, g \in G\}\text{ --- множество всех правых смежных классов}
+    \end{gathered}
+\end{equation*}
 
 \begin{definition}
-    Пусть $H < G$. Тогда индексом $H$ в $G$ называется $(G : H) = |G / H|$
+    Пусть $H < G$. Тогда \textbf{индексом} $H$ в $G$ называется $(G : H) = |G / H|$
 \end{definition}
 
-TODO()
+\begin{theorem-non}
+    Количество левых смежных классов, равно количеству правых смежных классов, то есть $(G : H) = |H \backslash G|$.
+\end{theorem-non}
+
+\begin{proof}
+    Построим биекцию из $G/H$ в $H \backslash G$. Пусть $A \to A^{-1} = \{a^{-1} \, | \, a \in A\}$. Это действительно отображение, потому что $A^{-1} = (gH)^{-1} = H^{-1}g^{-1} = Hg^{-1} \in H \backslash G$. В качестве обратного отображения можно также взять отображение $A \to A^{-1}$. Очевидно оно корректно определено просто по аналогии с нашей биекцией. Таким образом мы получили две взаимно обратные биекции, значит множества равномощны, что и требовалось доказать.
+\end{proof}
+
+\begin{remark}
+    У конечной группы индекс очевидно всегда будет конечным. При этом у бесконечного множества все-равно может быть конечный индекс. Например $(\Z : m\Z) = |\Z/m\Z| = m$.
+\end{remark}
 
 \begin{theorem-non}
-    Пусть $K < H < G$ и $(G : H) < \infty, (H : K) < \infty$. Тогда $(G : K) < \infty)$ и $(G : K) = (G : H)(H : K)$.
+    Пусть $K < H < G$ и $(G : H) < \infty, \, (H : K) < \infty$. Тогда $(G : K) < \infty$ и $(G : K) = (G : H) \cdot (H : K)$.
 \end{theorem-non}
 \begin{proof}
-    Пусть $(G : H) = k, (H : K) = l$ и $g_1, \dotsc, g_k$ --- представители всех классов в $G / H$ и $h_1, \dotsc, h_l$ --- представители всех классов в $H / K$. Докажем, что $\{g_i h_j \, | \, i = 1,\dotsc,k; j = 1,\dotsc, l\}$ --- представители всех классов в $G / K$. Для этого нужно доказать два утверждения: 1) $\forall g \in G, \, \exists i, j\colon g \in g_i h_j K$ и 2) $g_i h_j K \neq g_{i'} h_{j'} K$ при $(i, j) \neq (i', j')$. TODO().
+    Пусть $(G : H) = k, \, (H : K) = l$, \:  $g_1, \dotsc, g_k$ --- представители всех классов в
+$G / H$ и $h_1, \dotsc, h_l$ --- представители всех классов в $H / K$. Докажем, что $\{g_i h_j \,
+| \, i = 1,\dotsc,k; \; j = 1,\dotsc, l\}$ --- представители всех классов в $G / K$. Для этого докажем следующие два утверждения:
+\begin{enumerate}
+    \setlength{\parskip}{0pt}
+    \setlength{\itemsep}{0pt}
+    \item $\forall g \in G, \, \exists \, i, j\colon g \in g_i h_j K$
+    \begin{proof}
+        \begin{equation*}
+            \begin{gathered}
+                g \in G \implies \exists \, i!\colon \; g \in g_iH \text{, т.~е. } g = g_ih, \; h \in H
+            \end{gathered}
+        \end{equation*}
+        Аналогично
+        \begin{equation*}
+            h = h_jt, \; t \in K \implies g = g_i h_j t, \; t \in K
+        \end{equation*}
+        То есть $g \in g_ih_jK$.
+    \end{proof}
+    \item $g_i h_j K \neq g_{i'} h_{j'} K$ при $(i, j) \neq (i', j')$
+    \begin{proof}
+        Пусть $g_ih_jK = g_{i'}h_{j'}K$. Тогда $\smash{g_i\overbrace{h_j}^{\mathclap{\in H}} = g_{i'}\overbrace{h_{j'}t}^{\mathclap{\in H}}, \: t \in K}$. Но раз $g_i$ и $g_{i'}$ не могут давать один и тот же элемент если они представляют разные классы, значит они равны. То есть $i = i'$. Теперь можно на этот элемент сократить, и по той же причине получится, что $j = j'$.
+    \end{proof}
+\end{enumerate}
 \end{proof}
 
 \begin{examples}
-    1. Пусть $G = S_3, H = \langle (1 2) \rangle = \{e, (1 2)\}$. Тогда:
+    1. Пусть $G = \Z,\, H = m\Z,\, K = mn\Z$.
+    \begin{equation*}
+        (G : H) = m, \quad (G : K) = mn \implies (H : K) = mn/m = n
+    \end{equation*}
+
+    2. Пусть $G = S_3, H = \langle (1 2) \rangle = \{e, (1 2)\}$. Тогда:
     \begin{equation*}
         \begin{gathered}
             eH = (1 2)H = H,\\
@@ -78,90 +124,146 @@ TODO()
     \begin{equation*}
         (G : e) = (G : H) \cdot (H : e) \implies |G| = (G : H)|H|
     \end{equation*}
+    Что и требовалось доказать.
 \end{proof}
 
 \begin{theorem}[Лагранжа]
-    $|G| < \infty, H < G \implies |H| | |G|$
+    $|G| < \infty, \, H < G \implies |G| \dvdots |H|$
 \end{theorem}
 \begin{proof}
     $|G| = |H| \cdot (G : H)$
 \end{proof}
 \begin{corollary}
-    Пусть $|G| < \infty, g \in G$. Тогда $\ord g | |G|$.
+    Пусть $|G| < \infty, \, g \in G$. Тогда $|G| \dvdots \ord g $.
 \end{corollary}
 \begin{proof}
-    $\ord g = |\langle g \rangle|$. При этом $\langle g \rangle$ --- подгруппа $G$. Значит по теореме Лагранжа $\ord g = |\langle g \rangle| | |G|$
+    $\ord g = |\langle g \rangle|$. При этом $\langle g \rangle$ --- подгруппа $G$. Значит по теореме Лагранжа $|G| \dvdots |\langle g \rangle| = \ord g$
 \end{proof}
 \begin{corollary}
-    Пусть $|G| < \infty, g \in G$. Тогда $g^{|G|} = e$.
+    Пусть $|G| < \infty, \, g \in G$. Тогда $g^{|G|} = e$.
 \end{corollary}
 \begin{proof}
     $|G|$ делится на $\ord g$. Значит $g^{|G|} = g^{k \cdot \ord g} = e^k = e$
 \end{proof}
-\begin{corollary}
-    Пусть $m \in \N, a \in \Z, (a, m) = 1$. Тогда $a^{\phi(m)} = 1 \pmod{m}$.
+\begin{corollary}[теорема Эйлера]
+    Пусть $m \in \N, \, a \in \Z, \, (a, m) = 1$. Тогда $a^{\phi(m)} = 1 \pmod{m}$.
 \end{corollary}
 \begin{proof}
-    $G = (\Z /m \Z)^{*}, g = [a]_{m}$. TODO()
+    Пусть $G = (\Z /m \Z)^{*}, \, g = [a]_{m}$. Так как $(a, m) = 1$, то класс $a$ будет элементом группы $(\Z/m\Z)^{*}$. Тогда по следствию 2
+    \begin{equation*}
+        ([a]_m)^{|(\Z/m\Z)^{*}|} = [1]_m
+    \end{equation*}
+    Заметим, что $|\Z/m\Z^{*}| = \phi(m)$ --- просто потому что число обратимо по модулю $m$ тогда и только тогда, когда их $\GCD$ равен единице. Но тогда
+    \begin{equation*}
+        ([a]_m)^{\phi(m)} = [1]_m \implies a^{\phi(m)} \equiv 1 \pmod{m}
+    \end{equation*}
+    Что и требовалось доказать.
 \end{proof}
 
-TODO()
+Вспомним как мы вводили операцию умножения на множестве $\Z/m\Z\colon [a]_m \cdot [b]_m = [a \cdot b]_m$. Попробуем обобщить это на случай левых смежных классов. Пусть:
+\begin{equation*}
+    g_1H \times g'H = gg'H
+\end{equation*}
+Для доказательства корректности заданной операции проверим, что результат операции не изменяется от выбора представителя в классе. Заменим $g$ на $gh, \, h \in H$ и $g'$ на $g'h', \, h' \in H$:
+\begin{align*}
+        ghg'\overbrace{h'H}^{\mathclap{H}} &\overset{\mathclap{?}}{=} gg'H\\
+        hg'H &\overset{\mathclap{?}}{=} g'H\\
+        (g')^{-1}hg'H &\overset{\mathclap{?}}{=} H = eH\\
+        (g')^{-1}hg' &\overset{\mathclap{?}}{\in} H
+\end{align*}
+Мы будем определять наше умножение только для подгрупп, удовлетворяющих получившемуся утверждению. Речь о них пойдет в следующем параграфе.
 
 \section{Нормальные подгруппы}
 \begin{definition}
-    Пусть $H$ --- подгруппа в $G$. $H$ называется нормальной подгруппой, если $\forall g \in G, \forall h \in H\colon ghg^{-1} \in H$.
+    Пусть $H$ --- подгруппа в $G$.\, $H$ называется \textbf{нормальной подгруппой}, если $\forall g \in G, \, \forall h \in H\colon ghg^{-1} \in H$.
 \end{definition}
-\rmk{Обозначение}. TODO(нормальная подгруппа)
+\rmk{Обозначение}. $H \triangle G \iff H$ --- нормальная подгруппа $G$.
 \begin{remark}
-    $G$ --- абелева группа. Тогда любая подгруппа $G$ --- нормальная.
+    $G$ --- абелева $\implies$ любая подгруппа $G$ --- нормальная.
 \end{remark}
 
 \begin{theorem-non}
-    Пусть $\phi\colon G \to G'$ --- гомоморфизм, тогда $\Ker \phi$ --- нормальная подгруппа $G$.
+    Пусть $\phi\colon G \to G'$ --- гомоморфизм, тогда $\Ker \phi \triangle G$.
 \end{theorem-non}
 \begin{proof}
-    Пусть $h \in \Ker \phi, g \in G$. Тогда:
+    Пусть $h \in \Ker \phi, \, g \in G$. Тогда:
     \begin{equation*}
         \phi(ghg^{-1}) = \phi(g) \overbrace{\phi(h)}^{\mathclap{e}} \phi(g)^{-1} = e
+        \implies ghg^{-1} \in \Ker \phi
     \end{equation*}
 \end{proof}
 
 \begin{theorem-non}
     Пусть $H < G$. Тогда следующие утверждения эквивалентны:
     \begin{enumerate}
-        \item $H$ --- нормальная подгруппа $G$.
+        \item $H \triangle G$.
         \item $\forall g \in G\colon gHg^{-1} \subset H$.
         \item $\forall g \in G\colon gHg^{-1} = H$.
         \item $\forall g \in G\colon Hg = gH$
      \end{enumerate}
 \end{theorem-non}
 \begin{proof}
-    TODO()
+    $1 \Leftrightarrow 2\colon \quad gHg^{-1} = \{ghg^{-1} \, | \, h \in H\}$ --- оба утверждения о том, что это множество должно лежать в $H \implies$ они эквивалентны.
+
+    $3 \Rightarrow 2\colon$
+    \begin{equation*}
+        gHg^{-1} = H \implies gHg^{-1} \subset H
+    \end{equation*}
+
+    $2 \Rightarrow 3\colon \quad \forall g \in G\colon$
+    \begin{equation*}
+        \left.
+        \begin{gathered}
+            gHg^{-1} \subset H \\
+            g^{-1}Hg \subset H \implies H \subset gHg^{-1}
+        \end{gathered}
+        \right \}
+        \implies gHg^{-1} = H
+    \end{equation*}
+
+    $3 \Rightarrow 4\colon$
+    \begin{equation*}
+        gHg^{-1} = H \implies gH = Hg\text{ --- домножили на $g$}
+    \end{equation*}
+
+    $4 \Rightarrow 3\colon$
+    \begin{equation*}
+        Hg = gH \implies H = gHg^{-1}\text{ --- домножили на $g^{-1}$}
+    \end{equation*}
 \end{proof}
 
 \begin{examples}
-    1) $\langle (1 2) \rangle$ --- не нормальная группа в $S_3$.
+    1) $\langle (1 2) \rangle$ --- не нормальная подгруппа в $S_3$.
 
-    2) $A_3$ --- нормальная группа в $S_3$.
+    2) $A_3$(четные перестановки в $S_3$) --- нормальная группа в $S_3$. Это так потому что у перестановок $g$ и $g^{-1}$ одинаковая четность, а значит четная перестановка останется четной.(ровно по этой причине множество $S_3 \ A_3$ тоже нормальная подгруппа)
 \end{examples}
 \begin{remark}
-    $(G : H) = 2 \implies H \triangledown G$
+    $(G : H) = 2 \implies H \triangle G$
 \end{remark}
 \begin{proof}
     \begin{equation*}
         \begin{gathered}
-            G / H = \{H, G \ H\}\\
-            H / G = \{H, G \ H\}
+            G / H = \{H, G \backslash H\}\\
+            H \backslash G = \{H, G \backslash H\}
         \end{gathered}
     \end{equation*}
 \end{proof}
 
+\begin{remark}
 Очевидно, пересечение набора нормальных подгрупп --- нормальная подгруппа.
+\end{remark}
 
-Пусть $H \triangle G$. Введем на $G / H$ структуру группы. TODO()...
+Пусть $H \triangle G$. Введем на $G / H$ структуру группы.
+\begin{equation*}
+    \begin{gathered}
+        G/H \times G/H \to G/H \\
+        (A, B) \mapsto AB
+    \end{gathered}
+\end{equation*}
+Проверим, что $AB \in G/H$. Пусть $A = gH, \, B = g'H$. Тогда $AB = gHg'H = gg'HH = (gg')(HH) = gg'H \in G/H$.
 
 \begin{theorem-non}
-    $(G / H, \cdot)$ --- группа.
+    $(G / H, \, \cdot)$ --- группа.
 \end{theorem-non}
 \begin{proof}
     1) Ассоциативность очевидна, потому что верна ассоциативность для множеств. $A, B, C \subset G \implies (AB)C = A(BC)$
@@ -177,17 +279,30 @@ TODO()
     3) $g^{-1}H$ --- обратный к $gH$.
     \begin{equation*}
         \begin{gathered}
-            g^{-1}gH = g^{-1}gH = eH \\
-            gHg^{-1}H = eH\text{--- TODO(тут что-то написано)}
+            g^{-1}HgH = g^{-1}gH = eH \\
+            gHg^{-1}H = eH
         \end{gathered}
     \end{equation*}
 \end{proof}
 \begin{definition}
-    $G / H$ называется факторгруппой группы $G$ по нормальной подгруппе $H$.
+    $G / H$ называется \textbf{факторгруппой} группы $G$ по нормальной подгруппе $H$.
 \end{definition}
 
 \begin{theorem-non}
-    TODO()
+    1. Факторгруппа $\Z/m\Z$ --- совпадает с ранее определенной $\Z/m\Z$.
+
+    2. $G / G$ --- тривиальная группа(все элементы попадают в один класс).
+
+    3. $G / \{e\} \cong G$
 \end{theorem-non}
+
+\begin{definition}
+    Элементы $g$ и $g'$ называются \textbf{сравнимыми} по нормальной подгруппе $H$, если \linebreak
+    $gH = g'H \iff g' = gh, \, h \in H \iff g' = \tilde{h}g, \, \tilde{h} \in H$.
+\end{definition}
+
+\begin{definition}
+    $ghg^{-1}$ называется \textbf{сопряженным} к $h$ при помощи $g$.
+\end{definition}
 
 \end{document}

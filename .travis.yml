@@ -1,0 +1,7 @@
+sudo: required
+language: generic
+services: docker
+
+script:
+  - docker pull dxjoke/tectonic-docker
+  - docker run --mount src=.,target=/usr/src/tex,type=bind dxjoke/tectonic-docker /bin/sh -c "tectonic main.tex"

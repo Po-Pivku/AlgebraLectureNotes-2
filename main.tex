@@ -1,6 +1,5 @@
 \documentclass[a4paper,10pt,oneside]{book}
 
-\usepackage{cmap}
 \usepackage[utf8]{inputenc}
 \usepackage[russian]{babel}
 \usepackage[a4paper,includeheadfoot,top=5mm,bottom=10mm,left=10mm,right=10mm]{geometry}
@@ -9,45 +8,19 @@
 
 \usepackage{matanhelper}
 
-\usepackage{mathtools}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{color}
-\usepackage{graphicx}
-\usepackage{etoolbox}
-
-\usepackage{tikz}
-\usepackage{tikz-cd}
-\usetikzlibrary{arrows,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks}
-\usepackage{arydshln}
-\usepackage{mathtools}
-\usepackage{multirow}
-\usepackage{multicol}
-\usepackage{cancel}
-
-
-\usepackage{xr}
-\usepackage{wrapfig}
-
-\ifcsdef{subimport}{
-\renewcommand{\subimport}[2]{\input{#1#2}}
-}{}
-
 \graphicspath{
-    {img/}
+    {../img/}
 }
 
 \frenchspacing
 \setcounter{chapter}{5}
-\righthyphenmin=2
 
 \begin{document}
 
 \tableofcontents
 
-\subfile{tex/lec1.tex}
-\subfile{tex/lec2.tex}
+\subfile{../tex/lec1.tex}
+\subfile{../tex/lec2.tex}
 
 
 \end{document}
