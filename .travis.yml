@@ -1,7 +1,10 @@
-sudo: required
-language: generic
-services: docker
-
+install:
+ - source ./texlive_install.sh
+cache:
+  directories:
+    - /tmp/texlive
+    - $HOME/.texlive
 script:
-  - docker pull dxjoke/tectonic-docker
-  - docker run --mount src=$TRAVIS_BUILD_DIR,target=/usr/src/tex,type=bind dxjoke/tectonic-docker /bin/sh -c "tectonic main.tex"
+- mkdir _build
+# Prefix command with travis_wait x so it times out after 3 mins
+- travis_wait 3 pdflatex -output-directory _build ./src/nameofmytexfile.tex
