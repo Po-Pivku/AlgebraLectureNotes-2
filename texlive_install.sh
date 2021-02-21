@@ -49,8 +49,34 @@ tlmgr install   \
     bookmark \
     tikzsymbols \
     tikz \
-    subfiles
-
+    subfiles \
+    t2 \
+    cm-super \
+    euscript      \
+    latexsym \
+    showkeys \
+    pythonhighlight \
+    mdframed \
+    lipsum \
+    soul \
+    parskip \
+    graphicx \
+    stackengine \
+    tocloft \
+    xcolor \
+    pdfcomment \
+    blindtext \
+    todonotes \
+    authblk \
+    listings \
+    datetime2 \
+    tracklang \
+    zref \
+    marginnote \
+    soulpos \
+    titlesec \
+    hyphsubst \
+    pgfplots
 
 # Keep no backups (not required, simply makes cache bigger)
 tlmgr option -- autobackup 0
