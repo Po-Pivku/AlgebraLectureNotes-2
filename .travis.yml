@@ -6,7 +6,7 @@ cache:
     - $HOME/.texlive
 script:
 - mkdir _build
-- travis_wait 3 latexmk -pdf -jobname=_build/AlgebraLectureNotes ./main.tex
+- travis_wait 3 latexmk -pdf -jobname=_build/AlgebraLectureNotes2 ./main.tex
 deploy:
   provider: releases
   api_key:
