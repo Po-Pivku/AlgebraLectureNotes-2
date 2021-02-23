@@ -41,9 +41,9 @@
 Легко видеть, что $[g]$ --- класс эквивалентности элемента $g$ по отношению $\sim$, в точности равен $gH$.
 
 \begin{definition}
-    $gH$ --- левый смежный класс(левый класс смежности),
+    $gH$ --- \textbf{левый смежный класс}(левый класс смежности),
 
-    $Hg$ --- правый смежный класс(правый класс смежности) элемента $g$ по подгруппе $H$.
+    $Hg$ --- \textbf{правый смежный класс}(правый класс смежности) элемента $g$ по подгруппе $H$.
 \end{definition}
 \begin{equation*}
     \begin{gathered}
@@ -177,13 +177,13 @@ $G / H$ и $h_1, \dotsc, h_l$ --- представители всех класс
 \begin{definition}
     Пусть $H$ --- подгруппа в $G$.\, $H$ называется \textbf{нормальной подгруппой}, если $\forall g \in G, \, \forall h \in H\colon ghg^{-1} \in H$.
 \end{definition}
-\rmk{Обозначение}. $H \triangle G \iff H$ --- нормальная подгруппа $G$.
+\rmk{Обозначение}. $H \triangleleft G \iff H$ --- нормальная подгруппа $G$.
 \begin{remark}
     $G$ --- абелева $\implies$ любая подгруппа $G$ --- нормальная.
 \end{remark}
 
 \begin{theorem-non}
-    Пусть $\phi\colon G \to G'$ --- гомоморфизм, тогда $\Ker \phi \triangle G$.
+    Пусть $\phi\colon G \to G'$ --- гомоморфизм, тогда $\Ker \phi \triangleleft G$.
 \end{theorem-non}
 \begin{proof}
     Пусть $h \in \Ker \phi, \, g \in G$. Тогда:
@@ -196,7 +196,7 @@ $G / H$ и $h_1, \dotsc, h_l$ --- представители всех класс
 \begin{theorem-non}
     Пусть $H < G$. Тогда следующие утверждения эквивалентны:
     \begin{enumerate}
-        \item $H \triangle G$.
+        \item $H \triangleleft G$.
         \item $\forall g \in G\colon gHg^{-1} \subset H$.
         \item $\forall g \in G\colon gHg^{-1} = H$.
         \item $\forall g \in G\colon Hg = gH$
@@ -238,7 +238,7 @@ $G / H$ и $h_1, \dotsc, h_l$ --- представители всех класс
     2) $A_3$(четные перестановки в $S_3$) --- нормальная группа в $S_3$. Это так потому что у перестановок $g$ и $g^{-1}$ одинаковая четность, а значит четная перестановка останется четной.(ровно по этой причине множество $S_3 \ A_3$ тоже нормальная подгруппа)
 \end{examples}
 \begin{remark}
-    $(G : H) = 2 \implies H \triangle G$
+    $(G : H) = 2 \implies H \triangleleft G$
 \end{remark}
 \begin{proof}
     \begin{equation*}
@@ -253,7 +253,7 @@ $G / H$ и $h_1, \dotsc, h_l$ --- представители всех класс
 Очевидно, пересечение набора нормальных подгрупп --- нормальная подгруппа.
 \end{remark}
 
-Пусть $H \triangle G$. Введем на $G / H$ структуру группы.
+Пусть $H \triangleleft G$. Введем на $G / H$ структуру группы.
 \begin{equation*}
     \begin{gathered}
         G/H \times G/H \to G/H \\
