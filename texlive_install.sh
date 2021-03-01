@@ -82,7 +82,8 @@ tlmgr install   \
     microtype \
     tikz-cd \
     pdfpages \
-    transparent
+    transparent \
+    pdflscape
 
 # Keep no backups (not required, simply makes cache bigger)
 tlmgr option -- autobackup 0
