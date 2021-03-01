@@ -80,7 +80,8 @@ tlmgr install   \
     hyphsubst \
     pgfplots \
     microtype \
-    tikz-cd
+    tikz-cd \
+    transparent
 
 # Keep no backups (not required, simply makes cache bigger)
 tlmgr option -- autobackup 0
