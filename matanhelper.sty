@@ -63,6 +63,9 @@
 \renewcommand{\Re}{\@custom@Re}
 \renewcommand{\Im}{\@custom@Im}
 
+\def\lan{\left\langle }
+\def\ran{\right\rangle}
+
 % Математические операторы
 \DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\Ker}{Ker}
@@ -71,6 +74,7 @@
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\SL}{SL}
 \DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\sign}{sign}
 \DeclareMathOperator{\ord}{ord}
 
 \newcommand{\GCD}{\text{НОД}}
@@ -89,3 +93,5 @@
    \mathrel{\vcenter{\hbox{\scalebox{#1}{$\supset$}}}}}
 
 \newcommand{\dvdots}{\mathop{\raisebox{-2pt}{\vdots}}}
+
+\newcommand\leftmapsto{\mathrel{\reflectbox{\ensuremath{\mapsto}}}}

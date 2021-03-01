@@ -146,16 +146,16 @@ $G / H$ и $h_1, \dotsc, h_l$ --- представители всех класс
     $|G|$ делится на $\ord g$. Значит $g^{|G|} = g^{k \cdot \ord g} = e^k = e$
 \end{proof}
 \begin{corollary}[теорема Эйлера]
-    Пусть $m \in \N, \, a \in \Z, \, (a, m) = 1$. Тогда $a^{\phi(m)} = 1 \pmod{m}$.
+    Пусть $m \in \N, \, a \in \Z, \, (a, m) = 1$. Тогда $a^{\varphi(m)} = 1 \pmod{m}$.
 \end{corollary}
 \begin{proof}
     Пусть $G = (\Z /m \Z)^{*}, \, g = [a]_{m}$. Так как $(a, m) = 1$, то класс $a$ будет элементом группы $(\Z/m\Z)^{*}$. Тогда по следствию 2
     \begin{equation*}
         ([a]_m)^{|(\Z/m\Z)^{*}|} = [1]_m
     \end{equation*}
-    Заметим, что $|\Z/m\Z^{*}| = \phi(m)$ --- просто потому что число обратимо по модулю $m$ тогда и только тогда, когда их $\GCD$ равен единице. Но тогда
+    Заметим, что $|\Z/m\Z^{*}| = \varphi(m)$ --- просто потому что число обратимо по модулю $m$ тогда и только тогда, когда их $\GCD$ равен единице. Но тогда
     \begin{equation*}
-        ([a]_m)^{\phi(m)} = [1]_m \implies a^{\phi(m)} \equiv 1 \pmod{m}
+        ([a]_m)^{\varphi(m)} = [1]_m \implies a^{\varphi(m)} \equiv 1 \pmod{m}
     \end{equation*}
     Что и требовалось доказать.
 \end{proof}
@@ -183,13 +183,13 @@ $G / H$ и $h_1, \dotsc, h_l$ --- представители всех класс
 \end{remark}
 
 \begin{theorem-non}
-    Пусть $\phi\colon G \to G'$ --- гомоморфизм, тогда $\Ker \phi \triangleleft G$.
+    Пусть $\varphi\colon G \to G'$ --- гомоморфизм, тогда $\Ker \varphi \triangleleft G$.
 \end{theorem-non}
 \begin{proof}
-    Пусть $h \in \Ker \phi, \, g \in G$. Тогда:
+    Пусть $h \in \Ker \varphi, \, g \in G$. Тогда:
     \begin{equation*}
-        \phi(ghg^{-1}) = \phi(g) \overbrace{\phi(h)}^{\mathclap{e}} \phi(g)^{-1} = e
-        \implies ghg^{-1} \in \Ker \phi
+        \varphi(ghg^{-1}) = \varphi(g) \overbrace{\varphi(h)}^{\mathclap{e}} \varphi(g)^{-1} = e
+        \implies ghg^{-1} \in \Ker \varphi
     \end{equation*}
 \end{proof}
 
@@ -235,7 +235,7 @@ $G / H$ и $h_1, \dotsc, h_l$ --- представители всех класс
 \begin{examples}
     1) $\langle (1 2) \rangle$ --- не нормальная подгруппа в $S_3$.
 
-    2) $A_3$(четные перестановки в $S_3$) --- нормальная группа в $S_3$. Это так потому что у перестановок $g$ и $g^{-1}$ одинаковая четность, а значит четная перестановка останется четной.(ровно по этой причине множество $S_3 \ A_3$ тоже нормальная подгруппа)
+    2) $A_3$(четные перестановки в $S_3$) --- нормальная группа в $S_3$. Это так потому что у перестановок $g$ и $g^{-1}$ одинаковая четность, а значит четная перестановка останется четной.(ровно по этой причине множество $S_3 \backslash A_3$ тоже нормальная подгруппа)
 \end{examples}
 \begin{remark}
     $(G : H) = 2 \implies H \triangleleft G$
@@ -297,8 +297,10 @@ $G / H$ и $h_1, \dotsc, h_l$ --- представители всех класс
 \end{theorem-non}
 
 \begin{definition}
-    Элементы $g$ и $g'$ называются \textbf{сравнимыми} по нормальной подгруппе $H$, если \linebreak
-    $gH = g'H \iff g' = gh, \, h \in H \iff g' = \tilde{h}g, \, \tilde{h} \in H$.
+    Элементы $g$ и $g'$ называются \textbf{сравнимыми} по нормальной подгруппе $H$, если
+    \begin{equation*}
+      gH = g'H \iff g' = gh, \, h \in H \iff g' = \tilde{h}g, \, \tilde{h} \in H
+    \end{equation*}
 \end{definition}
 
 \begin{definition}

@@ -1,0 +1,235 @@
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+  Легко видеть, что для любой факторгруппы у нас определен соответствующий ей гомоморфизм, переводящий элемент в класс, содежащий этот элемент.
+  \begin{definition}
+    \textbf{Каноническим гомоморфизмом проекции G на факторгруппу $G/H$} называют отображение $\pi_{H}$ такое, что
+    \begin{align*}
+        \pi_H\colon G &\longrightarrow G/H \\
+        g &\longmapsto gH
+    \end{align*}
+  \end{definition}
+  Действительно, такое отображение будет гомоморфизмом, так как
+  \begin{equation*}
+    \pi_H(g) \cdot \pi_H(g') = gH \cdot g'H = gg'H = \pi_H(gg')
+  \end{equation*}
+  Очевидно $\pi_H$ --- сюръективен($\Im \pi_H = G/H$), ведь любой класс из $G/H$ содержит хотя бы один элемент, а ядром такого гомоморфизма будет $H$, так как ровно эти элементы являются прообразами нейтрального элемента $eH = H$. Отсюда в частности следует, что любая нормальная подгруппа является ядром некоторого гомоморфизма. Тем не менее выражение <<канонический гомоморфизм>> иногда употребляется в другой ситуации.
+\begin{definition}
+  \textbf{Каноническим гомоморфизмом вложения} подгруппы $K$ в группу $G$ называют отображение $i_K$ такое, что
+  \begin{align*}
+      i_K\colon K &\longrightarrow G\\
+      g &\longmapsto g
+  \end{align*}
+\end{definition}
+
+  Очевидно это будет инъективный гомоморфизм, сюръективный в случае $K = G$ с образом равным $K$ и тривиальным ядром $\{e\}$.
+\begin{remark}
+  Пусть $\varphi\colon G \to G'$ --- гомоморфизм. Тогда $\varphi$ инъективен тогда и только тогда, когда $\Ker \varphi = \{e\}$.
+\end{remark}
+\begin{proof}
+  \begin{enumerate}
+    \item[,,$\Rightarrow$''] Инъективность $\implies$ не существует элемента $g \neq e_G$ такого, что $\varphi(g) = \varphi(e_G) = e_{G'}$. Значит $e_G$ единственный такой элемент, образ которого равен $e_{G'}$. Значит $\Ker \varphi = \{e_G\}$.
+    \item[,,$\Leftarrow$''] Пусть $\varphi(g_1) = \varphi(g_2)$. Тогда
+    \begin{equation*}
+      \varphi(g_2^{-1}g_1) = \varphi(g_2^{-1})\varphi(g_1) = \varphi(g_2)^{-1}\varphi(g_1) = e_{G'} \implies
+      g_2^{-1}g_1 \in \Ker \varphi \implies g_2^{-1}g_1 = e_G \implies g_1 = g_2
+    \end{equation*}
+  \end{enumerate}
+\end{proof}
+Таким образом ядро это мера неинъективности отображения. Чем больше ядро, тем чаще в группе образы некоторых элементов могут оказаться совпадающими.
+
+  Описанные выше конструкции можно использовать и при изучении произвольного гомоморфизма. Пусть $\varphi\colon G \to G'$ --- гомоморфизм, $H \triangleleft G, \, H \subset \Ker \varphi$. Тогда оказывается, что $\varphi$ можно разложить в композицию двух гомоморфизмов.
+
+\begin{figure}[ht]
+    \centering
+    \incfig[0.3]{1}
+\end{figure}
+\begin{theorem-non}
+  \label{non:6.12}
+  Пусть $\varphi\colon G \to G'$ --- гомоморфизм, $H \triangleleft G, \, H \subset \Ker \varphi$ тогда существует единственный гомоморфизм $\varphi'\colon G/H \to G'$ такой, что $\varphi = \varphi' \circ \pi_H$, иными словами диаграмма выше коммутативна, иными словам гомоморфизм $\varphi$ единственным образом пропускается через гомоморфизм $\pi_H$.
+  \begin{editremark}
+    lol
+  \end{editremark}
+\end{theorem-non}
+\begin{proof}
+  Проверим единственность. Подставим в наше равенство любой элемент $g \in G$
+  \begin{equation*}
+    \varphi(g) = (\varphi' \circ \pi_H)(g) = \varphi'(\pi_H(g)) = \varphi'(gH)
+  \end{equation*}
+  То есть для произвольного $g \in G$ образ $gH$ под действием $\varphi'$ определен однозначно --- он равен $\varphi(g)$. Но так как ни один класс эквивалентности не может быть пустым, то для любого класса найдется элемент, подставив который мы найдем образ этого класса. Значит все образы определены однозначно, значит гомоморфизм $\varphi'$ --- единственный возможный.
+
+  Теперь проверим существование. Положим $\varphi'(gH) \coloneqq \varphi(g)$. Чтобы проверить корректность данного отображения нужно проверить следующее утверждение
+  \begin{equation*}
+    g_1, g_2 \in G \colon g_1H = g_2 H \overset{?}{\implies} \phi(g_1) = \phi(g_2)
+  \end{equation*}
+  Действительно,
+  \begin{equation*}
+    g_1H = g_2H \implies g_2 = g_1h, h \in H \implies \phi(g_2) = \phi(g_1)\underset{\mathclap{H \subset \Ker \varphi}}{\cancel{\phi(h)}} = \phi(g_1)
+  \end{equation*}
+  Осталось проверить что $\varphi'$ не только корректно заданное отображение, но еще и гомоморфизм:
+  \begin{equation*}
+    \varphi'(g_1H \cdot g_2H) = \varphi'(g_1g_2H) = \varphi(g_1g_2) = \varphi(g_1)\varphi(g_2) =
+    \varphi'(g_1H)\varphi'(g_2H)
+  \end{equation*}
+  И наконец равенство $\varphi = \varphi' \circ \pi_H$ тривиально проверяется по определению. Предложение доказано.
+\end{proof}
+
+Таким образом если при изучении некоторого гомоморфизма стало известно что некоторая нормальная подгруппа $H$ попадает в ядро нашего гомоморфизма, мы можем упростить ситуацию и рассматривать гомоморфизм $\varphi'$ тем самым уменьшив группу $G$ до <<классов по модулю $H$>> из-за того что значения гомоморфизма $\varphi$ будут такими же как и у $\varphi'$. Тем не менее, мы можем еще больше упростить ситуацию в случае несюръективного отображения.
+
+\begin{figure}[ht]
+    \centering
+    \incfig[0.3]{2}
+\end{figure}
+
+\begin{theorem-non}
+  \label{non:6.13}
+  Пусть $\varphi\colon G \to G'$ --- гомоморфизм, $K < G', \; K \supset \Im \varphi$. Тогда существует единственный гомоморфизм $\widetilde{\varphi}\colon G \to K$ такой, что диаграмма выше коммутативна.
+\end{theorem-non}
+\begin{proof}
+  Пусть $\widetilde{\varphi}(g) = \varphi(g)$. Легко видеть, что это отображение подходит. Единственность такого гомоморфизма также проверяется тривиально.
+\end{proof}
+
+  Таким образом, если $H \triangleleft G, \; H \subset \Ker \varphi$ и $K < G', \; K \supset \Im \varphi$. Тогда наш произвольный гомоморфизм $\varphi$ раскладывается в композицию трех гомоморфизмов.
+\begin{figure}[ht]
+    \centering
+    \incfig[0.3]{3}
+\end{figure}
+
+  Легко видеть, что полученный гомоморфизм $\varphi''$ это последовательное применение предыдущих двух предложений. Сначала к гомоморфизму $\varphi$, а потом к гомоморфизму $\varphi'$. В такой ситуации $\varphi''$ называется гомоморфизмом из $G/H$ в $K$, \textbf{индуцированным} гомоморфизмом $\varphi$.
+
+\begin{theorem}[о гомоморфизме]
+  Пусть $\varphi\colon G \to G'$ --- гомоморфизм. Тогда индуцированный гомоморфизм
+  \begin{equation*}
+    \varphi''\colon (G/\Ker \varphi) \longrightarrow \Im \varphi
+  \end{equation*}
+  является изоморфизмом.
+\end{theorem}
+\begin{proof}
+  Распишем по какой формуле действует $\varphi''$. Это легко выводится из предложений \ref{non:6.12} и \ref{non:6.13}.
+  \begin{equation*}
+    \varphi''(g \cdot \Ker \varphi) = \varphi(g)
+  \end{equation*}
+  Проверим сюръективность и инъективность данного гомоморфизма.
+  \begin{enumerate}
+    \item Сюръективность. Пусть $g' \in \Im \varphi \implies \exists g \in G\colon g' = \varphi(g) = \varphi''(g \cdot \Ker \varphi) \implies  g' \in \Im \varphi''$. Таким образом $\Im \varphi'' = \Im \varphi$.
+    \item Инъективность. Воспользуемся доказанным выше замечанием и проверим что ядро нашего гомоморфизма тривиально. Пусть $g \cdot \Ker \varphi \in \Ker \varphi''$. Тогда
+    \begin{equation*}
+    \varphi''(g \cdot \Ker \varphi) = e_{G'}
+\implies \varphi(g) = e_{G'} \implies g \in \Ker \varphi \implies g \cdot \Ker \varphi = e_{G} \cdot \Ker \varphi \implies \Ker \varphi'' = \{e_G \cdot \Ker \varphi\}
+    \end{equation*}
+  \end{enumerate}
+  Таким образом $\varphi''$ --- сюръективный и инъективный гомоморфизм, то есть изоморфизм.
+\end{proof}
+
+\begin{examples}
+  \begin{enumerate}
+    \item Пусть $G = \C^{*}, \, H = \mathbb{T} = \{z \; | \; |z| = 1\}$. Очевидно $H$ --- нормальная(так как $G$ --- абелева) подгруппа $G$.
+
+    Рассмотрим $\C^{*} / \mathbb{T}$. Для того чтобы понять что из себя представляют классы такого вида(а точнее чему изоморфна группа таких классов) построим гомоморфизм такой, чтобы ядром этого гомоморфизма оказалась группа $\mathbb{T}$. То есть мы хотим, чтобы наш гомоморфизм переводил все числа с модулем равным единице в нейтральный элементы. Разумеется логичным в данной ситуации отображением будет отображение, переводящее число в модуль этого числа. Также заметим, что модуль гомоморфно зависит от числа, так как произведение модулей равно модулю произведения. Таким образом следующий гомоморфизм является искомым:
+    \begin{align*}
+      \C^{*} &\overset{\varphi}{\longrightarrow} \R^{*} \\
+      z &\longmapsto |z|
+    \end{align*}
+  Легко видеть, что $\Im \varphi = \R_{+}^{*}$ и $\Ker \varphi = \mathbb{T}$. Поэтому по теореме о гомоморфизме, индуцированный гоморфизм между фактором по ядру и образом --- это изоморфизм. Таким образом $C^{*} / \mathbb{T} \cong \R_{+}^{*}$
+  \begin{remark}
+    $\R_{+}^{*}$ в свою очередь изоморфно группе $\R$ по сложению. Для доказательства этого факта достаточно взять гомоморфизм переводящий число в логарифм от этого числа($a \mapsto \ln a$).
+  \end{remark}
+
+  \item Пусть $G = \C^{*}, \, H = \lan i \ran = \{i, -1, -i, 1\}$. Тогда для того чтобы изучить $C^{*} / \lan i \ran$ нужно подобрать такое отображение, что в нейтральный элемент переводятся ровно элементы из группы $\lan i \ran$. Легко видеть, что $\lan i \ran$ --- это просто корни четвертой степени из единицы. Тогда достаточно логично взять в качестве нашего гомоморфизма возведение числа в четвертую степень, то есть гомоморфизм:
+    \begin{align*}
+      \C^{*} &\overset{\varphi}{\longrightarrow} \C^{*} \\
+      z &\longmapsto z^4
+    \end{align*}
+    Легко видеть что в этом случае $\Ker \varphi = \lan i \ran$ и $\Im \varphi = \C^{*}$, а значит $\C^{*}/\lan i \ran i \cong \C^{*}$.
+
+  \item Пусть $G = S_4, \, H = A_4$. Очевидно, что $A_4$ --- нормальная подгруппа $S_4$. Рассмотрим отображение переводящее перестановку в знак этой перестановки, то есть:
+    \begin{align*}
+      S_n &\overset{\sign}{\longrightarrow} \Z^{*} = \{1, -1\} \\
+      \sigma &\longmapsto \sgn \sigma
+    \end{align*}
+  Очевидно, что $\Ker \sign = A_n$ и $\Im \sign = \Z^{*}$, а значит $S_n/A_n = \Z^{*}$.
+  \end{enumerate}
+\end{examples}
+
+\rmk{Следствие}(классификация циклических групп). Пусть $G$ --- циклическая группа.
+\begin{enumerate}
+  \item Если $G$ бесконечна, то $G \cong \Z$.
+  \item Если $|G| = n < \infty$, то $G \cong \Z/n\Z$.
+\end{enumerate}
+\begin{proof}
+  Если $G$ --- циклическая, значит она порождается каким-то элементом $g$. Тогда рассмотрим такое отображение:
+  \begin{align*}
+    \Z &\overset{\varphi}{\longrightarrow} G \\
+    a &\longmapsto g^a
+  \end{align*}
+  Очевидно $\varphi$ --- гомоморфизм. Посмотрим что происходит в каждом из двух случаев:
+  \begin{enumerate}
+    \item $G$ --- бесконечная группа $\implies g^m \neq e, \: \forall m \in \N
+    \implies \forall g^{-m} \ne e, \: \forall m \in \N$. Таким образом $\Ker \varphi = \{0\}$. Значит $\varphi$ инъективен, а также $\Im \varphi = \{g^a \: | \: a \in \Z\} = \lan g \ran = G$, то есть $\varphi$ еще и сюръективен. Получается, что $\varphi$ --- изоморфизм.
+
+    \item $|G| = n < \infty$, значит $\ord g = n$. Разберемся с тем какие именно степени попали в ядро гомоморфизма. Рассмотрим какое-то произвольное $m \in (0,\, n), \, m \in \Z$. Очевидно $g^m \neq e$, ведь в противном случае $\ord g \leq m < n$. Таким образом рассмотрим произвольное $m$ и поделим его с остатком на $n$. Получим $m = nq + p \implies g^m = g^{nq}\cdot g^p \implies g^m = g^p$ при $p \in [0, n)$. Но мы уже знаем, что $g^p = e$ при $p \in [0, n)$ тогда и только тогда, когда $p = 0$. Значит $g^m$ равно нейтральному элементу тогда и только тогда, когда $m$ делится на $n$ без остатка.
+
+    Таким образом $\Ker \varphi = \{nq \, | \, q \in \Z\} = n\Z$ и $\Im \varphi = \lan g \ran = G$, значит $G \cong \Z/\Ker \varphi = \Z/n\Z$.
+  \end{enumerate}
+\end{proof}
+
+\section{Две теоремы об изоморфизме}
+\begin{theorem-non}
+  Пусть $\varphi\colon \; G \to G'$ --- гомоморфизм. Тогда
+  \begin{enumerate}
+    \item $H < G \implies \varphi(H) < G'$
+    \item $K < G' \implies \varphi^{-1}(K) < G$
+  \end{enumerate}
+\end{theorem-non}
+\begin{proof}
+  \begin{enumerate}
+    \item $e_{G'} = \varphi(e_G) \in G'$ --- нейтральный попадает в образ. Замкнутость по умножению также есть, из-за того, что $\varphi(h_1)\varphi(h_2) = \varphi(h_1h_2) \in \varphi(H)$. И замкнутость относительно взятия обратного также есть, так как $\varphi(k)^{-1} = \varphi(h^{-1}) \in \varphi(H)$.
+    \item $e_{G'} \in K \implies e_{G} \in \varphi^{-1}(K)$ --- нейтральный попадает в прообраз.
+    \begin{remark}
+      \begin{equation*}
+        \begin{gathered}
+          \forall g_1, g_2 \in H \implies g_1g_2 \in H \\
+          g \in H \implies g^{-1} \in H
+        \end{gathered}
+        \iff
+        \forall g_1, g_2 \in H \implies g_1g_2^{-1} \in H
+      \end{equation*}
+    \end{remark}
+    Таким образом нужно проверить лишь то, что $\forall g_1, g_2 \in \varphi^{-1}(K)\colon g_1g_2^{-1} \in \varphi^{-1}(K)$. Просто применим $\varphi$, получаем $\smash{\varphi(g_1g_2^{-1}) = \underbrace{\varphi(g_1)}_{\mathclap{\in K}}\underbrace{\varphi(g_2)^{-1}}_{\mathclap{\in K}} \in K}$.
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}[о соответствии]
+  Пусть $H \triangleleft G$. Тогда следующие два отображения являются взаимно-обратными биекциями.
+  \begin{align*}
+    \{K < G \, | \, K \supset H\} &\rightleftarrows \{K' < G/H\} \\
+    K &\mapsto \pi_H(K) \\
+    \pi_H^{-1}(K') &\leftmapsto K'
+  \end{align*}
+  При этом $K \triangleleft G \iff \pi_H(K) \triangleleft G/H$.
+\end{theorem}
+\begin{proof}
+  По предыдущему предложению уже знаем, что $\pi_H(K) < G/H$ и $\pi_H^{-1}(K') < G$. Также очевидно, что $\pi_H^{-1}(K) \supset H$. Осталось проверить, что эти два отображения обратны друг к другу. Действительно
+  \begin{equation*}
+    \begin{gathered}
+      \pi_H^{-1}(\pi_H(K)) = \bigcup\limits_{k \in K} kH \underset{\mathclap{K \supset H}}{=} K \\
+      \underbrace{\pi_H(\pi_H^{-1}(K'))}_{\mathclap{ < \,G/H}} = K'
+    \end{gathered}
+  \end{equation*}
+  Теперь проверим второе утверждение:
+  \begin{equation*}
+    \begin{gathered}
+      K \triangleleft G \iff \forall g \in G, \, \forall k \in K\colon \; gkg^{-1} \in K
+      \iff \forall g \in G, \, \forall k \in K\colon \pi_H(gkg^{-1}) \in \pi_H(K) \iff \\
+      \iff \forall g \in G, \, \forall k \in K\colon (gH)(kH)(gH)^{-1} \in \pi_H(K) \iff \\
+      \{kH \, | \, k \in K\} = \pi_H(K) \\
+      \{gH \, | \, g \in G\} = G/H \\
+      \iff \pi_H(K) \triangleleft G/H
+    \end{gathered}
+  \end{equation*}
+  Таким образом эта часть теоремы тоже доказана.
+\end{proof}
+\end{document}
