@@ -81,6 +81,7 @@ tlmgr install   \
     pgfplots \
     microtype \
     tikz-cd \
+    pdfpages \
     transparent
 
 # Keep no backups (not required, simply makes cache bigger)
