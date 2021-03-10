@@ -1,0 +1,194 @@
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+Перед формулированием и доказательством следующей теоремы будет удобно понять что вообще из себя представляют подгруппы в факторгруппе. По выше доказанной теореме о соответствии мы знаем, что все подгруппы в факторгруппе это образы тех подгрупп $G$, которые содержат $H$(если мы рассматриваем факторгруппу $G/H$). Более формально все подгруппы $G$ имеют следующий вид: $\pi_H(K), \, K < G, \, K \supset H$. Тогда заметим, что раз $\pi_H(k) = kH$, то $\pi_H(K) = \{kH \, | \, k \in K\}$. А это множество удобно отождествить с факторгруппой $K/H$. Легко видеть, что $\pi_H(K)$ и $K/H$ с понятной операцией умножения это одно и то же. Таким образом мы получили явное описание всех подгрупп в $G/H$ --- это просто все факторгруппы $K/H$ где $K < G, \, K \supset H$.
+
+\begin{theorem}[о факторгруппе факторгруппы]
+  Пусть $H, K \triangleleft G, \, H \subset K$. Тогда $K/H \triangleleft G/H$ и $(G/H)/(K/H) \cong G/K$.
+\end{theorem}
+\begin{proof}
+  Рассмотрим канонический гомоморфизм $\pi_{K}\colon G \to G/K$. Мы знаем, что $\Ker \pi_{K} = K$. Значит $H \subset \Ker \pi_K$. Но по условию $H \triangleleft G$. Значит существует индуцированный гомоморфизм
+  \begin{equation*}
+    \begin{gathered}
+      G/H \overset{\varphi}{\longrightarrow} G/K \\
+      gH \mapsto \pi_K(g) = gK
+    \end{gathered}
+  \end{equation*}
+  Теперь к этому $\varphi$ будем применять теорему о гомоморфизме. Заметим, что $\Im \varphi = \{gK \, | \, g \in G\} = G/K$ --- наш $\varphi$ сюръективен, и $\Ker \varphi = \{gH \, | \, gK = eK\} = \{gH \, | \, g \in K\} = \{kH \, | \, k \in K\} = K / H$. Тогда по теореме о гомоморфизме $(G/H)/(K/H) \cong G/K$. Что и требовалось доказать.
+\end{proof}
+
+\rmk{Следствия}.
+  \begin{enumerate}
+    \item Подгруппы $\Z$ --- это всевозможные $l\Z$, где $l \in \N_0$.
+    \item Пусть $n$ натуральное число. Тогда все подгруппы $\Z/n\Z$ это циклические подгруппы $\lan d \ran$, где $d$ пробегает натуральные делители числа $n$ . При этом $(\Z/n\Z)/\lan \overline{d} \ran \cong \Z/d\Z$.
+    \begin{example}
+      Подгруппы $\Z/10\Z\colon$
+      \begin{enumerate}
+        \item $\lan \overline{1} \ran = \Z/10\Z$
+        \item $\lan \overline{2} \ran = \{\overline{2}, \overline{4}, \overline{6}, \overline{8}, \overline{0}\}$
+        \item $\lan \overline{5} \ran = \{\overline{5}, \overline{0}\}$
+        \item $\lan \overline{10} \ran = \lan \overline{0} \ran = \{\overline{0}\}$
+      \end{enumerate}
+    \end{example}
+  \end{enumerate}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Было.
+    \item Применим теорему о соответствии. Рассмотрим гомоморфизм $\Z \to \Z/n\Z$. Тогда все подгруппы в $\Z/n\Z$ это подгруппы вида $\pi_{n\Z}(d\Z)$, где $d\Z \supset n\Z \iff d | n$. То есть $\pi_{n\Z}(d\Z) = \{dm + n\Z \, | \, m \in \Z\} = \{m(d + n\Z) \, | \, m \in \Z\} =
+    \lan d + n\Z \ran = \lan \overline{d} \ran$. Также $(\Z/n\Z) / \lan \overline{d} \ran = (\Z/n\Z) / (d\Z/n\Z) \cong \Z/d\Z$ по теореме о факторгруппе факторгруппы. Что и требовалось доказать.
+  \end{enumerate}
+\end{proof}
+
+\begin{remark}
+  $|\Z/d\Z| = d \implies |(\Z/n\Z)/(\lan \overline{d} \ran)| = d \implies
+  (\Z/n\Z : \lan \overline{d} \ran) = d \implies \frac{|\Z/n\Z|}{|\lan \overline{d} \ran|} = d \implies |\lan \overline{d} \ran| = \frac{n}{d}$. Отсюда следует, что $\lan \overline{d_1} \ran \neq \lan \overline{d_2} \ran$, если $d_1$ и $d_2$ --- различные делители $n$, просто потому что группы с разными порядками не могут быть равны(а $\frac{n}{d_1}$ и $\frac{n}{d_2}$ не равны если $d_1 \neq d_2$).
+\end{remark}
+
+\begin{remark}
+  Если $H, K < G$, то $HK$ --- не обязательно подгруппа $G$.
+\end{remark}
+\begin{example}
+  Пусть $G = S_3, \, H = \lan (12) \ran = \{e, (12)\}, \, K = \lan (13) \ran = \{e, (13)\}$. Очевидно $H, K < G$, но $HK = \{e, (12), (13), (132)\}$ не является подгруппой $G$ по теореме Лагранжа.
+\end{example}
+
+\begin{statement}
+  Пусть $H \triangleleft G,\, K < G$. Тогда $HK = KH$ --- подгруппа в $G$.
+\end{statement}
+\begin{proof}
+  Легко видеть, что $hk = kk^{-1}hk = k \cdot (k^{-1} hk)$ --- произведение элемента из $K$ на сопряженный к элементу из $H$. Но раз $H$ --- нормальная подгруппа, то это просто произведение элемента из $K$ на элемент из $H$, то есть элемент $KH$. Значит $HK \subset KH$. Аналогично доказывается, что $KH \subset HK$($kh = khk^{-1}k = (khk^{-1})k$). Таким образом верно включение в каждую сторону, а значит $HK = KH$.
+
+  Проверим, что $HK$ --- подгруппа. $e \cdot e = e$ --- нейтральный элемент очевидно попал в $HK$. Замкнутость относительно взятия обратного тоже выполняется, потому что $(HK)^{-1} = K^{-1}H^{-1} = KH = HK$. Наконец замкнутость относительно умножения --- $(HK)(HK) = H(KH)K = H(HK)K = HHKK = (HH)(KK) = HK$. Таким образом $HK$ --- подгруппа.
+\end{proof}
+
+\begin{theorem}[о произведении подгрупп]
+  Пусть $H \triangleleft G, K < G$. Тогда $H \triangleleft KH, K\cap H \triangleleft K$ и $KH/H \cong K/(K \cap H)$.
+\end{theorem}
+\begin{proof}
+  $H \triangleleft KH$ --- тривиально. Если $c \in K \cap H$ и $k \in K$, то $kck^{-1} \in H$, так как $c \in H$, а $H$ --- нормальная подгруппа. С другой стороны $kck^{-1} \in K$, так как все три множителя лежат в $K$. Значит $kck^{-1} \in K \cap H$, значит $K \cap H \triangleleft K$. Теперь докажем последнее утверждение. Рассмотрим гомоморфизм $\varphi\colon K \to KH/H,\, \varphi(k) = kH$. Очевидно $\Im \varphi = \{kH \, | \, k \in K\}$. Заметим, что $KH/H = \{khH \, | \, k \in K, h \in H\} = \{kH \, | \, k \in K\}$. То есть $\Im \varphi = KH / H$ --- гомоморфизм сюръективен. При этом $\Ker \varphi = \{k \in K \, | \, kH = eH\} = \{k \in K \, | \, k \in H\} = K \cap H$. Тогда по теореме о гомоморфизме $K/(K\cap H) \cong KH/H$, что и требовалось доказать.
+\end{proof}
+
+\section{Прямое произведение}
+Пусть $G, G'$ --- группы и умножение в их декартовом произведении задано следующим образом:
+\begin{equation*}
+  (g_1, g_1')(g_2, g_2') = (g_1g_1', g_2g_2')
+\end{equation*}
+Тогда очевидно, что $(G \times G', \cdot)$ --- группа.
+\begin{theorem-non}
+  Рассмотрим отображения:
+  \begin{align*}
+    &i_1\colon G \to G \times G', \;\; g \mapsto (g, e) \\
+    &i_2\colon G \to G \times G', \;\; g' \mapsto (e, g')\\
+    &\pi_1\colon G \times G' \to G, \; (g, g') \mapsto g \\
+    &\pi_2\colon G \times G' \to G, \; (g, g') \mapsto g'
+  \end{align*}
+  Тогда:
+  \begin{enumerate}
+    \item $i_1, i_2$ --- мономорфизмы групп(инъективные гомоморфизмы).
+
+    $\pi_1, \pi_2$ --- эпиморфизмы групп(сюръективные гомоморфизмы).
+
+    \item $\Im i_1 = \Ker \pi_2 = G \times \{e\}$
+
+    $\Im i_2 = \Ker \pi_1 = \{e\} \times G'$
+
+    \item $\pi_1 \circ i_1 = \id_G$, \quad $\pi_2 \circ i_2 = \id_{G'}$
+
+    $\pi_1 \circ i_2 = e\colon g' \to e$, \quad $\pi_2 \circ i_1 = e\colon g \to e$
+  \end{enumerate}
+  Также легко видеть, что $i_1, i_2$ индуцируют следующие два изоморфизма:
+  \begin{equation*}
+    \begin{gathered}
+      G \to G \times \{e\} \\
+      G' \to \{e\} \times G'
+    \end{gathered}
+  \end{equation*}
+\end{theorem-non}
+
+Иногда при изучении произвольной группы может оказаться, что группа изоморфна прямому произведению каких-то её подгрупп. Например можно заметить, что перемножая числа в $\C^{*}$ мы перемножаем модули и тригонометрические части(в соответствующей записи комплексного числа). Поэтому вполне естественно рассматривать комплексное число как пару $\langle$ модуль, тригонометрическая часть $\rangle$. Соответсвенно при перемножении комплексных чисел модули и тригонометрические части перемножаются независимо.
+Отсюда получается, что комплексные числа на самом деле изоморфны группе пар:
+\begin{equation*}
+  \C^{*} \cong \R_{+}^{*} \times \T
+\end{equation*}
+\begin{editremark}
+  $\T$ это точки на единичной окружности. Легко видеть что $\T$ с операцией умножения на самом деле изоморфны углам поворота принимающим значения $[0, 2\pi)$ с операцией сложения.
+\end{editremark}
+\noindent Следующая теорема описывают в общем виде ситуацию, когда возникает такой изоморфизм(а именно какими должны быть подгруппы в нашей группе).
+
+\begin{theorem}
+  Пусть $G$ --- группа и $H_1,\, H_2 < G$. Тогда два условия равносильны:
+  \begin{enumerate}[A.]
+    \item Выполняются три свойства:
+    \begin{enumerate}[1)]
+      \item $H_1H_2 = G$
+      \item $H_1 \cap H_2 = \{e\}$
+      \item $\forall h_1 \in H,\, \forall h_2 \in H_2\colon h_1h_2 = h_2h_1$
+    \end{enumerate}
+    \item Отображение
+    \begin{equation*}
+      \begin{gathered}
+        H_1 \times H_2 \xrightarrow{\;\, \varphi \;\,} G \\
+        (h_1, h_2) \mapsto h_1h_2
+      \end{gathered}
+    \end{equation*}
+    --- это изоморфизм групп.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  \begin{enumerate}
+    \item[] \textbf{A $\Rightarrow$ B}. Для начала проверим что наше отображение $\varphi$ является гомоморфизмом:
+    \begin{equation*}
+      \varphi((h_1, h_2) \cdot (h_1', h_2')) =
+      \varphi((h_1h_1', h_2h_2')) =
+      h_1h_1'h_2h_2' =
+      h_1h_2h_1'h_2' =
+      \varphi((h_1, h_2))\varphi((h_1', h_2'))
+    \end{equation*}
+    Таким образом это действительно гомоморфизм. Также $\Im \varphi = G$, так как $G = H_1H_2$. Отсюда следует сюръективность гомоморфизма.
+
+    При этом $\Ker \varphi = \{(h_1, h_2) \, | \, h_1h_2 = e\} = \{(h_1, h_1^{-1}) \, | \, h_1 \in H_1, \, h_1^{-1} \in H_2\} = \{(e_1, e_2)\}$, так как $H_1 \cap H_2 = \{e\}$. И из тривиальности ядра следует инъективность гомоморфизма.
+    \item[] \textbf{B $\Rightarrow$ A}.
+    Заметим, что $\Im \varphi = H_1H_2$. При этом $\Im \varphi = G$, а значит $H_1H_2 = G$.
+
+    Возьмем $h \in H_1 \cap H_2$. Тогда $\varphi((h, h^{-1]})) = hh^{-1} = e \implies (h, h^{-1}) \in \Ker \varphi$. Но наше ядро тривиально(так как у нас изоморфизм), значит $h = e$.
+
+    Осталось проверить коммутативность:
+    \begin{equation*}
+    h_1h_2 = \varphi((h_1, h_2)) = \varphi((h_1, e_2) \cdot (e_1, h_2)) = \varphi((e_1, h_2) \cdot (h_1, e_2)) = \varphi((e_1, h_2)) \cdot \varphi((h_1, e_2)) = h_2h_1
+    \end{equation*}
+  \end{enumerate}
+\end{proof}
+  Таким образом если подгруппы $H_1, H_2$ удовлетворяют условиям теоремы, то $G$ --- внутреннее прямое произведение этих подгрупп.
+
+\begin{example}
+  $\R^{*}$ --- внутреннее прямое произведение $\R^{*}_{+}$ и $\{\pm 1\}$.
+\end{example}
+
+\begin{theorem-non}
+  $G$ --- внутреннее прямое произведение $H_1$ и $H_2 \iff$ выполняются условия 1 и 2 из теоремы, а так же условие 3': $H_1,\, H_2 \triangleleft G$.
+\end{theorem-non}
+\begin{proof}
+  \begin{enumerate}
+    \item[] \textbf{1,2,3 $\Rightarrow$ 3'}. Пусть $h \in H_1, \, g \in G$. Нужно проверить, что $ghg^{-1} \in H_1$. Но в силу условия 1 $g$~ можно записать в виде $ g = h_1h_2, \, h_1 \in H_1, \, h_2 \in H_2$. Тогда $ghg^{-1} = h_1h_2hh_2^{-1}h_1^{-1}$. Но так как $h \in H_1$ и $h_2 \in H_2$, то они коммутируют. То есть $ghg^{-1} = h_1h_2h_2^{-1}hh_1^{-1} = h_1hh_1^{-1}$. Получили произведение, в котором все три множителя являются элементами $H_1$, значит и $ghg^{-1} \in H_1$. Таким образом проверили, что $H_1 \triangleleft G$. Аналогично проверяется, что $H_2 \triangleleft G$.
+    \item[] \textbf{1, 2, 3' $\Rightarrow$ 3}. Пусть $h_1 \in H_1,\, h_2 \in H_2$. Посмотрим на $h_1h_2h_1^{-1}h_2^{-1}$:
+
+  \begin{equation*}
+    \rlap{
+    $
+    \underbrace{\phantom{h_1h_2h_1^{-1}}}_{\mathclap{
+      \in H_2
+    }}$}
+    h_1
+    \overbrace{h_2h_1^{-1}h_2^{-1}}^{\mathclap{
+      \in H_1
+    }}
+  \end{equation*}
+  $h_2h_1^{-1}h_2^{-1} \in H_1$ и $h_1h_2h_1^{-1} \in H_2$ потому что $H_1$ и $H_2$ --- нормальный подгруппы. Таким образом $h_1h_2h_1^{-1}h_2^{-1} \in H_1 \cap H_2$. Но мы знаем, что пересечение тривиально, а значит $h_1h_2h_1^{-1}h_2^{-1} = e \implies h_1h_2 = h_2h_1$.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

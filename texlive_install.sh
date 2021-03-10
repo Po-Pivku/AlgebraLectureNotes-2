@@ -83,7 +83,8 @@ tlmgr install   \
     tikz-cd \
     pdfpages \
     transparent \
-    pdflscape
+    pdflscape \
+    enumerate
 
 # Keep no backups (not required, simply makes cache bigger)
 tlmgr option -- autobackup 0
