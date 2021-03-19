@@ -1,0 +1,344 @@
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Центр и коммутант группы}
+\begin{definition}
+  Пусть $G$ --- группа. Тогда \textbf{центром} группы называется
+  \begin{equation*}
+    \mathcal{Z}(G) = \{g \in G \, | \, \forall h \in G\colon gh = hg\}
+  \end{equation*}
+  Элементы центра называются \textbf{центральными} элементами группы $G$.
+\end{definition}
+\begin{theorem-non}
+  $\mathcal{Z}$ --- это нормальная подгруппа $G$.
+\end{theorem-non}
+\begin{proof}
+  \begin{enumerate}
+    \item Замкнутость относительно умножения очевидна, $hg_1g_2 = g_1hg_2 = g_1g_2h$.
+    \item Замкнутость относительно взятия обратного --- $g^{-1}h = (h^{-1}g)^{-1} = (gh^{-1})^{-1} = hg^{-1}$.
+    \item Нормальность группы --- $g \in \mathcal{Z}(G) \implies h^{-1}gh = gh^{-1}h = g \in \mathcal{Z}(G)$.
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}
+  Пусть $g, h \in G$. Тогда \textbf{коммутатором} этих двух элементов называется элемент $[g, h] = ghg^{-1}h^{-1}$.
+\end{definition}
+\begin{remark}
+  \begin{enumerate}
+    \item $[g, h] = e \iff gh = hg$. Доказательство тривиально --- $ghg^{-1}h^{-1} = e \iff gh = hg$(соответственно умножаем или делим на $hg$). Как следствие: $gh = [g, h]hg$.
+    \item Обратимый к коммутатору элемент сам является коммутатором: $[g, h]^{-1} = [h, g]$.
+  \end{enumerate}
+\end{remark}
+
+\begin{definition}
+  \textbf{Коммутантом} группы $G$ называется подгруппа, порожденная всевозможными коммутаторами:
+  \begin{equation*}
+    [G, G] \coloneqq \lan [g, h] \, | \, g,h \in G \ran
+  \end{equation*}
+\end{definition}
+
+\begin{theorem-non}
+\label{non:6.18}
+  $[G, G]$ --- нормальная подгруппа $G$.
+\end{theorem-non}
+\begin{proof}
+  \begin{enumerate}
+    \item $[G, G]$ --- подгруппа по определению.
+    \item Пусть $a, g, h \in G$ и $g^a \coloneqq aga^{-1}$. Очевидно, что $(g_1g_2)^a = ag_1g_2a^{-1} = ag_1a^{-1}ag_2a^{-1} = g_1^ag_2^a$. Тогда легко видеть, что
+    \begin{equation*}
+      \begin{gathered}
+        G \longrightarrow G\\
+        g \mapsto g^a
+      \end{gathered}
+    \end{equation*}
+    --- это автоморфизм группы $G$(изоморфизм группы на себя). Отсюда
+    \begin{equation*}
+      [g, h]^a = g^ah^a(g^{-1})^a(g^{-1})^a =
+      g^ag^a(g^a)^{-1}(h^a)^{-1} = [g^a, h^a]
+    \end{equation*}
+    То есть применение сопряжения к коммутатору дает коммутатор. Тогда рассмотрим сопряжение любого элемента из $[G, G]$:
+    \begin{equation*}
+      ([g_1, h_1] \dotsm [g_m, h_m])^a
+      =
+      [g_1,h_1]^a \dotsm [g_m, h_m]^a
+      =
+      [g_1^a, h_1^a] \dotsm [g_m^a, h_m^a]
+      \in [G, G]
+    \end{equation*}
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem-non}
+\label{non:6.19}
+  Пусть $H \triangleleft G$. Тогда следующие утверждения эквивалентны:
+  \begin{enumerate}
+    \item $G/H$ абелева.
+    \item $[G, G] \subset H$.
+  \end{enumerate}
+\end{theorem-non}
+\begin{proof}
+  \begin{align*}
+    &G/H\text{ абелева } \\
+    &\iff
+    \forall g_1, g_2 \in G\colon (g_1H)(g_2H) = (g_2H)(g_1H) \\
+    &\iff
+    \forall g_1, g_2 \in G\colon (g_1H)(g_2H)(g_1H)^{-1}(g_2H)^{-1} = eH \\
+    &\iff
+    \forall g_1, g_2 \in G\colon (g_1g_2g_1^{-1}g_2^{-1})H = eH \\
+    &\iff
+    \forall g_1, g_2 \in G\colon [g_1, g_2] \in H \\
+    &\iff
+    [G, G] \subset H
+  \end{align*}
+\end{proof}
+
+\begin{definition}
+  Группа $G$ называется \textbf{разрешимой}, если существует цепочка подгрупп
+  \begin{equation*}
+    \{e\} = G_n < \dotsb G_2 < G_1 < G_0 = G
+  \end{equation*}
+  такая, что $\forall k =1..n,\; G_{k + 1} \triangleleft G_k$ и фактор $G_k/G_{k + 1}$ --- абелев.
+\end{definition}
+\begin{remark}
+  Все абелевы группы очевидно будут разрешимыми(можно взять $G_0 = G,\, G_1 = \{e\}$).
+\end{remark}
+
+\begin{example}
+  $D_n$ --- не абелева, но разрешимая группа симметрий $n$-угольника. Можно взять $\{e\} < \lan R_1 \ran < D_n$, где $\lan R_1 \ran$ --- подгруппа поворотов(подгруппа порожденная единичным поворотом). Тогда $\lan R_1 \ran / \{e\}$ очевидно абелев, потому что $\lan R_1 \ran$ --- абелева. И $D_n / \lan R_1 \ran \cong \Z/2\Z$, а значит $\lan R_1 \ran$ --- нормальная подгруппа и фактор $D_n / \lan R_1 \ran$ абелев.
+\end{example}
+
+\rmk{Обозначение.}
+Пусть
+\begin{equation*}
+  G^{(k)} \coloneqq
+  \begin{cases}
+    G, &k = 0 \\
+    [G^{(k - 1)}, G^{(k - 1)}], &k \geq 1
+  \end{cases}
+\end{equation*}
+
+\begin{theorem}
+  Пусть $G$ --- группа. Тогда следующие утверждения эквивалентны:
+  \begin{enumerate}
+    \item $G$ разрешима.
+    \item $\exists \, n \in \N\colon G^{(n)} = \{e\}$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  \begin{enumerate}
+    \item \textbf{``2 $\Rightarrow$ 1''.} Возьмем цепочку $\{e\} = G^{(n)} < \dotsb < G^{(1)} < G^{(0)} = G$. Тогда из того, что $G^{(k + 1)}$ --- коммутант $G^{(k)}$ следует, что $G^{(k + 1)} \triangleleft G^{(k)}$ по предложению \ref{non:6.18} и $G^{(k)}/G^{(k + 1)}$ --- абелев по предложению \ref{non:6.19}.
+    \item \textbf{``1 $\Rightarrow$ 2''.} $G$ --- разрешимая, значит существует цепочка подгрупп
+    \begin{equation*}
+      \begin{gathered}
+        \{e\} = G_n < \dotsb G_1 < G_0 = G \\
+        G_{k + 1} \triangleleft G_k, \; G_k/G_{k + 1}\text{ абелев}
+      \end{gathered}
+    \end{equation*}
+    Докажем по индукции: $G^{(k)} \subset G_k$. База $k = 0\colon G^{(0)} = G = G_0$. Тогда
+    \begin{equation*}
+      G^{(k + 1)} = [G^(k), G^{(k)}] \overbrace{\subset}^{\mathclap{\text{
+        инд. предположение
+      }}} [G_k, G_k]
+      \overbrace{\subset}^{\mathclap{\text{
+        \ref{non:6.19}
+      }}}
+      G_{k + 1}
+    \end{equation*}
+    Отсюда в частности $G^{(n)} \subset G_n = \{e\} \implies G^{(n)} = \{e\}$.
+  \end{enumerate}
+\end{proof}
+
+\begin{remark}
+  Если $G$ --- конечная группа, то выполнено хотя бы одно из двух условий:
+  \begin{enumerate}
+    \item $\exists\, n\colon G^{(n)} = \{e\}$.
+    \item $\exists\, n\colon G^{(n)} = G^{(n - 1)} \neq \{e\}$.
+  \end{enumerate}
+\end{remark}
+
+\begin{definition}
+  Группа называется \textbf{простой}, если она не имеет нормальных подгрупп, отличных от всей группы и единичной подгруппы.
+\end{definition}
+
+\section{Действие группы на множестве}
+\begin{definition}
+\label{def:6.20}
+  Пусть $G$ --- группа, $M$ --- множество. Говорят, что \textbf{задано действие $G$ на множестве $M$}, если задано отображение $G \times M \to M, \; (g, m) \mapsto gm$ с двумя свойствами:
+  \begin{enumerate}
+    \item $\forall g_1, g_2 \in G, \, \forall m \in M\colon (g_1g_2)m = g_1(g_2m)$
+    \item $\forall m \in M\colon em = m$
+  \end{enumerate}
+\end{definition}
+\begin{examples}
+\label{ex:6.20}
+  \begin{enumerate}
+    \item Пусть $G = \R$, $M = \C$ и $gm = m \cdot (\cos g + i \sin g)$. Геометрически это означает поворот точки $m$ на координатной плоскости на угол $g$.
+    \item Пусть $G = \GL_n(K)$, $M = K^n$. Тогда $g = A$ --- матрица, $m = b$ --- столбец, $gm = Ab$.
+    \item Пусть $G$ --- любая группа, $*$ --- операция в $G$, $M = G$. Тогда $gm \coloneqq g * m$ --- \textbf{действие $G$ на себе левыми сдвигами}.
+    \item Пусть $G$ --- любая группа, $*$ --- операция в $G$, $M = G$. Тогда $gm \coloneqq gmg^{-1}$ --- \textbf{действие $G$ на себе сопряжением}.
+  \end{enumerate}
+\end{examples}
+
+\begin{definition}
+\label{def:6.21}
+  Говорят, что \textbf{задано действие группы $G$ на множестве $M$}, если задан гомоморфизм $\varphi\colon G \to S(M)$.
+\end{definition}
+\begin{theorem-non}
+  Равносильность двух определений.
+\end{theorem-non}
+\begin{proof}
+  \begin{enumerate}
+    \item \textbf{``1 $\Rightarrow$ 2''.} Пусть задано отображение $(g, m) \mapsto gm$. Тогда определим $\varphi\colon G \to S(M)$ как $\varphi(g)~=~(m \mapsto gm)$. Получилась биекция, так как существует обратное отображение $m \mapsto g^{-1}m$. Докажем, что $\varphi$ --- гомоморфизм.
+    \begin{equation*}
+      \varphi(g_1g_2)(m) = (g_1g_2)(m) = g_1(g_2m) = \varphi(g_1)(\varphi(g_2)(m))
+    \end{equation*}
+    Таким образом $\varphi(g_1g_2) = \varphi(g_1) \circ \varphi(g_2)$.
+    \item \textbf{``2 $\Rightarrow$ 1''.}
+    Рассмотрим отображение
+    \begin{equation*}
+      \begin{gathered}
+        G \times M \to M \\
+        (g, m) \mapsto \varphi(g)(m)
+      \end{gathered}
+    \end{equation*}
+    Тогда
+    \begin{equation*}
+      \begin{gathered}
+        (g_1g_2)(m) = (\varphi(g_1) \circ \varphi(g_2))(m) = g_1(g_2m) \\
+        em = \varphi(e)(m) = \id_m(m) = m
+      \end{gathered}
+    \end{equation*}
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}
+  Пусть задано $G$ на $M$ и $m \in M$. Тогда \textbf{орбитой} элемента $m$ называют множество
+  \begin{equation*}
+    Gm = \{gm \, | \, g \in G\}
+  \end{equation*}
+\end{definition}
+
+\begin{examples}
+  Найдем орбиты элементов из примеров к определению \ref{def:6.20}.
+  \begin{enumerate}
+    \item $Gm = \{z \in \C \, | \, |z| = |m|\}$.
+    \item $Gm =
+    \begin{cases}
+      \{0\}, m = 0 \\
+      K^n \, \backslash\, \{0\}, m \neq 0
+    \end{cases}$
+    \item $Gm = M = G$.
+    \item Орбиты --- классы сопряженности.
+  \end{enumerate}
+\end{examples}
+
+\begin{remark}
+  Орбиты двух элементов $M$ либо не пересекаются, либо совпадают.
+\end{remark}
+\begin{proof}
+  Пусть $n \in Gm_1 \cap Gm_2$. Тогда $n = g_1m_1,\; g_1 \in G$ и $n = g_2m_2,\; g_2 \in G$. Отсюда $m_2 = g_2^{-1}g_1m_1 \in Gm_1 \implies \forall g \in G\colon gm_2 = gg_2^{-1}g_1m_2 \in Gm_1 \implies Gm_2 \subset Gm_1$. Аналогично получается, что $Gm_1 \subset Gm_2$.
+\end{proof}
+\begin{exercise}
+  Передоказать замечание, используя отношение эквивалентности.
+\end{exercise}
+
+\begin{definition}
+  Если $\exists m\colon Gm = M$, то действие $G$ на $M$ называют \textbf{транзитивным}.
+\end{definition}
+
+\begin{definition}
+  Пусть $G$ действует на $M$ и $m \in M$. \textbf{Стабилизатором(стационарной подгруппой)} элемента $m$ называется подгруппа
+  \begin{equation*}
+    \St_m = \{g \in G \, | \, gm = m\}
+  \end{equation*}
+\end{definition}
+
+\begin{theorem-non}
+  \begin{enumerate}
+    \item $St_m < G$.
+    \item Существует биекция $G/St_m \overset{\alpha}{\longrightarrow} Gm$ такая, что $g \cdot St_m \mapsto gm$.
+  \end{enumerate}
+\end{theorem-non}
+\begin{proof}
+  \begin{enumerate}
+    \item Пусть $g, g_1, g_2 \in St_m$. Тогда
+    \begin{equation*}
+      \begin{gathered}
+        (g_1g_2)m = g_1(g_2m) = g_1m = m \\
+        g^{-1}m = g^{-1}(gm) = (g^{-1}g) m = em = m
+      \end{gathered}
+    \end{equation*}
+    Доказали замкнутость относительно умножения и взятия обратного.
+    \item Пусть $g_1St_m  = g_2St_m \implies g_2 = g_1h, \, h \in St_m \implies g_2m = (g_1h)m = g_1(hm) = g_1m$. Осталось проверить биективность. Пусть
+    \begin{equation*}
+      \begin{gathered}
+        \alpha(g \cdot \St_m) = \alpha(g' \cdot \St_m) \implies \\
+        gm = g'm \implies \\
+        m = g^{-1}g'm \implies \\
+        g^{-1}g' \in \St_m \implies \\
+        g' \in g \cdot \St_m \implies \\
+        g'\St_m = g\St_m
+      \end{gathered}
+    \end{equation*}
+    Инъективность доказана, а сюръективность тривиальна.
+  \end{enumerate}
+\end{proof}
+\begin{corollary*}
+  Пусть $G$ --- конечная группа, $G$ действует на $M$ и $m \in M$. Тогда $|Gm|$ делит $|G|$.
+\end{corollary*}
+\begin{proof}
+  По предложению $|Gm| = |G/\St_m|$, но $|G/\St_m| = (G : \St_m)$, что делит $G$.
+\end{proof}
+
+\begin{examples}
+  Снова обратимся к примерам для определения \ref{def:6.20} и найдем стабилизаторы в заданных действиях.
+  \begin{enumerate}
+    \item $\St_m =
+    \begin{cases}
+      \R, &m = 0 \\
+      \lan 2\pi \ran, &m \neq 0
+    \end{cases}$
+  \item Упражнение для читателя.
+  \item $\St_g = \{e\}$.
+  \item $\St_g = \{h \in G \, | \, hg = gh\} = \mathcal{Z}_g$ --- централизатор $g$.
+  \end{enumerate}
+\end{examples}
+
+\begin{theorem-non}
+  Пусть $G$ --- конечная $p$-группа(т.е. $|G| = p^n,\, p$ --- простое). Тогда $\mathcal{Z}(G)\, \neq\, \{e\}$.
+\end{theorem-non}
+\begin{proof}
+  Рассмотрим действие $G$ на себе сопряжением. Тогда $G$ --- это объединение орбит, при этом порядок любой орбиты является делителем порядка группы. Тогда возможные порядки орбит это $1, p, p^2, \dotsc, p^n$.
+
+  Пусть $m_i$ --- число орбит длины $p^i$. Тогда
+  \begin{equation*}
+    p^n = 1 \cdot m_0 + \underbrace{p \cdot m_1 + p^2 \cdot m_2 + \dotsb + p^n \cdot m_n}_{\mathclap{\text{
+      делится на $p$
+    }}}
+  \end{equation*}
+  Отсюда следует, что $m_0$ делится на $p$. Но элементы, которые под действием сопряжения переходят в себя --- это центральные элементы группы. Таким образом $m_0 = |\mathcal{Z}(G)| \implies p \, | \, |\mathcal(G)| \implies \mathcal{Z}(G) \neq \{e\}$.
+\end{proof}
+
+\begin{corollary*}
+  Любая конечная $p$-группа разрешима.
+\end{corollary*}
+\begin{proof}
+  Пусть $|G| = p^n$, индукция по $n$. Рассмотрим $G' = G / \mathcal{Z}(G)$. Из того, что $\mathcal{Z}(G) \neq \{e\}$ следует, что $|G'| < |G|$. С другой стороны очевидно,  что $|G'| = \frac{|G|}{(G : \mathcal{Z}(G))}$, а значит $G'$ --- $p$-группа.
+
+  Если $G' = \{e\} \implies G = \mathcal{Z}(G) \implies G$ --- абелева, а значит разрешима. Иначе $G' \neq \{e\}$, а значит по индукционному предположению существует цепочка подгрупп $\{e\} = G_n' < \dotsb < G_0' = G'$, \, $G_{k + 1}' \triangleleft G_k'$ и $G_k' / G_{k + 1}'$ абелев. Рассмотрим гомоморфизм проекций на факторгруппу $\pi_{\mathcal{Z}(G)}$. Пусть $G_k \coloneqq \pi_{\mathcal{Z}(G)}^{-1}(G_k')$. Тогда рассмотрим цепочку
+  \begin{equation*}
+    \{e\} = G_{n + 1} < \mathcal{Z}(G) = \Ker \pi_{\mathcal{Z}(G)} = G_n < \dotsb < G_2 < G_1 < G_0 = G
+  \end{equation*}
+  Осталось доказать необходимые свойства нашей цепочки.
+  \begin{enumerate}
+    \item Заметим, что $\pi_{\mathcal{Z}(G)}\colon G_k \longrightarrow G_k'$. А значит по теореме о соответствии $G_{k + 1}' \triangleleft G_k' \implies G_{k + 1} \triangleleft G_k$.
+    \item Заметим, что $G_k' \cong G_k / \mathcal{Z}(G) \implies G_k' / G_{k + 1}' \cong (G_k / \mathcal{Z}(G)) / (G_{k + 1} / \mathcal{Z}(G)) \cong G_k/G_{k + 1}$ --- абелева.
+  \end{enumerate}
+  Таким образом $G$ --- разрешимая.
+\end{proof}
+
+\end{document}
