@@ -1,0 +1,374 @@
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Конечные и конечно порожденные абелевы группы}
+
+\begin{lemma}
+\label{lem:6.9}
+  Пусть $m, n \in \N, \, (m, n) = 1$. Тогда $\Z/(mn)\Z \cong (\Z/m\Z) \oplus (\Z/n\Z)$, где $\oplus$ --- прямая сумма(то же самое, что и прямое произведение $\times$).
+\end{lemma}
+\begin{proof}[Доказательство I]
+ Рассмотрим отображение
+  \begin{align*}
+    \Z &\xrightarrow{\;\; \varphi \;\;} (\Z/m\Z) \oplus (\Z/n\Z) \\
+    a &\longmapsto ([a]_m,\; [a]_n)
+  \end{align*}
+  Очевидно $\varphi$ --- гомоморфизм(класс суммы равен сумме классов). При этом
+  \begin{equation*}
+  \Ker \varphi = \{a \, | \, a \equiv 0 \mod m, \, a \equiv 0 \mod n\}
+  =
+  (m\Z) \cap (n\Z) = (mn\Z)
+  \end{equation*}
+  Также по теореме о гомоморфизме $\Z/mn\Z \cong \Im \varphi \implies |\Im \varphi| = mn \implies \Im \varphi = (\Z/m\Z) \oplus (\Z/n\Z)$.
+\end{proof}
+\begin{proof}[Доказательство II]
+  Заметим, что $\ord([1]_m,\, [1]_n) = \min \{l \in \N \, | \, ([l]_m,\, [l]_n) = [0]_m, \, [0]_n\} = mn$. Но раз в группе порядка $mn$ нашелся элемент порядка $mn$, то $(\Z/m\Z) \times (\Z/n\Z) = \lan ([1]_m, \, [1]_n) \ran \implies (\Z/m\Z) \times (\Z/n\Z) \cong (\Z/mn\Z)$.
+\end{proof}
+
+\begin{definition}
+  Группа называется \textbf{примарной}, если $|G| = p^t$, где $p$ --- простое, а $t \in \N$.
+\end{definition}
+
+\begin{theorem}
+  Пусть $G$ --- конечная абелева группа. Тогда $G$ изоморфна прямой сумме примарных циклических групп, порядки которых определены однозначно с точностью до перестановки.
+\end{theorem}
+\begin{example}
+  Опишем все абелевы группы порядка 200. Для этого нужно посмотреть разложение числа 200 на примарные, тогда каждому множителю будет соответствовать своя примарная циклическая группа:
+  \begin{align*}
+    200 &= 5^2 \cdot 2^3
+        &(\Z/25\Z) \oplus (\Z/8\Z)
+        \\
+        &= 5 \cdot 5 \cdot 2^3
+        &(\Z/5\Z) \oplus (\Z/5\Z) \oplus (\Z/8\Z)
+        \\
+        &= 5^2 \cdot 2^2 \cdot 2
+        &(\Z/25\Z) \oplus (\Z/4\Z) \oplus (\Z/2\Z)
+        \\
+        &= 5 \cdot 5 \cdot 2^2 \cdot 2
+        &(\Z/5\Z) \oplus (\Z/5\Z) \oplus (\Z/4\Z) \oplus (\Z/2\Z)
+        \\
+        &= 5^2 \cdot 2 \cdot 2 \cdot 2
+        &(\Z/25\Z) \oplus (\Z/2\Z) \oplus (\Z/2\Z) \oplus (\Z/2\Z)
+        \\
+        &= 5 \cdot 5 \cdot 2 \cdot 2 \cdot 2
+        &(\Z/5\Z) \oplus (\Z/5\Z) \oplus (\Z/2\Z) \oplus (\Z/2\Z) \oplus (\Z/2\Z)
+  \end{align*}
+\end{example}
+
+\begin{corollary*}
+  Пусть $K$ --- поле, $G < K^{*}, \, |G| < \infty$. Тогда $G$ --- циклическая.
+\end{corollary*}
+\begin{proof}
+  Заметим, что $G \cong \bigoplus\limits_{i = 1}^{m} \Z/p_i^{l_i}\Z$. Предположим, что среди $p_i$ есть совпадающие. НУО: $p_1 = p_2$. Тогда рассмотрим $(\Z/p_1^{l_1}\Z) \oplus (\Z/p_1^{l_2}\Z)$ и рассмотрим элементы вида $g = ([ap_1^{l_1 - 1}], \, [bp_1^{l_2 - 1}]), \, 0 \leq a, b \leq p - 1$. Тогда заметим, что $p_1 g = ([ap_1^{l_1}], \, bp_1^{l_2}) = ([0]_{p_1^{l_1}},\, [0]_{p_2^{l_2}})$. Отсюда $\ord g = p$ или $\ord g = 1$(в случае если $g = e$).
+  Таким образом $ |\{g \in G \, | \, pg = 0\}| \geq p^2$(потому что различных комбинаций $a$ и $b$ из определения $g$ уже $p^2$ и каждая комбинация дает новый элемент). Но заметим, что
+  \begin{equation*}
+    \{g \in G \, | \, pg = 0\} \subset \{x \in K^{*} \, | \, x^p = 1\}
+  \end{equation*}
+  А у многочлена $x^p - 1$ в поле не больше $p$ корней. Получили противоречие.
+
+  Таким образом все $p_j$ различные, а значит все $p_i^{l_i}$ попарно взаимно простые. Отсюда по лемме \ref{lem:6.9}
+  \begin{equation*}
+    \bigoplus \Z/p_{i}^{l_i}\Z \cong \Z/(\prod p_i^{l_i})\Z
+  \end{equation*}
+  Что и требовалось доказать.
+\end{proof}
+
+\begin{definition}
+  \textbf{Конечнопорождённая абелева группа} --- абелева группа с конечным числом образующих.
+\end{definition}
+
+\begin{definition}
+  Пусть $G$ --- абелева группа. Тогда \textbf{подгруппой кручения} будем называть
+  \begin{equation*}
+    G_{\tor} = \{g \in G \, | \, \ord g < \infty\}
+  \end{equation*}
+\end{definition}
+\begin{remark}
+  Пусть $G$ --- абелева группа. Тогда
+  \begin{equation*}
+    (G/G_{\tor})_{\tor} = \{0\}
+  \end{equation*}
+\end{remark}
+\begin{proof}
+  // TODO
+\end{proof}
+
+\begin{statement}
+  Пусть $G$ --- конечнопорождённая абелева группа. Тогда
+  \begin{enumerate}
+    \item $G_{\tor} = 0 \implies G \cong \Z^r$, где $r$ --- инвариант.
+    \item В общем случае $G \cong (G/G_{\tor}) \oplus G_{\tor}$.
+    \item $G_{\tor}$ --- конечная абелева группа.
+  \end{enumerate}
+\end{statement}
+\begin{corollary*}
+  Конечнопорождённая абелева группа изоморфна прямой сумме циклических.
+\end{corollary*}
+
+\chapter{Линейные операторы}
+\section{Матрицы линейного отображения}
+
+\begin{theorem-non}[свойство универсальности базиса]
+  Пусть $V, W$ --- линейное пространство над полем $K$,\ $e_1, \dotsc, e_n$ --- базис $V$ и $w_1, \dotsc, w_n \in W$. Тогда существует \textbf{единственное} линейное отображение $\varphi \in \Hom(V, W)\colon \varphi(e_i) = w_i,\, i = 1,\dotsc,n$.
+\end{theorem-non}
+\begin{proof}
+  Пусть
+  \begin{equation*}
+    \varphi(\alpha_1 e_1 + \dotsc + \alpha_n e_n) = \alpha_1 w_1 + \dotsc + \alpha_n w_n
+  \end{equation*}
+  Очевидно $\varphi$ линейное и $\varphi(e_i) = w_i,\, i = 1,\dotsc,n$. Проверим единственность. Пусть существует отображение $\tilde{\varphi}$ удовлетворяющее свойствам из условия. Тогда по условию
+  \begin{align*}
+    \hphantom{,\quad i = 1,\dotsc, n}
+    \tilde{\varphi}(e_i) = w_i = \varphi(e_i),\quad i = 1,\dotsc, n
+  \end{align*}
+  При этом по линейности
+  \begin{align*}
+    \tilde{\varphi}(\alpha_1 e_1 + \dotsb + \alpha_n  e_n)
+    &=
+    \alpha_1 \tilde{\varphi}(e_1) + \dotsb + \alpha_n \tilde{\varphi}(e_n)
+    \\&=
+    \alpha_1 w_1 + \dotsb + \alpha_n w_n
+    \\&=
+    \alpha_1 \varphi(e_1) + \dotsb + \alpha_n \varphi(e_n)
+    \\&=
+    \varphi(\alpha_1 e_1 + \dotsb + \alpha_n e_n)
+  \end{align*}
+  Таким образом образы отображений $\varphi$ и $\tilde{\varphi}$ совпадают для любого вектора из $V$(так как любой вектор раскладывается в линейную комбинацию базисов), а значит отображения равны. Единственность проверена.
+\end{proof}
+
+\begin{definition}
+  Пусть $\varphi \in \Hom(V, W),\, E = (e_1, \dotsc, e_n)$ --- базис $V$, $F = (f_1, \dotsc, f_m)$ --- базис $W$. \textbf{Матрицей $\varphi$ относительно базисов $E, F$} называется
+  \begin{equation*}
+    [\varphi]_{E, F} = ([\varphi(e_1)]_F, [\varphi(e_2)]_F, \dotsc, [\varphi(e_n)]_F) \in M(m, n, K)
+  \end{equation*}
+\end{definition}
+
+\begin{corollary*}
+  Отображение
+  \begin{align*}
+    \Hom(v, w) &\overset{\varepsilon}{\longrightarrow} M(m, n, K) \\
+    \varphi &\longmapsto([\varphi]_{E, F})
+  \end{align*}
+  --- биекция.
+\end{corollary*}
+
+Введем структуру линейного пространства на $\Hom(V, W)$.
+Пусть $\varphi, \psi \in \Hom(V, W); \alpha, \beta \in K$. Тогда рассмотрим отображение
+\begin{equation*}
+  (\alpha \varphi + \beta \psi)(v) \coloneqq \alpha \varphi(v) + \beta \psi(v)
+\end{equation*}
+Легко видеть, что $\alpha \varphi + \beta \psi \in \Hom(V, W)$. Также очевидно, что все аксиомы линейного пространства выполняются, а также, что $\varepsilon$ --- изоморфизм линейных пространств.
+
+\begin{corollary*}
+  Пусть $\dim V = n,\, \dim W = m$. Тогда $\dim \Hom(V, W) = mn$.
+\end{corollary*}
+
+\begin{theorem-non}
+\label{non:7.2}
+  Пусть $E, F$ --- базисы $V, W$ соответственно, $v \in V,\, \varphi \in \Hom(V, W)$.
+  Тогда
+  \begin{equation*}
+    [\varphi(v)]_F = [\varphi]_{E, F} [v]_E
+  \end{equation*}
+\end{theorem-non}
+\begin{proof}
+  Заметим, что
+  \begin{equation*}
+    \begin{gathered}
+      v = E \cdot [v]_E  \\
+      \varphi(v) = F \cdot [\varphi(v)]_F
+    \end{gathered}
+  \end{equation*}
+  При этом из линейности $\varphi$ мы знаем, что
+  \begin{equation*}
+    \varphi(v) =
+    \smash{\overbrace{(\varphi(e_1), \dotsc, \varphi(e_n))}^{\mathclap{\varphi(E)}}}
+    \cdot [v]_E
+  \end{equation*}
+  Но
+  \begin{equation*}
+    \varphi(e_i) = F \cdot [\varphi]_{E, F}[,i]
+    \implies
+    \varphi(E)
+    =
+    (F \cdot [\varphi]_{E, F}[,1], \dotsc, F \cdot [\varphi]_{E, F}[,n])
+    =
+    F \cdot [\varphi]_{E, F}
+  \end{equation*}
+  Тогда
+  \begin{equation*}
+    \varphi(v)
+    =
+    (F \cdot [\varphi]_{E, F}) \cdot [v]_E
+    =
+    F \cdot ([\varphi]_{E, F}[v]_{E})
+  \end{equation*}
+  Таким образом получили, что
+  \begin{equation*}
+    F \cdot [\varphi(v)]_F = F \cdot ([\varphi]_{E, F} \cdot [v]_E)
+  \end{equation*}
+  Но раз $F$ --- это базис $W$, а вектор не может иметь больше одного разложения по базису, то отсюда мы делаем вывод что столбцы коэффициентов равны. То есть
+  \begin{equation*}
+    [\varphi(v)]_F = [\varphi]_{E, F}[v]_E
+  \end{equation*}
+  Что и требовалось доказать.
+\end{proof}
+
+\begin{remark}
+  Пусть $E, E'$ --- базисы одного пространства. Тогда
+  \begin{equation*}
+    M_{E\to E'} = [\underbrace{\varepsilon_v}_{\mathclap{\id_v}}]_{E',E}
+  \end{equation*}
+\end{remark}
+
+\begin{theorem-non}
+\label{non:7.3}
+  Пусть $U, V, W$ --- конечномерные линейные пространства над $K;\; E, F, G$ --- их базисы, $\varphi \in \Hom(U, V),\; \psi \in \Hom(V, W)$. Тогда
+  \begin{equation*}
+    [\psi \circ \varphi]_{E, G} = [\psi]_{F, G} \cdot [\varphi]_{E, F}
+  \end{equation*}
+\end{theorem-non}
+\begin{proof}
+  Заметим, что
+  \begin{equation*}
+    \begin{gathered}
+      \varphi(E) = F \cdot [\varphi]_{E, F} \\
+      \psi(F) = G \cdot [\psi]_{F, G} \\
+      \psi(\varphi(E)) = G \cdot [\psi \circ \varphi]_{E, G}
+    \end{gathered}
+  \end{equation*}
+  Тогда
+  \begin{equation*}
+    \psi(\varphi(E)) = \psi(F) \cdot [\varphi]_{E, F} = G \cdot ([\psi]_{F, G}[\varphi]_{E, F})
+  \end{equation*}
+  При этом $G$ --- базис, а значит столбцы коэффициентов в разложении одного и того же вектора равны. Таким образом
+  \begin{equation*}
+    [\psi \circ \varphi]_{E, G} = [\psi]_{F, G} \cdot [\varphi]_{E, F}
+  \end{equation*}
+  Что и требовалось доказать.
+\end{proof}
+
+\begin{corollary*}
+  Пусть $E, E'$ --- базисы $V;\; F, F'$ --- базисы $W$; $C = M_{E\to E'},\, D = M_{F\to F'}$ и $\varphi \in \Hom(V, W)$. Тогда
+  \begin{equation*}
+    [\varphi]_{E', F'} = D^{-1} \cdot [\varphi]_{E, F} \cdot C
+  \end{equation*}
+\end{corollary*}
+\begin{proof}
+  Заметим, что
+  \begin{equation*}
+    \varphi = \varepsilon_W \circ \varphi \circ \varepsilon_V
+  \end{equation*}
+  Тогда по предложению \ref{non:7.3}
+  \begin{equation*}
+    [\varphi]_{E', F'} = [\varepsilon_W]_{F, F'} [\varphi]_{E, F} [\varepsilon_V]_{E', E}
+  \end{equation*}
+  Тогда воспользовавшись замечанием к предложению \ref{non:7.2} получаем
+  \begin{equation*}
+    [\varphi]_{E', F'} = M_{F'\to F} [\varphi]_{E, F} M_{E\to E'} = D^{-1} \cdot [\varphi]_{E, F} \cdot C
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}
+\label{th:7.1}
+  Пусть $V, W$ --- конечномерные линейные пространства, $\varphi \in \Hom(V, W)$. Тогда в $V, W$ существуют базисы $E, F$ такие, что
+  $
+    [\varphi]_{E, F}\text{ --- окаймленная единичная}
+  $.
+\end{theorem}
+\begin{proof}[Доказательство 1]
+  Пусть $E_0, F_0$ --- какие-либо базисы $V, W$. Заметим, что
+  \begin{equation*}
+    [\varphi]_{E_0, F_0} = PDQ
+  \end{equation*}
+  где $P, Q$ --- обратимые, $D$ --- окаймленная единичная. Тогда нужно построить $E, F$ так, что
+  \begin{equation*}
+    \begin{gathered}
+      M_{E_0 \to E} = Q^{-1} \\
+      M_{F_0 \to F} = P
+    \end{gathered}
+  \end{equation*}
+  Тогда пусть
+  \begin{equation*}
+    \begin{gathered}
+      E \coloneqq E_0Q^{-1} \\
+      F \coloneqq F_0P
+    \end{gathered}
+  \end{equation*}
+  Отсюда получаем, что
+  \begin{align*}
+    [\varphi]_{E, F}
+    &= M_{F_0 \to F}^{-1} [\varphi]_{E_0, F_0} M_{E_0 \to E}
+    \\
+    &=P^{-1}PDQQ^{-1} = D
+  \end{align*}
+  Теорема доказана.
+\end{proof}
+\begin{proof}[Доказательство 2]
+  Пусть $r = \rk \varphi, n = \dim V, m = \dim W$. Заметим, что $\dim \Ker \varphi = n - r$. Пусть $e_1', \dotsc, e_{n - r}'$ --- базис $\Ker \varphi$ и $e_1, \dotsc, e_r$ --- дополнение базиса $\Ker \varphi$ до базиса $V$.
+  Пусть $f_1 = \varphi(e_1), \dotsc, f_r = \varphi(e_r)$.
+
+  Легко видеть что $f_1, \dotsc, f_r$ --- ЛНС. Действительно, пусть
+  \begin{equation*}
+    \alpha_1 f_1 + \dotsc + \alpha_r f_r = 0
+  \end{equation*}
+  Тогда
+  \begin{equation*}
+    \begin{gathered}
+      \varphi(\alpha_1 e_1 + \dotsc + \alpha_r e_r) = 0 \\
+      \implies \alpha_1 e_1 + \dotsc + \alpha_r e_r \in \Ker \varphi
+    \end{gathered}
+  \end{equation*}
+  Тогда этот вектор как-то расскладывается по базису нашего ядра. То есть
+  \begin{equation*}
+    \alpha_1 e_1 + \dotsc + \alpha_r e_r = \alpha_1' e_1' + \dotsc + \alpha_{n - r}' e_{n - r}'
+  \end{equation*}
+  Но $e_1, \dotsc, e_r, e_1', \dotsc, e_{n - r}'$ --- базис $V$. Тогда $\alpha_1 = \dotsb = \alpha_r = 0$(в противном случае базис $V$ не ЛНС, чего не может быть).
+
+  Теперь дополним $f_i$ до базиса $W\colon f_{r + 1}, f_{r + 2}, \dotsc f_m$. Тогда получились следующие базисы:
+  \begin{equation*}
+    \begin{gathered}
+      E\colon e_1, \dotsc, e_r, e_1', \dotsc, e_{n - r}' \\
+      F\colon f_1, \dotsc, f_m
+    \end{gathered}
+  \end{equation*}
+  Тогда заметим, что нам нужно разложить базис $E$ через базис $F$ чтобы получить нашу матрицу. Для всех $e_i$ разложение очевидно --- $\varphi(e_i) = f_i$. При этом все вектора $e_i'$ --- из ядра нашего отображения. То есть $\varphi(e_i') = 0$. Таким образом
+  \begin{equation*}
+    [\varphi]_{E, F}
+    =
+    \bordermatrix{
+      ~ & 1 & 2 & 3 & \cdots & r & r + 1 & \cdots & n \cr
+      ~ & 1 & 0 & 0 & \cdots & 0 & 0 & \cdots & 0 \cr
+      ~ & 0 & 1 & 0 & \cdots & 0 & 0 & \cdots & 0 \cr
+      ~ & 0 & 0 & 1 & \cdots & 0 & 0 & \cdots & \vdots \cr
+      ~ & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \ddots & \vdots \cr
+      ~ & 0 & 0 & 0 & \cdots & 1 & 0 & \cdots & 0 \cr
+      ~ & 0 & 0 & 0 & \cdots & 0 & 0 & \cdots & 0 \cr
+      ~ & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \ddots & \vdots \cr
+      ~ & 0 & 0 & 0 & \cdots & 0 & 0 & \cdots & 0
+    }
+  \end{equation*}
+  Легко видеть, что полученная матрица является окаймленной единичной. Что и требовалось доказать.
+\end{proof}
+
+\begin{theorem-non}
+  Пусть $V, W$ --- конечномерные пространства, $E, F$ --- базисы, $\varphi \in \Hom(V, W)$. Тогда
+  \begin{equation*}
+    \rk [\varphi]_{E, F} = \rk \varphi
+  \end{equation*}
+\end{theorem-non}
+\begin{proof}[Доказательство 1]
+  //TODO
+\end{proof}
+\begin{proof}[Доказательство 2]
+  //TODO
+\end{proof}
+\begin{proof}
+  См. доказательство №2 теоремы \ref{th:7.1}.
+\end{proof}
+
+\end{document}
