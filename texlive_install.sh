@@ -29,6 +29,9 @@ tlmgr install luatex
 
 tlmgr install latexmk
 
+# Update the TL install but add nothing new
+tlmgr update --self --all --no-auto-install
+
 # Other contrib packages: done as a block to avoid multiple calls to tlmgr
 # texlive-latex-base is needed to run pdflatex
 tlmgr install   \
