@@ -1,52 +1,6 @@
-\documentclass[a4paper,10pt,oneside]{book}
-
-\usepackage[T2A]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[english,russian]{babel}
-\usepackage[a4paper,includeheadfoot,top=5mm,bottom=10mm,left=10mm,right=10mm]{geometry}
-\usepackage{subfiles}
-\usepackage{microtype}
-\usepackage{xcolor}
-\usepackage{enumerate}
-\usepackage[bookmarks]{hyperref}
-
-\usepackage{tikz-cd}
-\usetikzlibrary{arrows,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks}
-
-\usepackage{matanhelper}
-
-\usepackage{import}
-\usepackage{pdfpages}
-\usepackage{transparent}
-\usepackage{xcolor}
-
-\newcommand{\incfig}[2][1]{%
-    \def\svgwidth{#1\columnwidth}
-    \import{./img/}{#2.pdf_tex}
-}
-
-%\begin{figure}[ht]
-%    \centering
-%    \incfig[0.3]{drawing}
-%    \caption{Riemmans theorem}
-%    \label{fig:riemmans-theorem}
-%\end{figure}
-
-\pdfsuppresswarningpagegroup=1
-
-\hypersetup{
-    colorlinks,
-    linkcolor={blue!50!black},
-    citecolor={blue!50!black},
-    urlcolor={red!80!black}
-}
-
-\frenchspacing
-\setcounter{chapter}{5}
+\input{preamble.tex}
 
 \begin{document}
-
-
 \tableofcontents
 
 \subfile{tex/lec1.tex}
@@ -55,6 +9,6 @@
 \subfile{tex/lec4.tex}
 \subfile{tex/lec5.tex}
 \subfile{tex/lec6.tex}
-%\subfile{tex/lec7.tex}
+\subfile{tex/lec7.tex}
 
 \end{document}

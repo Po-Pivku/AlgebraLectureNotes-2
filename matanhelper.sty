@@ -1,18 +1,11 @@
 \ProvidesPackage{matanhelper}
 
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{mathtools}
-\usepackage{cancel}
-\usepackage{tikz}
-
 % Теоремы, следствия, замечания, ...
 \theoremstyle{plain}
 \newtheorem{theorem}{Теорема}[chapter]
 \newtheorem{theorem-non}{Предложение}[chapter]
 \newtheorem{statement}{Утверждение}[chapter]
-\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{lemma}{Лемма}[chapter]
 \newcounter{corollaryCounter}[theorem]
 \newtheorem{corollary}[corollaryCounter]{Следствие}
 \newtheorem*{corollary*}{Следствие}
@@ -39,6 +32,10 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\T}{\mathbb{T}}
+
+% Поднятая chi
+\DeclareRobustCommand{\rchi}{{\mathpalette\irchi\relax}}
+\newcommand{\irchi}[2]{\raisebox{\depth}{$#1\chi$}} % inner command, used by \rchi
 
 % Специальная команда обрамления в кружочек
 \newcommand*{\encircle}[1]{%
@@ -80,22 +77,28 @@
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\St}{St}
 \DeclareMathOperator{\tor}{tor}
+\DeclareMathOperator{\End}{End}
 
 \newcommand{\GCD}{\text{НОД}}
 \newcommand{\LCM}{\text{НОК}}
 
+% Большие римские цифры
 \makeatletter
 \newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
 \makeatother
 
 \newcommand{\rmk}[1]{\noindent {\textbf{#1}}}
 
+% Биг сабсет
 \newcommand\bigsubset[1][1.19]{%
    \mathrel{\vcenter{\hbox{\scalebox{#1}{$\subset$}}}}}
 
+% Биг сапсет
 \newcommand\bigsupset[1][1.19]{%
    \mathrel{\vcenter{\hbox{\scalebox{#1}{$\supset$}}}}}
 
+% Как vdots только более удобные для использованияя как знак "делится на"
 \newcommand{\dvdots}{\mathop{\raisebox{-2pt}{\vdots}}}
 
+% Лефт мапсто
 \newcommand\leftmapsto{\mathrel{\reflectbox{\ensuremath{\mapsto}}}}

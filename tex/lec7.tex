@@ -1,0 +1,434 @@
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Линейные операторы}
+Пусть $V$ --- конечномерное линейное пространство.
+
+\begin{definition}
+  \textbf{Эндоморфизм} --- гомоморфизм какого-либо алгебраического объекта на себя. В частности, эндоморфизмы линейных пространств называются линейными операторами.
+\end{definition}
+
+\begin{definition}
+  \textbf{Линейным оператором на $V$} называется линейное отображение $V \to V$. Множество всех линейных операторов будем обозначать $\End V = \Hom(V, V)$.
+\end{definition}
+
+\begin{theorem-non}
+\label{non:7.5}
+  Пусть $\mathcal{A} \in \End V$. Тогда эквивалентны следующие утверждения:
+  \begin{enumerate}
+    \item $\mathcal{A}$ обратим
+    \item $\Im \mathcal{A} = V$
+    \item $\Ker A = 0$
+  \end{enumerate}
+\end{theorem-non}
+\begin{proof}
+  \begin{enumerate}
+    \item[]
+    \item[] \boxed{\textbf{2 $\bm{\Leftrightarrow}$ 3}}
+    Заметим, что
+    $$
+      \dim \Ker \mathcal{A} + \dim \Im \mathcal{A} = \dim V
+    $$
+    Тогда
+      $$
+        \Im \mathcal{A} = V \iff \dim \Im \mathcal{A} = \dim V \iff \dim \Ker \mathcal{A} = 0 \iff \Ker \mathcal{A} = 0
+      $$
+    \item[] \boxed{\textbf{1 $\bm{\Rightarrow}$ 2, 3}} \vphantom{\Big |}
+    Заметим, что любое обратимое отображение биективно. Отсюда очевидно и получается, что $\Im \mathcal{A} = V$ и $\Ker \mathcal{A} = 0$.
+    \item[] \boxed{\textbf{2 $\bm{\Rightarrow}$ 1},\textbf{3 $\bm{\Rightarrow}$ 1}} \vphantom{\Big |}
+    Из $2$ или из $3$ по первому пункту всегда следует и 2 и 3. Но $2$ означает сюръективность гомоморфизма, а $3$ означает инъективность. Значит $\mathcal{A}$ --- биекция. Значит он обратим(можно доказать, что обратное к линейному отображению отображение --- линейно).
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem-non}
+\label{non:7.6}
+  Пусть $\mathcal{A} \in \End V,\, E$ --- базис $V,\, A = [\mathcal{A}]_E$.
+  Тогда $\mathcal{A}$ обратим $\iff$ A невырожденная(обратима).
+\end{theorem-non}
+\begin{proof}
+  \begin{enumerate}
+    \item Пусть $\mathcal{A}$ обратим, тогда $\exists \mathcal{B} \in \End V\colon \mathcal{AB} = \mathcal{BA} = \varepsilon_v \implies A \cdot B = B \cdot A = E_n \implies A \in \GL_n(K)$.
+    \item Пусть $A \in \GL_n(K) \implies \exists B \in \GL_n(K)\colon AB = BA = E_n$. Но существует $\mathcal{B} \in \End V\colon [\mathcal{B}]_E = B$, просто потому что у нас существует биекция между матрицами и линейными операторами(по следствию из определения \ref{def:7.1}). Легко показать, что оператор, соответствующей этой матрице подходит в качестве обратного к $\mathcal{A}$:
+    $$
+      \begin{gathered}
+        [\mathcal{AB}]_E = A \cdot B = E_n \implies \mathcal{AB} = \varepsilon_v \\
+        [\mathcal{BA}]_E = B \cdot A = E_n \implies \mathcal{BA} = \varepsilon_v
+      \end{gathered}
+    $$
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}
+  Пусть $\mathcal{A} \in \End V,\, W$ подпространство $V$. Тогда говорят, что \textbf{$W$ инвариантно относительно $\mathcal{A}$} если и только если $\mathcal{A}(W) \subset W$.
+\end{definition}
+\begin{remark}
+  Очевидно, что $V$ и $0$ --- инвариантные подпространства относительно любого оператора.
+\end{remark}
+
+\begin{theorem-non}
+  Пусть $\mathcal{A} \in \End V,\, W < V,\, e_1, \dotsc, e_m$ --- базис $W$ и $e_{m + 1},\dotsc,e_n$ --- его дополнение до базиса $V$. Тогда следующие два условия эквивалентны:
+  \begin{enumerate}
+    \item $W$ инвариантно относительно $\mathcal{A}$.
+    \item Пусть $E = (e_1, \dotsc, e_n)$. Тогда
+    $[\mathcal{A}]_E =
+    \begin{pmatrix}
+      A_1 & B \\
+      0  & A_2
+    \end{pmatrix}
+    $, где $A_1 \in M_m(K)$.
+  \end{enumerate}
+\end{theorem-non}
+\begin{proof}
+  Заметим, что $W = \Lin(e_1, \dotsc, e_m)$. Тогда
+  \begin{align*}
+  &W\text{ инвариантно относительно }\mathcal{A}  \\
+  &\iff \forall w \in W\colon \mathcal{A}(w) \in W  \\
+  &\iff \mathcal{A}(e_1), \dotsc, \mathcal{A}(e_m) \in W  \\
+  &\iff \mathcal{A}(e_1), \dotsc, \mathcal{A}(e_m) \in \Lin(e_1, \dotsc, e_m) \\
+  &\iff\text{ первые $m$ столбцов } [\mathcal{A}]_E \text{ содержат нули на пересечении со строками $m + 1, \dotsc, n$}
+  \end{align*}
+\end{proof}
+
+\begin{definition}
+  Пусть $W < V$ и $W$ инвариантно относительно $\mathcal{A} \in \End V$. Тогда отображение $\mathcal{A} |_{W}$ называется \textbf{индуцированным определителем}. Легко видеть, что данное отображение является эндоморфизмом пространства $W$, то есть элементом множества $\End W$.
+\end{definition}
+
+% Добавить информацию про прямую сумму подпространств
+
+\begin{theorem-non}
+  Пусть $\mathcal{A} \in \End V,\, V = W_1 \oplus W_2$ и $E_1, E_2$ --- базисы $W_1, W_2$ соответственно, $E = E_1E_2$ --- базис $V$. Тогда следующие два условия эквивалентны:
+  \begin{enumerate}
+    \item $W_1, W_2$ инвариантны относительно $\mathcal{A}$
+    \item $[\mathcal{A}]_E =
+    \begin{pmatrix}
+      A_1 & 0 \\
+      0 & A_2
+    \end{pmatrix}
+    $, где $A_1 \in M_m(K),\, m = \dim W_1$.
+  \end{enumerate}
+\end{theorem-non}
+%\begin{proof}
+
+%  Упражнения для читателя.
+%\end{proof}
+
+\section{Собственные векторы и собственные значения линейного оператора}
+
+\begin{definition}
+  Пусть $\mathcal{A} \in \End V$. Тогда вектор $v \in V, v \neq 0$ называется \textbf{собственным вектором $\mathcal{A}$}, если $\mathcal{A}(v) = \lambda v, \lambda \in K$.
+\end{definition}
+
+\begin{definition}
+  Пусть $\mathcal{A} \in \End V$. Тогда скаляр $\lambda \in K$ называется \textbf{собственным значением $\mathcal{A}$}, если $\exists v \neq 0\colon \mathcal{A}(v) = \lambda v$(такое $v$ называется собственным вектором $\mathcal{A}$ принадлежащим $\lambda$).
+\end{definition}
+
+Заметим, что
+\begin{equation*}
+  \mathcal{A}v = \lambda v \iff (\mathcal{A} - \lambda \varepsilon_v) v = 0
+  \iff
+  v \in \Ker(\mathcal{A} - \lambda \varepsilon_v)
+\end{equation*}
+Легко видеть, что такое ядро является линейным подпространством.
+
+\begin{remark}
+  $\lambda$ --- собственное значение $\mathcal{A} \iff \Ker (\mathcal{A} - \lambda \varepsilon_v) \neq 0$. В этом случае такое ядро называется \textbf{собственный подпространством $\mathcal{A}$}, принадлежащим $\lambda$. При этом собственные векторы это все ненулевые векторы собственного подпространства.
+\end{remark}
+
+\begin{definition}
+  \textbf{Геометрической кратностью} собственного значения $\lambda$ называют
+  \begin{equation*}
+    g_{\lambda} = \dim \Ker(\mathcal{A} - \lambda \varepsilon_v)
+  \end{equation*}
+\end{definition}
+
+\begin{theorem-non}
+\label{non:7.9}
+  Собственные вектора, принадлежащие разным собственным значениям линейно независимы.
+\end{theorem-non}
+\begin{proof}
+  Пусть $v_1, \dotsb, v_m$ --- собственные векторы, принадлежащие собственным значениям $\lambda_1, \dotsb, \lambda_m$. Докажем, что $v_1, \dotsb, v_m$ --- ЛНС. По индукции:
+
+  База: Если $m = 1$, то по определению $v_1 \neq 0 \implies v_1$ --- ЛНС.
+
+  Переход $m - 1 \to m$: От противного. Пусть существует нетривиальная линейная комбинация, не равная нулю:
+  \begin{equation}
+  \hphantom{, \exists\, i\colon \alpha_i \neq 0}
+    \alpha_1 v_1 + \dotsb + \alpha_m v_m = 0, \exists\, i\colon \alpha_i \neq 0
+    \tag{*}
+    \label{eq:non:7.9.*}
+  \end{equation}
+  Заметим, что $\alpha_m \neq 0$. Действительно, в противном случае мы нашли нетривиальную линейную комбинацию $m - 1$ вектора равную нулю, что противоречит индукционному предположению. Тогда сделаем следующее преобразование:
+  \begin{equation*}
+    \text{(\ref{eq:non:7.9.*}) }= 0
+    \implies
+    \mathcal{A}(\alpha_1 v_1 + \dotsb + \alpha_m v_m) = 0
+    \implies
+    \alpha_1 \lambda_1 v_1 + \dotsb + \alpha_m \lambda_m v_m = 0
+  \end{equation*}
+  Вычтем из получившегося равенства (\ref{eq:non:7.9.*}), домноженное на $\lambda_m$(в правой части получится 0, так как (\ref{eq:non:7.9.*}) = 0):
+  \begin{equation*}
+    \alpha_1(\lambda_1 - \lambda_m)v_1 + \dotsb + \alpha_{m- 1}(\lambda_{m  -1} - \lambda_m)v_{m - 1} = 0
+  \end{equation*}
+  Но $v_1, \dotsc, v_{m - 1}$ --- ЛНС по индукционном предположению. Значит все коэффициенты равны нулю. При этом $\lambda_i \neq \lambda_m, i \neq m$, значит все $\alpha_i$ равны нулю. Что противоречит тому, что (\ref{eq:non:7.9.*}) --- нетривиальная линейная комбинация. Получили противоречие, значит $v_1, \dotsc, v_m$ --- ЛНС.
+\end{proof}
+
+\begin{corollary*}
+  Пусть $\lambda_1, \dotsb, \lambda_m$ --- какие-либо собственные значения $\mathcal{A}$, $V_i = \Ker(\mathcal{A} - \lambda_i \varepsilon_v)$. Тогда
+  \begin{equation*}
+    V_1 + \dotsb + V_m = V_1 \oplus \dotsb \oplus V_m
+  \end{equation*}
+\end{corollary*}
+\begin{proof}
+  Пусть
+  \begin{equation*}
+    \hphantom{\text{,\, где $v_i, v_i' \in V_i$}}
+    v_1 + \dotsb + v_m = v_1' + \dotsb + v_m'\text{,\, где $v_i, v_i' \in V_i$}
+  \end{equation*}
+  Тогда
+  \begin{equation*}
+    \underbrace{(v_1 - v_1')}_{\in V_1} + \dotsb + \underbrace{(v_m - v_m')}_{\in V_m} = 0
+  \end{equation*}
+  Таким образом мы получили какую-то линейную комбинацию векторов из $V_1, \dotsb, V_m$, равную нулю. Но как мы знаем из предложения \ref{non:7.9} такие вектора являются линейно независимыми. Значит $v_i - v_i' = 0, \forall i = 1,\dotsc, m$. Значит наборы векторов равны и каждый вектор представляется единственным образом, а это и значит что сумма прямая.
+\end{proof}
+
+\begin{corollary*}
+  Пусть $\lambda_1, \dotsb, \lambda_n$ --- все собственные значения $\mathcal{A}$.
+  Тогда
+  \begin{equation*}
+    g_{\lambda_1} + \dotsb + g_{\lambda_m} \leq \dim V
+  \end{equation*}
+\end{corollary*}
+\begin{proof}
+  Пусть $V_i = \Ker(\mathcal{A} - \lambda_i \varepsilon_v)$. Тогда
+  \begin{equation*}
+    \dim (V_1 + \dotsb + V_m)
+    =
+    \dim (V_1 \oplus \dotsb \oplus V_m)
+    =
+    g_{\lambda_1} + \dotsb + g_{\lambda_m}
+  \end{equation*}
+  Но $V_1 + \dotsb + V_m$ --- это какое-то подпространство $V$, значит $\dim(V_1 + \dotsb + V_m) \leq \dim V$. Значит $g_{\lambda_1} + \dotsb + g_{\lambda_m} \leq \dim V$. Что и требовалось доказать.
+\end{proof}
+
+\begin{definition}
+  Оператор $\mathcal{A} \in \End V$ называется \textbf{диагонализируемым}, если $\exists E\colon [\mathcal{A}]_E$ --- диагональная.
+\end{definition}
+
+\begin{theorem-non}
+  Для $\mathcal{A} \in \End V$ три утверждения эквивалентны:
+  \begin{enumerate}
+    \item $\mathcal{A}$ диагонализируемый.
+    \item В $V$ существует базис из собственных векторов $\mathcal{A}$.
+    \item Пусть $\lambda_1, \dotsc, \lambda_m$ --- все собственные значения $\mathcal{A}$. Тогда $g_{\lambda_1} + \dotsb + g_{\lambda_m} = \dim V$.
+  \end{enumerate}
+\end{theorem-non}
+\begin{proof}
+  \begin{enumerate}
+  \item[]
+  \item[] \boxed{\textbf{1 $\bm{\Rightarrow}$ 2}}
+  Возьмем базис $E$ из определения диагонализируемого оператора. Тогда каждый базисный вектор при применении к нему оператора $\mathcal{A}$ просто умножается на соответствующее число в диагональной матрице. Значит он является собственным. Таким образом мы нашли базис из собственных векторов $\mathcal{A}$.
+  \item[] \boxed{\textbf{2 $\bm{\Rightarrow}$ 1}}
+  Возьмем базис $E$, состоящий из собственных векторов $\mathcal{A}$. Тогда при применении к нему оператора $\mathcal{A}$ каждый вектор станет равным самому себе же, только домноженному на какую-то константу. Значит в разложении $\mathcal{A}(e_i)$ на вектора из базиса, коэффициенты при других векторах будут равны нулю, а в $i$-ой строчке будет находится собственное значение вектора $e_i$, не равное нулю. Значит матрица $\mathcal{A}$ будет диагональной.
+  \item[] \boxed{\textbf{2 $\bm{\Rightarrow}$ 3}}
+  Пусть $\lambda$ --- собственное значение $\mathcal{A}$ и
+  $
+    [\mathcal{A}]_E =
+    \begin{pmatrix}
+      \beta_1 & \hdots & 0 \\
+      \vdots & \ddots & \vdots \\
+      0 & \hdots & \beta_n
+    \end{pmatrix}
+  $. Тогда вспомним, что $\lambda$ --- собственное значение тогда и только тогда, когда $\Ker(\mathcal{A} - \lambda \varepsilon_v) \neq 0 \iff [\mathcal{A} - \lambda \varepsilon_v]_E$ --- невырожденная(такой переход получается если применить равносильности из предложений \ref{non:7.5} и \ref{non:7.6}). Тогда посмотрим на матрицу $[\mathcal{A} - \lambda \varepsilon_v]_E$:
+  \begin{equation*}
+    [\mathcal{A} - \lambda \varepsilon_v]_E
+    =
+    \begin{pmatrix}
+      \beta_1 - \lambda & \hdots & 0 \\
+      \vdots & \ddots & \vdots \\
+      0 & \hdots & \beta_n - \lambda
+    \end{pmatrix}
+  \end{equation*}
+  Отсюда легко видеть, что $\lambda$ --- собственное значение если и только если $\lambda \in \{\beta_1, \dotsc, \beta_n\}$.
+
+  Осталось посчитать геометрическую кратность $\lambda$. Заметим, что если $b_j = \lambda$, то $(\mathcal{A} - \lambda \varepsilon_v) e_j = 0$. При этом никакой из других базисных векторов в 0 не обратится, просто потому что если в разложении какого-то вектора присутствует базисный вектор такой, что $b_i \neq \lambda$, то при применении к нему оператора $(\mathcal{A} - \lambda \varepsilon_v)$ коэффициент при нем все еще будет ненулевым. Таким образом $\Ker(\mathcal{A} - \lambda \varepsilon_v) = \Lin(e_j \; | \; b_j = \lambda)$. Тем самым $g_{\lambda} = |\{j \; | \; \beta_j = \lambda\}|$.
+
+  Теперь мы можем сложить такие величины по всем $\lambda$ и получить нужное равенство. Заметим, что любое значение на диагонали является собственным значением просто по определению, поэтому каждую диагональ мы посчитаем минимум один раз(и максимум один раз просто потому что каждой диагонали соответствует ровно одно число).
+  \item[] \boxed{\textbf{3 $\bm{\Rightarrow}$ 2}}
+  Пусть $V_i = \Ker(\mathcal{A} - \lambda_i \varepsilon_v)$. Тогда
+  \begin{equation*}
+    V_1 + \dotsb + V_m = V_1 \oplus \dotsb \oplus V_m
+  \end{equation*}
+  Тогда легко видеть, что
+  \begin{equation*}
+    g_{\lambda_1} + \dotsb + g_{\lambda_m} = \dim V
+    \implies
+    V_1 \oplus \dotsb \oplus V_m = V
+  \end{equation*}
+  Пусть $E_i$ --- базис $V_i$. Тогда $E_1\dotso E_m$ --- искомый базис. Действительно, линейная оболочка такого базиса будет равна $V$(из определения прямой суммы), при этом каждый из векторов будет собственным, так как это конкатенация базисов в собственных подпространствах $V$.
+  \end{enumerate}
+\end{proof}
+
+\section{Характеристический многочлен}
+Как мы уже выясняли в прошлом параграфе, если $\lambda$ --- собственное значение, то $\Ker(\mathcal{A} - \lambda \varepsilon) \neq 0$, что равносильно вырожденности соответствующей матрице $[\mathcal{A} - \lambda \varepsilon]_E$ для любого базиса $E$. Но это в свою очередь равносильно тому, что определитель такой матрицы не равен нулю. То есть(будем обозначать $[\mathcal{A}]_E$ просто как $A$):
+\begin{equation*}
+  \lambda\text{ --- собственное значение $\mathcal{A}$ } \iff |A - \lambda E_n| \neq 0
+  \hphantom{\quad \quad \quad \quad}
+\end{equation*}
+Таким образом
+\begin{equation*}
+  \lambda\text{ --- собственное значение $\mathcal{A}$ }
+  \iff
+  \begin{vmatrix}
+    a_{11} - \lambda & a_{12} & a_{13} & \hdots & a_{1n} \\
+    a_{21} & a_{22} - \lambda & a_{23} & \hdots & a_{2n} \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    a_{n1} & a_{n2} & a_{n3} & \hdots & a_{nn} - \lambda
+  \end{vmatrix}
+  \neq 0
+\end{equation*}
+Тогда если расписать определитель по определению, то получится некоторое выражение, которое можно рассматривать как многочлен, в который вместо переменной подставили $\lambda$. Например при $n = 2$:
+\begin{equation*}
+  \begin{vmatrix}
+    a_{11} - \lambda & a_{12} \\
+    a_{21} & a_{22} - \lambda
+  \end{vmatrix}
+  =
+  (a_{11} - \lambda)(a_{22} - \lambda) - a_{12} a_{21}
+  =
+  \lambda^2 - (a_{11} + a_{22}) \lambda + a_{11} a_{22} - a_{12} a_{21}
+\end{equation*}
+
+\begin{definition}
+  Пусть $A \in M_n(K)$. \textbf{Характеристическим многочленом матрицы $A$} называют
+  \begin{equation*}
+  \rchi_A = |
+  \underbrace{A - x E_n}_{\mathclap{\qquad \qquad \in M_n(K[X])}}
+  |
+  \end{equation*}
+\end{definition}
+
+\begin{lemma}
+  Пусть $A \in M_n(K),\, \lambda \in K$. Тогда
+  \begin{equation*}
+    A - \lambda E_n \in \GL(K) \iff \rchi_A(\lambda) \neq 0
+  \end{equation*}
+\end{lemma}
+\begin{proof}
+  Заметим, что
+  \begin{equation*}
+    A - \lambda E_n \in \GL_n(K)
+    \iff
+    |A - \lambda E_n| \neq 0
+  \end{equation*}
+  Но
+  \begin{equation*}
+    |A - \lambda E_n| = |A - x E_n|(\lambda) = \rchi_A(\lambda)
+  \end{equation*}
+  Значит
+  \begin{equation*}
+    A - \lambda E_n \in \GL(K) \iff \rchi_A(\lambda) \neq 0
+  \end{equation*}
+  Что и требовалось доказать.
+\end{proof}
+
+\begin{definition}
+  Пусть $\mathcal{A} \in \End V$. Тогда \textbf{характеристическим многочленом оператора $\mathcal{A}$} называют
+  \begin{equation*}
+    \hphantom{\text{, где $E$ --- какой-либо базис}}
+    \rchi_{\mathcal{A}} = \rchi_{[\mathcal{A}]_E}
+    \text{, где $E$ --- какой-либо базис}
+  \end{equation*}
+  Легко видеть, что определение не зависит от выбора базиса. Действительно, для любых двух базисов $E, E'$ выполнено:
+  \begin{equation*}
+    [\mathcal{A}]_{E'} = C^{-1} [\mathcal{A}]_E C
+  \end{equation*}
+  Тогда
+  \begin{align*}
+    \rchi_{[\mathcal{A}]_{E'}}
+    &=
+    \rchi_{C^{-1}[\mathcal{A}]_E C}
+    \\
+    &=
+    |C^{-1} [\mathcal{A}]_E C - x \cdot E_n|
+    \\
+    &=
+    |C^{-1} [\mathcal{A}]_E C - C^{-1} X C|
+    \\
+    &=
+    |C^{-1}([\mathcal{A}]_E - x \cdot E_n) C|
+    \\
+    &=
+    |C^{-1}| \cdot \rchi_{[\mathcal{A}]_E} \cdot |C|
+    \\
+    &= \rchi_{[\mathcal{A}]_E}
+  \end{align*}
+\end{definition}
+Заметим, что коэффициенты у некоторых степеней $x$ в $\rchi_A$ нам уже известны:
+\begin{equation*}
+  \rchi_A = |A - x E_n| = (-1)^n x^n + (a_{11} + a_{22} + \dotsb + a_{nn}) \cdot (-1)^{n - 1} \cdot x^{n - 1} + \dotsb + |A|
+\end{equation*}
+
+\begin{definition}
+  \textbf{Алгебраической кратностью} собственного значения $\lambda$ называю
+  \begin{equation*}
+    a_{\lambda} \coloneqq \text{кратность $\lambda$ как корня $\rchi_{\mathcal{A}}$}
+  \end{equation*}
+\end{definition}
+
+\begin{theorem-non}
+  Пусть $W$ --- инвариантное относительно $\mathcal{A}$ подпространство. Тогда $\rchi_{\mathcal{A} |_{W}}$ делит $\rchi_{\mathcal{A}}$.
+\end{theorem-non}
+\begin{proof}
+  Пусть $E_1$ --- базис $W$,\, $E = E_1E_2$ --- базис $V$. Тогда
+  \begin{equation*}
+    \hphantom{\text{, где $A_1 = [\mathcal{A}|_W]_{E_1}$}}
+    [\mathcal{A}]_E
+    =
+    \begin{pmatrix}
+      A_1 & * \\
+      0 & A_2
+    \end{pmatrix}
+  \text{, где $A_1 = [\mathcal{A}|_W]_{E_1}$}
+  \end{equation*}
+  Значит
+  \begin{equation*}
+    \rchi_{\mathcal{A}}
+    =
+    \begin{vmatrix}
+      A_1 - x E_m & * \\
+      0 & A_2 - x E_{n - m}
+    \end{vmatrix}
+    =
+    |A_1 - x E_m | \cdot |A_2 - x E_{n - m}|
+    =
+    \rchi_{A_1} \cdot \rchi_{A_2}
+  \end{equation*}
+  Таким образом $\rchi_{A_1} | \rchi_{\mathcal{A}}$, но $\rchi_{A_1} = \rchi_{\mathcal{A} |_{W}}$. Значит $\rchi_{\mathcal{A} |_{W}}$ делит $\rchi_{\mathcal{A}}$. Что и требовалось доказать.
+\end{proof}
+
+\begin{corollary*}
+  Пусть $\lambda$ --- собственное значение $\mathcal{A}$. Тогда $g_{\lambda} \leq a_{\lambda}$.
+\end{corollary*}
+\begin{proof}
+  Пусть $W = \Ker(\mathcal{A} - \lambda \varepsilon_v)$. Очевидно $W$ инвариантно(каждый вектор просто умножаеется на скаляр, а значит мы не можем выйти из этого подпространства). Значит $\rchi_{\mathcal{A} |_W}$ делит $\rchi_{\mathcal{A}}$. Но
+  \begin{equation*}
+    [\mathcal{A} |_W]_{\text{любой}} =
+    \begin{pmatrix}
+      \lambda & \hdots & 0 \\
+      \vdots & \ddots & \vdots \\
+      0 & \hdots & \lambda
+    \end{pmatrix}
+    \implies
+    \rchi_{\mathcal{A} |_W} = (\lambda - x)^{g_{\lambda}}
+    \implies
+    (\lambda - x)^{g_{\lambda}} \, | \, \rchi_{\mathcal{A}}
+    \implies
+    a_{\lambda} \geq g_{\lambda}
+  \end{equation*}
+\end{proof}
+
+\end{document}
