@@ -21,6 +21,8 @@ if ! command -v texlua > /dev/null; then
   cd ..
 fi
 
+sh update-tlmgr-latest.sh -- --upgrade
+
 tlmgr update --self
 
 # Just including texlua so the cache check above works
