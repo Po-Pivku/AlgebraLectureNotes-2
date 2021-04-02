@@ -8,7 +8,7 @@
 # required
 
 # See if there is a cached version of TL available
-export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
+export PATH=/tmp/texlive/2021/bin/x86_64-linux:$PATH
 if ! command -v texlua > /dev/null; then
   # Obtain TeX Live
   wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
