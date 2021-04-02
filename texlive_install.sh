@@ -38,7 +38,7 @@ tlmgr update --self --all --no-auto-install
 tlmgr install   \
     exam          \
     stmaryrd      \
-    amsfonts      \
+    amsfonts     \
     inputenc \
     cyrillic      \
     babel \
