@@ -1,0 +1,344 @@
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+\begin{theorem-non}
+\label{non:7.12}
+  Пусть $\mathcal{A} \in \End V$. Тогда эквивалентны два утверждения:
+  \begin{enumerate}
+    \item $\mathcal{A}$ диагонализируем
+    \item $\rchi_{\mathcal{A}}$ раскладывается на линейные множители, и для любого собственного значения $\lambda\colon g_{\lambda} = a_{\lambda}$
+  \end{enumerate}
+\end{theorem-non}
+\begin{proof}
+  \begin{enumerate}
+    \item[]
+    \item[] \boxed{\textbf{1 $\bm{\Rightarrow}$ 2}}
+    Если $\mathcal{A}$ диагонализируем, то для некоторого базиса $E$:
+    \begin{equation*}
+      [\mathcal{A}]_E
+      =
+      \begin{pmatrix}
+        \lambda_1 & 0 & 0 & \hdots & 0 \\
+        0 & \lambda_2 & 0 & \hdots & 0 \\
+        0 & 0 & \lambda_3 & \hdots & 0 \\
+        \vdots & \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & 0 & \hdots & \lambda_n
+      \end{pmatrix}
+    \end{equation*}
+    Тогда:
+    \begin{equation*}
+      \rchi_{\mathcal{A}} = \prod\limits_{i = 1}^{n} (\lambda_i - x)
+    \end{equation*}
+    Тогда отсюда кратность корня $\lambda$ это просто количество вхождений $\lambda$ в набор $(\lambda_1, \lambda_2, \dotsc, \lambda_n)$.
+    При этом $g_{\lambda}$ это тоже самое просто по определению. Значит $a_{\lambda} = g_{\lambda}$.
+    \item[] \boxed{\textbf{2 $\bm{\Rightarrow}$ 1}}
+      Пусть $\lambda_1, \dotsc, \lambda_m$ --- все собственные значения(без повторений). Тогда
+      \begin{equation*}
+        a_{\lambda_1} + \dotsb + a_{\lambda_m} = n
+        \implies
+        g_{\lambda_1} + \dotsb + g_{\lambda_m} = n
+        \overset{\ref{non:7.10}}{\implies}
+        \mathcal{A}\text{ диагонализируем}
+      \end{equation*}
+  \end{enumerate}
+\end{proof}
+\begin{examples}
+  \begin{enumerate}
+    \item Пусть $K = \R,\quad V$ двумерное, $E$ --- базис и есть оператор $\mathcal{A}$ такой, что $[\mathcal{A}]_E = \begin{pmatrix}
+      0 & 1 \\
+      -1 & 0
+    \end{pmatrix}$. Тогда легко видеть, что характеристическим многочленом такого оператора будет определитель матрицы $
+    \begin{vmatrix}
+      -x & 1 \\
+      -1 & -x
+    \end{vmatrix} = x^2 + 1$. Корней у такого многочлена нет $\implies \mathcal{A}$ не диагонализируем.
+    \item Пусть $K = \C,\quad V$ двумерное, $E$ --- базис и есть оператор $\mathcal{A}$ такой, что $[\mathcal{A}]_E = \begin{pmatrix}
+      0 & 0 \\
+      1 & 0
+    \end{pmatrix}$. Тогда $\rchi_{\mathcal{A}} = x^2,\, a_0 = 2$. Но геометрическая кратность собственного значения это размерность собственного подпространства, то есть $g_0 = \dim \Ker (\mathcal{A} - 0 \cdot E_n) = \dim \Ker(A)$, но легко видеть, что ядро нашего оператора это просто вектор $e_2$ и все кратные ему(потому что в его столбце в матрице оператора стоят нули), а значит размерность такого собственного подпространства равна единице. То есть $a_0 = 2$ и $g_0 = 1$, а значит $\mathcal{A}$ не диагонализируемый.
+  \end{enumerate}
+\end{examples}
+\begin{definition}
+  \textbf{Жордановой клеткой} порядка $m$ с собственным значением $\lambda$ называют матрицу
+  \begin{equation*}
+    J_m(\lambda)
+    =
+    \begin{pmatrix}
+      \lambda & 0 & 0 & \hdots & 0 & 0 \\
+      1 & \lambda & 0 & \hdots & 0 & 0 \\
+      0 & 1 & \lambda & \hdots & 0 & 0 \\
+      \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+      0 & 0 & 0 & \hdots & 1 & \lambda
+    \end{pmatrix}
+    \in M(m, K)
+  \end{equation*}
+\end{definition}
+В частности матрица из второго примера к предложению \ref{non:7.12} являлась жордановой клетко порядка 2 с собственным значением 1. Также легко видеть, что $\lambda$ на самом деле является единственным собственным значением $J_m(\lambda)$. Действительно,
+\begin{equation*}
+  \rchi_{J_m(\lambda)} = (\lambda - x)^m
+\end{equation*}
+Тогда алгебраическая кратность $\lambda$ очевидно равна $m$, а для того чтобы посчитать геометрическую кратность введем оператор умножения на матрицу слева, то есть
+\begin{equation*}
+  \mathcal{A} = J_m(\lambda) \;\bm{\cdot}
+\end{equation*}
+Соответственно
+\begin{equation*}
+  g_{\lambda}
+  =
+  \dim \Ker(\mathcal{A} - \lambda \varepsilon)
+  =
+  \dim \Ker(J_m(0) \; \bm{\cdot})
+\end{equation*}
+Но
+\begin{equation*}
+  J_m(0) =
+    \begin{pmatrix}
+      0 & 0 & 0 & \hdots & 0 & 0 \\
+      1 & 0 & 0 & \hdots & 0 & 0 \\
+      0 & 1 & 0 & \hdots & 0 & 0 \\
+      \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+      0 & 0 & 0 & \hdots & 1 & 0
+    \end{pmatrix}
+\end{equation*}
+То есть каждый из векторов базиса переходит в следующий по номеру, при этом последний базисный вектор переходит в ноль($e_1 \mapsto e_2 \mapsto \dotsb \mapsto e_{m} \mapsto 0$). Очевидно ядру такого оператора будут принадлежать только векторы кратные базисному вектору $e_m$, а значит размерность такого ядра будет равна единице. Таким образом:
+\begin{equation*}
+  g_{\lambda} = \dim \Ker(J_m(0) \; \bm{\cdot}) = 1
+\end{equation*}
+
+\begin{definition}
+  \textbf{Жордановой матрицей} называют блочно-диагональную матрицу, блоки которой это некоторые жордановы клетки.
+\end{definition}
+
+\section{Аннулирующие многочлены}
+Пусть $\mathcal{A} \in \End V$, где $V$ --- конечномерное пространство над полем $K$. И пусть $f \in K[x],\, f = a_m X^m + \dotsb + a_1 X + a_0$. Тогда определим подстановку оператора вместо переменной в наш многочлен следующим образом:
+\begin{equation*}
+  f(\mathcal{A})
+  =
+  a_m \mathcal{A}^{m}
+  +
+  a_{m - 1} \mathcal{A}^{m - 1}
+  +
+  \dotsb
+  +
+  a_1 \mathcal{A}
+  +
+  a_0 \varepsilon_V
+\end{equation*}
+
+\begin{theorem-non}
+  \begin{enumerate}
+    \item Пусть $f, g \in K[x]$. Тогда $(fg)(\mathcal{A}) = f(\mathcal{A})g(\mathcal{A})$.
+    \item Пусть $f, g \in K[x]$. Тогда $f(\mathcal{A})g(\mathcal{A}) = g(\mathcal{A})f(\mathcal{A})$.
+    \item Пусть $f \in K[x]$. Тогда $\Ker f(\mathcal{A})$ и $\Im f(\mathcal{A})$ --- $\mathcal{A}$-инвариантные подпространства.
+  \end{enumerate}
+\end{theorem-non}
+\begin{proof}
+  \begin{enumerate}
+    \item Тривиально расписывается по определению.
+    \item $f(\mathcal{A}) g(\mathcal{A}) = (fg)(\mathcal{A}) = (gf)(\mathcal{A}) = g(\mathcal{A}) f(\mathcal{A})$
+    \item Пусть $v \in \Ker f(\mathcal{A})$, тогда заметим, что
+    \begin{equation*}
+    \hphantom{\text{, где $g = X$}}
+      \mathcal{A}(v) = g(\mathcal{A})(v)\text{,\quad где $g = X$}
+    \end{equation*}
+    Тогда
+    \begin{equation*}
+      f(\mathcal{A})(\mathcal{A}v) = f(\mathcal{A})g(\mathcal{A})(v) = g(\mathcal{A})\underbrace{f(\mathcal{A})(v)}_{0} = 0
+    \end{equation*}
+    А значит $\mathcal{A}(\Ker \mathcal{A}) \subseteq \Ker(\mathcal{A})$
+
+    Теперь посмотрим на образ: пусть $v \in \Im f(\mathcal{A})$, тогда $v = f(\mathcal{A})(w)$, а значит
+    \begin{equation*}
+      \mathcal{A}(v) = g(\mathcal{A})f(\mathcal{A})(w) = f(\mathcal{A})g(\mathcal{A})(w) \in \Im f(\mathcal{A})
+    \end{equation*}
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem-non}
+\label{non:7.14}
+  В евклидовом кольце любой идеал главный.
+\end{theorem-non}
+\begin{proof}
+  Пусть $I \subset R$ идеал($I < R,\, bI \subset I, \forall b \in R$). Пусть $\nu$ --- евклидова норма. Тогда рассмотрим два случая:
+  \begin{enumerate}
+    \item $I = 0$. Тогда $I = (0)$, а значит этот идеал главный.
+    \item $I \neq 0$. Пусть $a$ элемент $I$ с минимальной евклидовой нормой(евклидова норма принимает неотрицательные целые значения, поэтому там всегда достигается минимум). Тогда $\nu(a) = c$, докажем что в этом случае $I = (a)$.
+
+    Во-первых очевидно, что $(a) \subset I$(просто потому что $I$ замкнуто относительно умножения).
+
+    Иначе, пусть $b \in I$. Тогда $b = aq + r$, а значит либо $r = 0$ и $b$ кратен $a$, а значит лежит в $(a)$. Либо $\nu(r) < \nu(a)$ и $r \neq 0$, но мы знаем, что $r = b - aq \in I$. То есть мы нашли ненулевой элемент с меньшей евклидовой нормой, что противоречит тому, что $\nu(a)$ это минимум. Значит такого быть не может и $b \in I$ всегда кратен $a$, а значит $I = (a)$.
+  \end{enumerate}
+\end{proof}
+\begin{definition}
+  Пусть $f \in K[X]$. Тогда $f$ называется \textbf{аннулятором} или \textbf{аннулирующим многочленом} оператора $\mathcal{A}$, если $f(\mathcal{A}) = 0$. Множество всех аннуляторов оператора $\mathcal{A}$ будем обозначать $I$.
+\end{definition}
+Легко видеть, что $I = \{f \, | \, f\text{--- аннулятор $\mathcal{A}$}\}$ --- идеал в $K[X]$. Действительно, пусть $f \in I, g \in K[X]$. Тогда:
+\begin{equation*}
+  (gf)(\mathcal{A}) = g(\mathcal{A})\underbrace{f(\mathcal{A})}_{0} = 0 \implies gf \in I
+\end{equation*}
+Но раз $K[x]$ --- евклидово кольцо, то по предложению (\ref{non:7.14}) $I$ --- главный идеал. Пусть $I = (\mu_{\mathcal{A}})$. Очевидно, что образующая идеала определена неоднозначно(а именно все ассоциированные с обращующей так же будут образующими). Но в случае когда мы говорим о многочленах, два элемента ассоциированы тогда и только тогда, когда они могут получиться друг из друга умножением на ненулевую константу. Поэтому можно считать, что многочлен $\mu_{\mathcal{A}}$ унитарный(старший коэффициент единица)
+
+Важно заметить, что наш идеал никогда не равен нулю(действительно, иначе мы не можем считать $\mu_{\mathcal{A}}$, так как он может быть равным нулю). Докажем почему это так:
+
+\begin{definition}
+  $\mu_{\mathcal{A}}$ называют \textbf{минимальным многочленом} оператора $\mathcal{A}$.
+\end{definition}
+
+\begin{definition}
+  Пусть $v \in V$. Говорят, что $f \in K[X]$ --- \textbf{аннулятор} $v$(по отношению к оператору $\mathcal{A}$), если $f(\mathcal{A})(v) = 0$. Множество всех аннуляторов $v$ по отношению к $\mathcal{A}$ будем обозначать $I_v$.
+\end{definition}
+Легко видеть, что $I_v = \{f \, | \, f(\mathcal{A})(v) = 0\}$ тоже является идеалом в $K$(рассуждение аналогично рассуждению для множества $I$). При этом из-за того что $K[X]$ --- евклидово кольцо, $I_v$ является главным идеалом в этом кольце, то есть $I_v = (\mu_{\mathcal{A}, v})$. Очевидно этот идеал ненулевой(любой аннулятор оператора $\mathcal{A}$ является аннулятором для любого из векторов в $V$).
+\begin{definition}
+  $\mu_{\mathcal{A}, v}$ называют \textbf{минимальным аннулятором} вектора $v$ по отношению к оператору $\mathcal{A}$.
+\end{definition}
+
+\begin{exercise}
+  Пусть $e_1,\dotsc,e_n$ --- базис $V$. Тогда $\mu_{\mathcal{A}} = \LCM(\mu_{\mathcal{A},e_1}, \dotsc, \mu_{\mathcal{A},e_n})$.
+\end{exercise}
+
+\section{Циклические подпространства}
+Пусть $v \in V$. Введем следующее обозначение:
+\begin{equation*}
+  L_v = \Lin(v, \mathcal{A}v, \mathcal{A}^2v, \dotsc)
+\end{equation*}
+Очевидно $L_v$ это минимальное линейное подпространство, инвариантное относительно $\mathcal{A}$.
+\begin{theorem-non}
+\label{non:7.15}
+  Пусть $d = \deg \mu_{\mathcal{A}, v}$. Тогда $v, \mathcal{A}v, \mathcal{A}^2v, \dotsc, \mathcal{A}^{d - 1}v$ --- базис $L_v$.
+\end{theorem-non}
+\begin{proof}
+  \begin{enumerate}
+    \item Докажем линейную независимость такого набора векторов. От противного, пусть
+    \begin{equation*}
+      \beta_0 v + \dotsb + \beta_{d - 1} \mathcal{A}^{d - 1} v = 0
+    \end{equation*}
+    Тогда возьмем многочлен $f = \beta_0 + \beta_1 X + \dotsb + \beta_{d - 1} X^{d - 1}$. Тогда $f(\mathcal{A})(v) = 0$, то есть $f$ --- аннулятор вектора $v$, а значит он должен делить минимальный аннулятор, то есть $\mu_{\mathcal{A}, v} |  f$. Но $\mu_{\mathcal{A}, v}$ имеет степень $d$, а $f$ имеет степень $d - 1$. Значит $f = 0$, а значит все коэффициенты равны нулю(а значит линейная комбинация равная нулю всегда тривиальна).
+    \item Докажем, что линейная оболочка такого набора векторов совпадает со всем $L_v$. Пусть $W = \Lin(v, \mathcal{A}v, \dotsc, \mathcal{A}^{d - 1}v)$. Докажем, что $m \geq 0 \implies \mathcal{A}^m v \in W$.
+    \begin{enumerate}[1)]
+      \item $m = 0, 1,\dotsc, d - 1$ --- тривиально.
+      \item Иначе подставим $\mathcal{A}v$ в минимальный аннулятор $v$:
+      \begin{equation*}
+        \begin{gathered}
+          \mathcal{A}^{d}v + \alpha_{d - 1}\mathcal{A}^{d - 1}v + \dotsb + \alpha_1 \mathcal{A}v + \alpha_0 v = 0 \\
+          \mathcal{A}^{d}v = -\alpha_{d - 1} \mathcal{A}^{d - 1} v - \dotsb - \alpha_1 \mathcal{A}v - \alpha_0 v \in W
+        \end{gathered}
+      \end{equation*}
+      Таким образом $A^dv \in W$, а дальше будем действовать по индукции. Переход $m \to m + 1$, по индукционному предположению:
+      \begin{equation*}
+        \begin{gathered}
+          \mathcal{A}^m v = \gamma_0 v + \gamma_1 \mathcal{A} v + \dotsb + \gamma_{d - 1} \mathcal{A}^{d - 1} v
+          \\
+          \mathcal{A}^{m + 1} v = \underbrace{\gamma_0 \mathcal{A} v + \gamma_1 \mathcal{A}^2 v + \dotsb}_{\in W} + \gamma_{d - 1} \underbrace{\mathcal{A}^{d} v}_{\in W}
+        \end{gathered}
+      \end{equation*}
+      Таким образом $\mathcal{A}^{m + 1} \in W$, а значит раскладывается в линейную комбинацию векторов, порождающих это пространство. А значит $L_v = W$. Что и требовалось доказать.
+    \end{enumerate}
+  \end{enumerate}
+\end{proof}
+
+Легко видеть, что каждый из векторов базиса переходит в следующий по номеру базисный вектор, кроме последнего. А вектор $\mathcal{A}^{d - 1}v$ переход в $\mathcal{A}^d v$, разложение которого по базису мы уже находили в процессе доказательства предложения \ref{non:7.15}:
+\begin{equation*}
+\hphantom{
+  \text{
+    --- \textbf{сопровождающая матрица}
+  }
+}
+  [\mathcal{A} |_{L_v}]_E
+  =
+  \begin{pmatrix}
+    0 & 0 & \hdots & 0 & -\alpha_0 \\
+    1 & 0 & \hdots & 0 & -\alpha_1 \\
+    0 & 1 & \hdots & 0 & -\alpha_2 \\
+    \vdots & \vdots & \ddots & \vdots & \vdots \\
+    0 & 0 & \hdots & 1 & -\alpha_{d - 1}
+  \end{pmatrix}
+  \text{
+    --- \textbf{сопровождающая матрица}
+  }
+\end{equation*}
+Таким образом наша матрица однозначно определяется минимальным аннулятором вектора $v$.
+
+\begin{lemma}
+  \begin{equation*}
+    \rchi_{\mathcal{A} |_{L_v}} = \pm \mu_{\mathcal{A}, v}
+  \end{equation*}
+\end{lemma}
+\begin{proof}
+  \begin{equation*}
+    \rchi_{\mathcal{A} |_{L_v}}
+    =
+    \begin{vmatrix}
+      -x & 0 & \hdots & 0 & -\alpha_0 \\
+      1 & -x & \hdots & 0 & -\alpha_1 \\
+      0 & 1 & \hdots & 0 & -\alpha_2 \\
+      \vdots & \vdots & \ddots & \vdots & \vdots \\
+      0 & 0 & \hdots & -x & -\alpha_{d - 2} \\
+      0 & 0 & \hdots & 1 & -\alpha_{d - 1} - x
+    \end{vmatrix}
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}[Гамильтона-Кэли]
+  Характеристический многочлен оператора является его аннулятором, то есть:
+  \begin{equation*}
+    \rchi_{\mathcal{A}}(\mathcal{A}) = 0
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  Пусть $v \in V$. Тогда
+  \begin{equation*}
+    L_v\text{ --- инвариантное подпространство}
+    \overset{\ref{non:7.11}}{\implies}
+    \rchi_{\mathcal{A} |_{L_v}} \, | \, \rchi_{\mathcal{A}}
+  \end{equation*}
+  Но $\rchi_{\mathcal{A}|_{L_v}} = \mu_{\mathcal{A}, v}$, то есть он является аннулятором, и тем самым $\rchi_{\mathcal{A} |_{L_v}}(\mathcal{A})(v) = 0$. Таким образом $\rchi_{\mathcal{A}}(v) = 0,\, \forall v \in V$. А значит $\rchi_{\mathcal{A}}$ --- аннулятор. Что и требовалось доказать.
+\end{proof}
+\begin{corollary*}
+  $\mu_{\mathcal{A}}$ делит $\rchi_{\mathcal{A}}$
+\end{corollary*}
+
+\section{Разложение пространства в прямую сумму примарных подпространств}
+\begin{definition}
+  Пусть $p \in K[x]$ --- неприводимый многочлен. Вектор $v \in V$ называют \textbf{$p$-примарным}, если $\mu_{\mathcal{A}, v} =  p^t$ для некоторого $t \geq 0$.
+\end{definition}
+
+\begin{lemma}
+  $W_p = \{v \in V \, | \, v\text{ --- $p$-примарный}\}$ --- инвариантное подпространство.
+\end{lemma}
+\begin{proof}
+  \begin{enumerate}
+    \item Замкнутость.
+    \item Инвариантность. Заметим, что $W_p = \bigcup\limits_{t \geq 0} \Ker p^t(\mathcal{A})$. Но все ядра инвариантны, а значит и их объединение также инвариантно.
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}
+  Пускай $p$ --- неприводимый многочлен. Тогда $V$ называется \textbf{$p$-примарным}, если $V = W_p$.
+\end{definition}
+\begin{lemma}
+  Пусть $\mu_{\mathcal{A}} = fg;\; (f, g) = 1$. Тогда $V = V_1 \oplus V_2$, где $V_1,V_2$ --- $\mathcal{A}$-инвариантные подпространства и $\mu_{\mathcal{A} |_{V_1}}$ делит $f$, а $\mu_{\mathcal{A} |_{V_2}}$ делит $g$.
+\end{lemma}
+\begin{proof}
+  Пусть $V_1 = \Ker g(\mathcal{A}),\, V_2 = \Ker f(\mathcal{A})$ --- инвариантные подпространства. Докажем, что это искомые подпространства:
+  \begin{enumerate}[(1)]
+    \item Докажем, что $V_1 + V_2 = V$. Так как $(f, g) = 1$, то $fa + gb = 1$ для некоторых $a, b \in K[x]$. Возьмем $v \in V$. Тогда:
+    \begin{equation*}
+      v = \varepsilon(v) = (f(\mathcal{A})a(\mathcal{A}) + g(\mathcal{A})b(\mathcal{A}))(v)
+      =
+      f(\mathcal{A})(a(\mathcal{A})(v)) + g(\mathcal{A})(b(\mathcal{A})(v))
+    \end{equation*}
+  Заметим, что $fg = \mu_{\mathcal{A}}$, а значит $g(\mathcal{A})f(\mathcal{A}) = \mu_{\mathcal{A}}(\mathcal{A}) = 0$. Поэтому $f(\mathcal{A}) \in \Ker g(\mathcal{A}) \in V_1$. Таким образом первое слагаемое принадлежит $V_1$. Аналогично получается, что второе слагаемое принадлежит $V_2$, а значит их сумма лежит в $V_1 + V_2$.
+  \item Докажем, что $V_1 \cap V_2 = 0$. Пусть $v \in V_1 \cap V_2$.
+
+  \begin{equation*}
+  v \in V_1 \implies v \in \Ker g(\mathcal{A}) \implies g\text{ --- аннулятор $v$} \implies \mu_{\mathcal{A}, v} | g
+  \end{equation*}
+  Аналогично $\mu_{\mathcal{A}, v} | f$, но $(f, g) = 1$, а значит $\mu_{\mathcal{A}, v} = 1 \implies v = 0$.
+  \item $\mu_{\mathcal{A}|_{V_1}}$ делит $f$. Действительно, $\forall v \in V\colon \mu_{\mathcal{A}, v}$ делит $f$(из прошлого пункта). Значит $\mu_{\mathcal{A}}$ --- аннулятор для всех элементов $v \in V_1$, значит $f$ --- анулятор $\mathcal{A}|_{V_1}$, а значит $\mu_{\mathcal{A} |_{V_1}}$ делит $f$. Аналогично $\mu_{\mathcal{A} |_{V_2}}$ делит $g$.
+  \end{enumerate}
+\end{proof}
+
+\end{document}
