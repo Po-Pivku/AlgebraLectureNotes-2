@@ -1,0 +1,328 @@
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{theorem}
+\label{th:7.3}
+  Пусть $\mathcal{A} \in \End V$ и $\mu_{\mathcal{A}} = p_1^{n_1} \dotsm p_s^{n_s}$, где $p_i$ --- различные унитарные неприводимые многочлены. Тогда
+  \begin{equation*}
+    V = \bigoplus\limits_{i = 1}^{s} W_{p_i}
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  По лемме
+  $
+    %\hphantom{\text{, где $V_i$ --- $\mathcal{A}$-инвариантно}}
+    V = \bigoplus\limits_{i = 1}^{s} V_i
+    %\text{, где $V_i$ --- $\mathcal{A}$-инвариантно}
+  $
+  где $V_i$ --- $\mathcal{A}$-инвариантно и $\mu_{\mathcal{A} |_{V_i}}$ делит $p_i^{n_i}$. А значит и $\mu_{\mathcal{A}, v}$ для любого $v \in V_i$ делит $p_i^{n_i}$, что значит, что каждый вектор из $V_i$ является $p_i$-примарным. Отсюда $V_i \subset W_{p_i}$.
+
+  Осталось проверить, что $W_{p_i} \subset V_i$. Для простоты записи будем считать, что $i = s$. Возьмем $w \in W_{p_s}$. Тогда
+  \begin{align*}
+    \hphantom{\text{, где $v_j \in V_j$}}
+    w &= v_1 + v_2 + \dotsb + v_s
+    \text{, где $v_j \in V_j$} \\
+    \underbrace{w - v_s}_{\mathclap{\in W_{p_s}}} &= v_1 + v_2 + \dotsb + v_{s - 1}
+  \end{align*}
+  Заметим, что $\mu_{w - v_s} = p_s^{N_s}$ и $\mu_{v_j} = p_{j}^{N_j}$. Тогда рассмотрим многочлен $g = \mu_{v_1} \dotsm \mu_{v_{s - 1}}$. Заметим, что $g$ будет аннулятором для правой части нашего равенства(действительно, $g$ является аннулятором для каждого из векторов $v_1, v_2, \dotsc, v_{s - 1}$, а значит является аннулятором для суммы). При этом заметим, что $g$ не делится на $p_s$, а значит он может являться аннулятором для правой части только в том случае, если $N_s = 0$, а значит $w - v_s = 0$. Таким образом $W_{p_i} \subset V_i$, потому что для каждого $w \in W_{p_i}$ мы нашли такой $v \in V_i$, что $w = v$.
+
+  Отсюда $W_{p_i} = V_i$. Соответственно $V = \bigoplus\limits_{i = 1}^{s} W_{p_i}$. Что и требовалось доказать.
+\end{proof}
+
+\begin{theorem}
+\label{th:7.4}
+  Пусть $V$ --- $p$-примарное пространство. Тогда существуют $v_1, \dotsc, v_t \in V$ такие, что
+  \begin{equation*}
+    V = \bigoplus\limits_{i = 1}^{t} L_{v_i}
+  \end{equation*}
+\end{theorem}
+
+Легко видеть, что матрица оператора в пространстве $V$ для некоторого базиса будет являться блочно-диагональной, где блоки --- это матрицы оператора на отдельных подпространствах. При этом в нашем частном случае(в случае циклического оператора) каждую из матриц соответствующего оператора в каждом из подпространств мы можем сделать сопровождающей матрицей многочлена.
+
+Пусть $E_i = (v_i, \mathcal{A}v_i, \dotsc, \mathcal{A}^{d - 1}v_i)$, где $d = \deg \mu_{\mathcal{A}, v_i}$. Тогда, как мы уже выясняли в прошлом параграфе
+\begin{equation*}
+  [\mathcal{A} |_{L_{v_i}}]_{E_i}
+  =
+  C(\mu_{\mathcal{A}, v_i})
+  =
+  \begin{pmatrix}
+    0 & 0 & \hdots & 0 & -\alpha_0 \\
+    1 & 0 & \hdots & 0 & -\alpha_1 \\
+    0 & 1 & \hdots & 0 & -\alpha_2 \\
+    \vdots & \vdots & \ddots & \vdots & \vdots \\
+    0 & 0 & \hdots & 1 & -\alpha_{d - 1}
+  \end{pmatrix}
+\end{equation*}
+
+Отсюда, объединив все пространство в одно(таким образом переформулировав нашу теорему на язык матриц) получаем общий вид матрицы оператора $\mathcal{A}$ в пространстве $V$ для базиса $E = E_1 \dotso E_t$.
+\begin{equation*}
+  [\mathcal{A}]_E =
+  \begin{pmatrix}
+    C(\mu_{\mathcal{A}, v_1}) & 0 & \hdots & 0 \\
+    0 & C(\mu_{\mathcal{A}, v_2}) & \hdots & 0 \\
+    \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & \hdots & C(\mu_{\mathcal{A}, v_t})
+  \end{pmatrix}
+\end{equation*}
+
+\begin{corollary*}
+  Пусть $\rchi_{\mathcal{A}} = \pm p_1^{m_1} \dotsm p_s^{m_s}$, где $p_i$ --- различные неприводимые. Тогда $\mu_{\mathcal{A}} = p_1^{n_1} \dotsm p_s^{n_s}$, где $1 \leq n_i \leq m_i$.
+\end{corollary*}
+\begin{proof}
+  Доказать это следствие предлагается читателю в качестве упражнения.
+\end{proof}
+
+\section{Жорданова нормальная форма}
+
+Пусть $\rchi_{\mathcal{A}} = \pm (x - \lambda_1)^{m_1} \dotsm (x - \lambda_t)^{m_t}$, где $\lambda_1, \dotsc, \lambda_t$ различны. Тогда по теореме \ref{th:7.3} наше пространство раскладывается в прямую сумму $W_{x - \lambda_i} =: R_{\lambda_i}$. То есть $V = R_{\lambda_1} \oplus \dotsb \oplus R_{\lambda_t}$.
+
+\begin{definition}
+  $R_{\lambda_i}$ называют \textbf{корневым подпространством}, принадлежащим собственному значению $\lambda_i$.
+\end{definition}
+
+\begin{definition}
+  Оператор $\mathbb{B} \in \End V$ называется \textbf{нильпотентным}, если $\exists n \in \N\colon \mathbb{B}^n = 0$.
+\end{definition}
+
+\begin{definition}
+  Пусть $\mathcal{A} \in \End V$. Тогда базис $E$ пространства $V$ называется \textbf{жордановым}, если $[\mathcal{A}]_E$ жорданова.
+\end{definition}
+
+\begin{theorem}
+  Пусть $\mathcal{A} \in \End V$. Тогда эквивалентны два условия:
+  \begin{enumerate}
+    \item $\rchi_{\mathcal{A}} = \pm (x - \lambda_1)^{m_1} \dotsm (x - \lambda_t)^{m_t}$.
+    \item Существует жорданов базис $E$ пространства $V$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  \begin{enumerate}
+    \item Пусть $\mathcal{A}$ нильпотентный. Тогда $t = 1$ и $\lambda_1 = 0$. Предположим что это не так и $\exists \lambda \neq 0$ --- собственное значение $\mathcal{A}$. Тогда мы знаем, что $\mathcal{A}^N = 0$, для некоторого $N \in \N$. Подставим в этот оператор вектор $v \in V_{\lambda}, v \neq 0$(собственный вектор принадлежащий собственному значению $\lambda$). Тогда с одной стороны $A^N v = 0$(потому что оператор нулевой), а с другой стороны $\mathcal{A}^N v = \lambda^N v \neq 0$. Получили противоречие, значит ненулевых собственных значений у $\mathcal{A}$ нет.
+
+    Таким образом, раз у $\mathcal{A}$ только одно собственное значение равное нулю, то $\rchi_{\mathcal{A}} = \pm \lambda^n$, где $n = \dim V$. При этом по теореме $\ref{th:7.4}$:
+    \begin{equation*}
+      V = \bigoplus\limits_{i = 1}^{s} L_{v_i}
+    \end{equation*}
+    Тогда заметим, что $\mu_{v_i}$ делит $\mu_{\mathcal{A}}$, а $\mu_{\mathcal{A}}$ делит $\rchi_{\mathcal{A}}$. А значит $\mu_{v_i} = x^{l_i} \implies [\mathcal{A} |_{L_{v_i}}]_{E_i} = C(x^{l_i})$. Но у многочлена $x^{l_i}$ все коэффициенты кроме старшего равны нулю. Таким образом если подставить этот многочлен в общий вид сопровождающей матрице можно заметить, что $C(x^{l_i}) = J_{l_i}(0)$.
+
+    Но такие матрицы это просто блоки в матрице оператора $\mathcal{A}$ в пространстве $V$(как мы выясняли в конце прошлого параграфа), а значит матрица $[\mathcal{A}]_E$ для $E = E_1 \dotso E_s$ это блочно-диагональная матрица, состоящая из жордановых клеток на диагонали, а значит она является жордановой. Таким образом мы нашли жорданов базис $E$.
+
+    \item Пусть $t = 1$. То есть $\rchi_{\mathcal{A}} = \pm (x - \lambda)^n$. Тогда заметим, что $(\mathcal{A} - \lambda \varepsilon)^n = 0$ по теореме Гамильтона-Кэли, а значит $\mathbb{B} = \mathcal{A} - \lambda \varepsilon$ --- нильпотентен. Но по первому пункту мы знаем, что у $\mathbb{B}$ существует жорданов базис $E$, и матрица оператора $\mathbb{B}$ для него выглядит следующим образом:
+    \begin{equation*}
+      [\mathbb{B}]_E
+      =
+      \begin{pmatrix}
+        J_{l_1}(0) & \hdots & 0 \\
+        \vdots & \ddots & \vdots \\
+        0 & \hdots & J_{l_s}(0)
+      \end{pmatrix}
+    \end{equation*}
+    Но тогда легко видеть, как будет выглядить матрица оператора $\mathcal{A}$ в том же базисе:
+    \begin{equation*}
+      [\mathcal{A}]_E
+      =
+      ([\mathcal{B}]_E + [\lambda \varepsilon]_E)
+      =
+      \begin{pmatrix}
+        J_{l_1}(\lambda) & \hdots & 0 \\
+        \vdots & \ddots & \vdots \\
+        0 & \hdots & J_{l_s}(\lambda)
+      \end{pmatrix}
+    \end{equation*}
+    Таким образом $E$ является жордановым базисом для оператора $\mathcal{A}$.
+
+    \item Теперь докажем теорему в общем случае.
+    Воспользуемся разложением нашего пространства в прямую сумму примарных:
+    \begin{equation*}
+      V = \bigoplus\limits_{i = 1}^{r} R_{\lambda_i}
+    \end{equation*}
+    Заметим, что $\mathcal{A} |_{R_{\lambda_i}}$ не имеет собственных значений, кроме $\lambda_i$, потому что $V_{\lambda_j} \subset R_{\lambda_j}$, а $R_{\lambda_j} \cap R_{\lambda_i} = 0$ при $i \neq j$.
+
+    При этом по случаю 2 для $\mathcal{A}|_{R_{\lambda_j}}$ существует жорданов базис, а объединение жордановых базисов также дает жорданов базис.
+  \end{enumerate}
+\end{proof}
+
+\begin{remark}
+  Жорданова матрица для оператора $\mathcal{A}$ определена однозначно с точностью до порядка следования клеток.
+\end{remark}
+
+\chapter{Билинейные формы и евклидовы пространства}
+\section{Билинейные формы}
+
+\begin{definition}
+  Пусть $V$ --- линейное пространство над полем $K$. \textbf{Билинейной формой(билинейной функцией)} на $V$ называется отображение $\mathcal{B}\colon V \times V \to K$ такое, что
+  \begin{enumerate}
+    \item $\mathcal{B}(\alpha_1 v_1 + \alpha_2 v_2, w)
+    = \alpha_1 \mathcal{B}(v_1, w) + \alpha_2 \mathcal{B}(v_2, w)$.
+    \item $\mathcal{B}(v, \alpha_1 w_1 + \alpha_2 w_2)
+    = \alpha_1 \mathcal{B}(v, w_1) + \alpha_2 \mathcal{B}(v, w_2)$.
+  \end{enumerate}
+\end{definition}
+
+\begin{examples}
+  \begin{enumerate}
+    \item Стандартное скалярное произведение. Пусть $V = K^n$. Тогда
+    \begin{equation*}
+      \mathcal{B}\left(
+        \begin{pmatrix}
+          \alpha_1 \\
+          \vdots \\
+          \alpha_n
+        \end{pmatrix},
+        \begin{pmatrix}
+          \beta_1 \\
+          \vdots \\
+          \beta_n
+        \end{pmatrix}
+      \right) =
+      \alpha_1 \beta_1 + \dotsb + \alpha_n \beta_n
+    \end{equation*}
+
+    \item Пусть $V = C[0, 1]$. Тогда
+    \begin{equation*}
+      \mathcal{B}(f, g) = \int_{0}^{1} fg
+    \end{equation*}
+
+    \item Пусть $V = K^2$. Тогда
+    \begin{equation*}
+      \mathcal{B}\left(
+        \begin{pmatrix}
+          \alpha_1 \\
+          \alpha_2
+        \end{pmatrix},
+        \begin{pmatrix}
+          \beta_1 \\
+          \beta_2
+        \end{pmatrix}
+      \right) =
+      \alpha_1 \beta_2 - \alpha_2 \beta_1
+    \end{equation*}
+  \end{enumerate}
+\end{examples}
+
+Заметим, что если $V$ --- конечномерное пространство и $E$ --- базис, то функция от двух фиксированных векторов $v, w \in V$ понятным образом выражается через функции от базисных векторов. Формально:
+\begin{equation}
+\label{bil:8.1}
+\tag{*}
+  \mathcal{B}(v, w) =
+  \mathcal{B}(\alpha_1 e_1 + \dotsb + \alpha_n e_n, \beta_1 e_1 + \dotsb + \beta_n e_n) =
+  \sum\limits_{i = 1}^{n} \sum\limits_{j = 1}^{n} \alpha_i \beta_j \mathcal{B}(e_i, e_j)
+\end{equation}
+Таким образом зная значения на билинейной формы на базисных векторах мы можем посчитать её значение на любой паре векторов из нашего пространства. Тогда давайте составим из всех значений матрицу и будем использовать её для подсчета произвольный значений нашей билинейной формы.
+
+\begin{definition}
+  Пусть $V$ --- конечномерное пространства, $E = {e_1, \dotsc, e_n}$ --- базис и $\mathcal{B}$ --- билинейная форма на $V$. Тогда \textbf{матрицей Грама} билинейной формы $\mathcal{B}$ в базисе $E$ называется матрица следующего вида:
+  \begin{equation*}
+    [\mathcal{B}]_E =
+    \begin{pmatrix}
+      \mathcal{B}(e_1, e_1) & \mathcal{B}(e_1, e_2) & \hdots & \mathcal{B}(e_1, e_n) \\
+      \mathcal{B}(e_2, e_1) & \mathcal{B}(e_2, e_2) & \hdots & \mathcal{B}(e_2, e_n) \\
+      \vdots & \vdots & \ddots & \vdots \\
+      \mathcal{B}(e_n, e_1) & \mathcal{B}(e_n, e_2) & \hdots & \mathcal{B}(e_n, e_n)
+    \end{pmatrix}
+  \end{equation*}
+\end{definition}
+
+Пусть $X =
+\begin{pmatrix}
+  \alpha_1 \\
+  \vdots \\
+  \alpha_n
+\end{pmatrix},\;
+Y =
+\begin{pmatrix}
+  \beta_1 \\
+  \vdots \\
+  \beta_n
+\end{pmatrix}$. Тогда легко видеть, что
+\begin{equation*}
+  \mathcal{B}Y =
+  \begin{pmatrix}
+    \mathcal{B}(e_1, EY) \\
+    \vdots \\
+    \mathcal{B}(e_n, EY)
+  \end{pmatrix}
+\end{equation*}
+А значит
+\begin{equation*}
+  \text{(\ref{bil:8.1})} = \mathcal{B}(EX, EY) = X^T \mathcal{B} Y
+\end{equation*}
+Посмотрим чему равна матрица Грама для каждого из примеров к определению билинейной формы:
+
+\begin{examples}
+  \begin{enumerate}
+    \item Возьмем стандартный базис. Тогда можно заметить, что $\mathcal{B}(e_i, e_j)$ равна нулю, если $i \neq j$ и равна единице, если $i = j$. А значит матрица Грама для скалярного произведения это просто единичная матрица:
+    \begin{equation*}
+      [\mathcal{B}]_E = E_n = \begin{pmatrix}
+        1 & 0 & \hdots & 0 \\
+        0 & 1 & \hdots & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \hdots & 1
+      \end{pmatrix}
+    \end{equation*}
+
+    \item Матрицы Грама не существует, так как пространство бесконечномерное.
+
+    \item Возьмем стандартный базис $E = \left(
+      \begin{pmatrix}
+        1 \\ 0
+      \end{pmatrix},
+      \begin{pmatrix}
+        0 \\ 1
+      \end{pmatrix}
+    \right)$. Легко видеть, что матрица Грама в данном случае будет равна следующей:
+    \begin{equation*}
+      [\mathcal{B}]_E = \begin{pmatrix}
+        0 & 1 \\
+        -1 & 0
+      \end{pmatrix}
+    \end{equation*}
+  \end{enumerate}
+\end{examples}
+
+Теперь посмотрим что происходит с матрицей Грама при переходе к другому базису.
+
+Пусть $E$ --- базис, $E' = EC, \; C \in \GL(n, K)$. Тогда $X = CX'$(преобразование столбца координат) и мы можем следующим способом преобразовать наше выражение:
+\begin{equation*}
+  X^T [\mathcal{B}]_E Y = \mathcal{B}(EX, EY) = \mathcal{B}(ECX', ECY') = \mathcal{B}(E'X', E'Y') = (X')^T [\mathcal{B}]_{E'} Y'
+\end{equation*}
+То есть:
+\begin{equation*}
+  \begin{gathered}
+    (X')^T [\mathcal{B}]_{E'} Y' = X^T [\mathcal{B}]_E Y = (CX')^T [\mathcal{B}]_E (CY') =
+    (X')^T C^T [\mathcal{B}]_E CY' \\
+    [\mathcal{B}]_{E'} = C^T [\mathcal{B}]_{E'} C
+  \end{gathered}
+\end{equation*}
+
+\begin{definition}
+  Пусть $\mathcal{B}$ --- билинейная форма на конечномерном пространстве $V$. Тогда \textbf{рангом $\mathcal{B}$} называется~$\rk [\mathcal{B}]_E$ для произвольного $E$.
+\end{definition}
+
+\begin{remark}
+  Ранг фиксированной билинейной формы это инвариант. Действительно, все матрицы билинейной формы в различных базисах получаются друг из друга домножением на определенные \textbf{обратимые} матрицы, а как мы знаем домножение на обратимую матрицу не меняет ранг, поэтому он будет всегда одинаковым вне зависимости от выбранного базиса.
+\end{remark}
+
+\begin{definition}
+  Билинейная форма $\mathcal{B}$ называется \textbf{симметрической(кососимметрической)}, если
+  \begin{equation*}
+    \begin{gathered}
+      \forall v, w \in V\colon \mathcal{B}(v, w) = \mathcal{B}(w, v) \\
+      (\text{соотв. } \mathcal{B}(v, w) = -\mathcal{B}(w, v))
+    \end{gathered}
+  \end{equation*}
+  %\begin{align*}
+  %  \forall v, w \in V\colon &\mathcal{B}(v, w) = \mathcal{B}(w, v) \\
+  %  (&\mathcal{B}(v, w) = -\mathcal{B}(w, v))
+  %\end{align*}
+\end{definition}
+
+\begin{definition}
+  Пусть $V$ --- линейное пространство над $K$ и $\chr K \neq 2$. Тогда отображение $q\colon V \to K$ называется \textbf{квадратичной формой}, если существует симметрическая билинейная форма $\mathcal{B}$ на $V$ такая, что $\forall v \in V\colon q(v) = \mathcal{B}(v, v)$.
+\end{definition}
+
+\end{document}
