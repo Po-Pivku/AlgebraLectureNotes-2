@@ -1,0 +1,227 @@
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+  Пусть $\mathcal{B}$ --- билинейная форма на $V$. Тогда говорят, что векторы $u, v \in V$ \textbf{ортогональны}($u \perp v$), если $\mathcal{B}(u, v) = 0$.
+\end{definition}
+
+\begin{remark}
+  Если $\mathcal{B}$ --- симметрическая билинейная форма, то отношение ортогональности симметрично.
+\end{remark}
+
+\begin{definition}
+  Базис $e_1, \dotsc, e_n$ пространства $V$ называется \textbf{ортогональным}, если $e_i \perp e_j$ при всех $i \neq j$.
+\end{definition}
+
+\begin{theorem}[Лагранжа]
+  Пусть $\mathcal{B}$ --- симметрическая билинейная форма на конечномерном пространстве $V$. Тогда в $V$ существует ортогональный базис.
+\end{theorem}
+\begin{proof}
+  Индукция по размерности. База: если $n = 1$, то любой базис ортогонален. Переход:
+  \begin{enumerate}
+    \item Если $\mathcal{B} = 0$, то любой базис ортогонален.
+    \item Иначе существует $e_1 \in V\colon \mathcal{B}(e_1, e_1) \neq 0$. Действительно, предположим это не так. Тогда для любого $v \in V\colon q(v) = \mathbb{B}(v, v) = 0$. Но тогда заметим, что $\forall v, w \in V \colon$
+    \begin{equation*}
+      \mathbb{B}(v, w) = \frac{1}{2}(q(v + w) - q(v) - q(w)) = \frac{1}{2}(0 + 0 - 0) = 0
+    \end{equation*}
+    Таким образом получили, что $\mathbb{B} = 0$. Противоречие. Значит такой $e_1$ все же существует.
+
+    Рассмотрим ортогональное к вектору $e_1$ подпространство. Пусть $W = \{w \in V \, | \, e_1 \perp w\}$. Очевидно $W$ это линейное подпространство. Рассмотрим следующее отображение:
+    \begin{align*}
+      V &\overset{\lambda}{\longrightarrow} K \\
+      v &\longmapsto \mathcal{B}(v, e_1)
+    \end{align*}
+  Заметим, что $\Im \lambda \neq 0$, потому что $\lambda(e_1, e_1) \neq 0$. А значит $\Im \lambda = K$, потому что $K$ --- одномерное линейное пространство, а значит у него только два возможных подпространства --- $0$ и $K$. Но тогда заметим, что
+  \begin{equation*}
+    \dim W = \dim \Ker \lambda = \dim V - \dim \Im \lambda = n - 1
+  \end{equation*}
+  Тогда давайте возьмем $B' = B |_{W \times W}$ --- симметрическая билинейная форма на $W$. По индукционному предположению у $W$ существует ортогональный базис $e_2, \dotsc, e_n$. Но тогда легко видеть, что $e_1 \neq \Lin(e_2, \dotsc, e_n) = W \implies e_1, \dotsc, e_n$ --- ЛЗС. А значит $e_1, \dotsc, e_n$ --- это искомый ортогональный базис $W$.
+  \end{enumerate}
+\end{proof}
+
+\begin{remark}
+  $E$ --- ортогональный базис $V$ по отношению к $\mathcal{B} \iff [\mathcal{B}]_E$ диагональная.
+\end{remark}
+
+\begin{remark}
+  Пусть $E = (e_1, \dotsc, e_n)$ --- ортогональный базис $V$,\; $E' = (\alpha_1 e_1, \dotsc, \alpha_n e_n),\, \alpha_i \neq 0$ и $[\mathcal{B}]_E = \diag(\lambda_1, \dotsc, \lambda_n)$. Тогда
+  \begin{equation*}
+    [\mathcal{B}]_{E'} = \diag(\alpha_1^2 \lambda_1, \dotsc, \alpha_n^2 \lambda_n)
+  \end{equation*}
+\end{remark}
+\begin{proof}
+  Действительно, если $E' = (\alpha_1 e_1, \dotsc, \alpha_n e_n)$ и при этом $E' = EC$, то легко можно видеть, что
+  \begin{equation*}
+    C = \begin{pmatrix}
+      \alpha_1 & 0 & \hdots & 0 \\
+      0 & \alpha_2 & \hdots & 0 \\
+      \vdots & \vdots & \ddots & \vdots \\
+      0 & 0 & \hdots & \alpha_n
+    \end{pmatrix}
+  \end{equation*}
+  При этом $C$ будет обратимой так как $\alpha_i \neq 0$, а значит $C$ это искомая матрица перехода от базиса $E$ к базису $E'$. Поэтому мы можем применить формулу, полученную ранне в этом параграфе:
+  \begin{equation*}
+    \begin{gathered}
+      [\mathcal{B}]_{E'} = C^T [\mathcal{B}]_E C
+      = \\ =
+      \begin{pmatrix}
+        \alpha_1 & 0 & \hdots & 0 \\
+        0 & \alpha_2 & \hdots & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \vdots & \alpha_n
+      \end{pmatrix}^T
+      \cdot
+      \begin{pmatrix}
+        \lambda_1 & 0 & \hdots & 0 \\
+        0 & \lambda_2 & \hdots & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \vdots & \lambda_n
+      \end{pmatrix}
+      \cdot
+      \begin{pmatrix}
+        \alpha_1 & 0 & \hdots & 0 \\
+        0 & \alpha_2 & \hdots & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \vdots & \alpha_n
+      \end{pmatrix}
+      =
+      \begin{pmatrix}
+        \alpha_1^2 \lambda_1 & 0 & \hdots & 0 \\
+        0 & \alpha_2^2 \lambda_2 & \hdots & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \vdots & \alpha_n^2 \lambda_n
+      \end{pmatrix}
+      = \\ =
+      \diag(\alpha_1^2 \lambda_1, \dotsc, \alpha_n^2 \lambda_n)
+    \end{gathered}
+  \end{equation*}
+\end{proof}
+
+\begin{theorem-non}
+\label{non:8.1}
+  Пусть $V$ --- конечномерное линейное пространство над полем $\C, \; \mathcal{B}$ --- симметрическая билинейная форма на $V$. Тогда существует базис $E$ пространства $V$ такой, что
+  \begin{equation*}
+    \hphantom{\text{ для некоторого $r$}}
+    [\mathcal{B}]_E =
+    \begin{pmatrix}
+      E_r & 0 \\
+      0 & 0
+    \end{pmatrix}
+    \text{ для некоторого $r$}
+  \end{equation*}
+  При этом $r$ --- инвариант $\mathcal{B}$.
+\end{theorem-non}
+\begin{proof}
+  По теореме Лагранжа и замечанию к ней в $V$ существует базис $E_0$ такой, что
+  \begin{equation*}
+    [\mathcal{B}]_{E_0} = \diag(\lambda_1, \dotsc, \lambda_n)
+  \end{equation*}
+  Можно считать, что $\lambda_1, \dotsc, \lambda_r \neq 0 ; \; \lambda_{r + 1} = \dotsb = \lambda_n = 0$. Теперь заметим, что для любого $j$ $\exists \alpha_j \in \C\colon \alpha_j^2 = \lambda_j$. Пусть
+  \begin{equation*}
+    E = (\alpha_1^{-1} e_1, \dotsc, \alpha_r^{-1} e_r, e_{r + 1}, \dotsc, e_n)
+  \end{equation*}
+  Тогда
+  \begin{equation*}
+    [\mathcal{B}]_E = \diag
+    (\underbrace{\alpha_1^{-2} \lambda_1, \dotsc, \alpha_r^{-2} \lambda_r}_{
+      \mathclap{1, \dotsc, 1}
+    },
+    \underbrace{\lambda_{r + 1}, \dotsc, \lambda_n}_{
+      \mathclap{0, \dotsc, 0}
+    })
+  \end{equation*}
+  При этом заметим, что $r = \rk
+  \begin{pmatrix}
+    E_r & 0 \\
+    0 & 0
+  \end{pmatrix} = \rk \mathcal{B}$ --- инвариант. Поэтому и $r$ инвариант для $\mathcal{B}$.
+\end{proof}
+
+\begin{theorem}[закон инерции вещественных билинейных форм]
+  Пусть $V$ --- конечномерное линейное пространство над $\R,\; \mathcal{B}$ --- симметрическая билинейная форма на $V$. Тогда существует базис $E$ такой, что
+  \begin{equation*}
+    [\mathcal{B}]_E = \diag(
+    \underbrace{1, \dotsc, 1}_{s},
+    \underbrace{-1, \dotsc, -1}_{t},
+    0, \dotsc, 0)
+  \end{equation*}
+  При этом $s$ и $t$ --- инварианты $\mathcal{B}$.
+\end{theorem}
+\begin{proof}
+  \begin{enumerate}
+    \item Доказательство существования аналогично доказательству предложения \ref{non:8.1}. Возьмем базис $E_0$ такой, что $[\mathcal{B}]_{E_0} = \diag(\lambda_1, \dotsc, \lambda_n)$. Можно считать, что $\lambda_1, \dotsc, \lambda_r \neq 0; \; \lambda_{r + 1} = \dotsb = \lambda_n = 0$. Теперь заметим, что для любого $j\; \exists \alpha_j \in \R\colon \alpha_j^2 = |\lambda_j|$. Пусть
+    \begin{equation*}
+      E = (\alpha_1^{-1} e_1, \dotsc, \alpha_r^{-1} e_r, e_{r + 1}, \dotsc, e_n)
+    \end{equation*}
+    Тогда
+    \begin{equation*}
+      [\mathcal{B}]_E = \diag
+      (\underbrace{\alpha_1^{-2} \lambda_1, \dotsc, \alpha_r^{-2} \lambda_r}_{
+        \mathclap{\pm 1, \dotsc, \pm 1}
+      },
+      \underbrace{\lambda_{r + 1}, \dotsc, \lambda_n}_{
+        \mathclap{0, \dotsc, 0}
+      })
+    \end{equation*}
+    Очевидно, что среди первых $r$ координат будут встречаться лишь $\pm 1$(действительно, когда мы делим число на модуль этого же числа мы получаем $\pm 1$), а последние $n - r$ будут равны нулю. Таким образом существование доказано.
+    \item Докажем, что $s$ и $t$ --- инварианты. Заметим, что
+    \begin{equation*}
+      \hphantom{\text{ --- инвариант $\mathcal{B}$}}
+      s + t = \rk [\mathcal{B}]_E = \rk \mathcal{B}
+      \text{ --- инвариант $\mathcal{B}$}
+    \end{equation*}
+    Таким образом осталось доказать, что $s$ --- инвариант $\mathcal{B}$(тогда и $t$ будет инвариантом как разность двух инвариантов). Предположим что это не так. Тогда существуют базисы $E_1, E_2$ такие, что
+    \begin{equation*}
+      \begin{gathered}
+        [\mathcal{B}]_{E_1} = \diag(
+        \underbrace{1, \dotsc, 1}_{s_1},
+        \underbrace{-1, \dotsc, -1}_{t_1},
+        0, \dotsc, 0) \\
+        [\mathcal{B}]_{E_2} = \diag(
+          \underbrace{1, \dotsc, 1}_{s_2},
+          \underbrace{-1, \dotsc, -1}_{t_2},
+          0, \dotsc, 0)
+      \end{gathered}
+    \end{equation*}
+    И при этом $s_1 \neq s_2$. НУО можем считать что $s_1 > s_2$. Также пусть
+    \begin{equation*}
+      \begin{gathered}
+        E_1 = (e_1, \dotsc, e_n) \\
+        E_2 = (f_1, \dotsc, f_n)
+      \end{gathered}
+    \end{equation*}
+    А так же
+    \begin{equation*}
+      \begin{gathered}
+        U_1 = \Lin(e_1, \dotsc, e_{s_1}) \\
+        U_2 = \Lin(f_{s_2 + 1}, \dotsc, f_n)
+      \end{gathered}
+    \end{equation*}
+    Заметим, что для произвольного ненулевого $v \in U_1\colon \mathcal{B}(v, v) > 0$. Действительно,
+    \begin{equation*}
+      \begin{gathered}
+        v = \alpha_1 e_1 + \dotsb + \alpha_{s_1} e_{s_1} \\
+        \mathcal{B}(v, v) = \sum\limits_{i = 1}^{s_1} \alpha_i^2
+      \end{gathered}
+    \end{equation*}
+    Получается такая формула, потому что функция от двух различных базисных векторов равна нулю(так как матрица Грама диагональна), и в противном случае функция от одного и того же вектора равна единице, так как индексы всех векторов не превосходят $s_1$(а значит квадратичная форма от них равна единице по определению $E_1$). При этом заметим, что $v \neq 0$, а значит $\alpha_j \neq 0$ для какого-то $j$, а значит $\mathcal{B}(v, v) > 0$.
+
+    С другой стороны для любого $v \in U_2\colon \mathcal{B}(v, v) \leq 0$. Доказательство аналогично --- $\mathcal{B}(v, v)$ будет равна сумме какого-то количества нулей и противоположных к числам из $\R$.
+
+    Таким образом $U_1 \cap U_2 = 0$. Но $\dim U_1 = s_1$, а $\dim U_2 = n - s_2$. Поэтому
+    \begin{equation*}
+      \dim U_1 + \dim U_2 = s_1 + n - s_2 > n
+    \end{equation*}
+    Что противоречит тому, что у этих подпространств нулевое пересечение. А значит $s$ и $t$ --- инварианты. Что и требовалось доказать.
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}
+  Пару $(s, t)$(или просто $t$) называют \textbf{сигнатурой} билинейной формы $\mathcal{B}$.
+\end{definition}
+
+\end{document}
