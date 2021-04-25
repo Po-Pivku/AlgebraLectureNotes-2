@@ -224,4 +224,167 @@
   Пару $(s, t)$(или просто $t$) называют \textbf{сигнатурой} билинейной формы $\mathcal{B}$.
 \end{definition}
 
+\section{Евклидовы пространства}
+
+\begin{definition}
+  Пусть $V$ --- линейное пространство над $\R$. Тогда симметрическая билинейная форма $\mathcal{B}$ на $V$ называется \textbf{положительно определенной}, если $\forall v \in V\colon \mathcal{B}(v, v) \geq 0$ и $\mathcal{B}(v, v) > 0$ при $v \neq 0$.
+\end{definition}
+
+\begin{remark}
+  Аналогично определяются понятия отрицательно определенной, неположительно определенной и неотрицательно определенной билинейной формы.
+\end{remark}
+
+\begin{remark}
+  Пусть $(s, t)$ --- сигнатура конечномерного пространства, $n$ --- его размерность. Тогда легко видеть, что верны следующие равносильности(самостоятельная проверка данного факта предлагается читателю в качестве упражнения):
+  \begin{enumerate}
+    \item Положительная определенность $\iff s = n$
+    \item Отрицательная определенность $\iff t = n$
+    \item Неположительная определенность $\iff s = 0$
+    \item Неотрицательная определенность $\iff t = 0$
+  \end{enumerate}
+\end{remark}
+
+\begin{definition}
+  \textbf{Евклидовым пространством} называется линейное пространство $V$ над полем $\R$ с фиксированной положительно определенной симметрической билинейной формой $(u, v)$ --- \textbf{скалярным произведением}.
+\end{definition}
+
+\begin{definition}
+  Пусть $V$ --- евклидово пространство. Тогда \textbf{длиной} или \textbf{нормой} вектора $v \in V$ называется
+  \begin{equation*}
+    | v | = \sqrt{(v, v)}
+  \end{equation*}
+\end{definition}
+
+\begin{theorem-non}[Неравенство Коши-Буняковского]
+\label{ineq:KB}
+  Пусть $V$ --- евклидово пространство и $v, w \in V$. Тогда
+  \begin{equation*}
+    |(v, w)| \leq |v| \cdot |w|
+  \end{equation*}
+\end{theorem-non}
+\begin{proof}
+  Пусть $t \in \R$. Тогда
+  \begin{equation*}
+    \begin{gathered}
+      0 \leq (v + tw, v + tw) =
+      (v, v) + t^2 (w, w) + t((v, w) + (w, v)) =
+      |w|^2 t^2 + 2 (v, w) t + |v|^2 \\
+      |w|^2 t^2 + 2 (v, w) t + |v|^2 \geq 0
+    \end{gathered}
+  \end{equation*}
+  Отсюда делаем вывод, что соответствующее квадратное уравнение имеет не больше одного корня(действительно, чтобы иметь больше одного корня парабола должна начинаться строго под осью $OX$), а значит его дискриминант неположителен. Таким образом:
+  \begin{equation*}
+    \begin{gathered}
+      4(v, w)^2 - 4|w|^2 |v|^2 \leq 0 \\
+      (v, w)^2 \leq |w|^2 \cdot |v|^2 \\
+      |(v, w)| \leq |w| \cdot |v|
+    \end{gathered}
+  \end{equation*}
+  Что и требовалось доказать.
+\end{proof}
+
+\begin{corollary*}
+  Пусть $v, w \in V$. Тогда
+  \begin{equation*}
+    |v + w| \leq |v| + |w|
+  \end{equation*}
+\end{corollary*}
+\begin{proof}
+  Заметим, что
+  \begin{equation*}
+    \begin{gathered}
+      | v + w |^2 = (v + w, v + w) =
+      (v, v) + (w, w) + 2(v, w)
+      \overset{\mathclap{
+        \text{\hyperref[ineq:KB]{К-Б}}
+      }}{\leq}
+      |v|^2 + |w|^2 + 2 \cdot |v| \cdot |w| = (|v| + |w|)^2 \\
+      | v + w |^2 \leq (|v| + |w|)^2 \\
+      | v + w | \leq |v| + |w|
+    \end{gathered}
+  \end{equation*}
+  Что и требовалось доказать.
+\end{proof}
+
+\begin{definition}
+  Пусть $V$ --- евклидово пространство. \textbf{Метрикой} на $V$ называется отображение $\rho\colon V \times V \to \R_{\geq 0}$ такое, что выполняются следующие свойства:
+  \begin{enumerate}
+    \item $\rho(v, w) = 0 \iff v = w$
+    \item $\rho(v, w) = \rho(w, v)$
+    \item $\rho(u, w) \leq \rho(u, v) + \rho(v, w)$
+  \end{enumerate}
+\end{definition}
+
+\begin{remark}
+  $\rho(v, w) = |v - w|$ --- метрика.
+\end{remark}
+\begin{proof}
+  \begin{enumerate}
+    \item Выполняется из-за положительной определенности нашей билинейной формы.
+    \item $|v - w| = \sqrt{(v - w, v - w)} = \sqrt{-1 \cdot -1 \cdot (w - v, w - v)} = |w - v|$
+    \item $u - w = (u - v) + (v - w)$, а значит по следствию из неравенства К-Б: $|u - w| \leq |u - v| + |v - w|$.
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}
+  Пусть $v, w \in V$. \textbf{Углом} между векторами $v, w$ называется $\alpha \in (0, \pi)$ такое, что
+  \begin{equation*}
+    (v, w) = |v| \cdot |w| \cdot \cos \alpha
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  Действительно, угол всегда существует, так как по неравенству Коши-Буняковского:
+  \begin{equation*}
+    -1 \leq \frac{(v, w)}{|v| \cdot |w|} \leq 1
+  \end{equation*}
+  При этом для любого $x \in [-1, 1]$ существует единственное $\alpha \in [0, \pi]$ такое, что $\cos \alpha = x$.
+\end{remark}
+
+\begin{definition}
+  Базис $E$ евклидова пространства $V$ называется \textbf{ортонормированным}, если
+  $E = (e_1, \dotsc, e_n)$ и $\forall i, j\colon (e_i, e_j) = \delta_{ij}$ --- символ Кронекера($\delta_{ij} = 1$ если $i = j$, и $\delta_{ij} = 0$ иначе).
+\end{definition}
+
+\begin{theorem-non}
+\label{non:8.3}
+  Пусть $(f_1, \dotsc, f_n)$ --- произвольный базис $V$. Тогда существует ортонормированный базис $(e_1, \dotsc, e_n)$ такой, что $e_j \in \Lin(f_1, \dotsc, f_j) \iff \Lin(e_1, \dotsc, e_j) = \Lin(f_1, \dotsc, f_j)$
+\end{theorem-non}
+\begin{proof}
+  Возьмем $e_1 = \frac{1}{|f_1|} f_1$. Тогда пусть $e_1, \dotsc, e_k$ уже построены и $k < n$. Давайте рассмотрим вектор вида
+  \begin{equation*}
+    e_{k + 1}^{\circ} = f_{k + 1} + \alpha_1 e_1 + \dotsb + \alpha_k e_k
+  \end{equation*}
+  Легко видеть, что такой вектор лежит в нужно нам линейной оболочке. Значит осталось подобрать такие $\alpha_j$, что наш вектор будет ортогонален всем уже взятым векторам из базиса. То есть:
+  \begin{equation*}
+    \begin{gathered}
+      (e_{k + 1}^{\circ}, e_j) = 0 \\
+      (f_{k + 1} + \alpha_1 e_1 + \dotsb + \alpha_k e_k, e_j) = 0 \\
+      (f_{k + 1}, e_j) + \alpha_j \underbrace{(e_j, e_j)}_{1} + \sum\limits_{i \neq j} \alpha_i \underbrace{(e_i, e_j)}_{0} = 0\\
+      (f_{k + 1}, e_j) + \alpha_j = 0 \\
+      \alpha_j = -(f_{k + 1}, e_j)
+    \end{gathered}
+  \end{equation*}
+  Таким образом
+  \begin{equation*}
+    e_{k + 1}^{\circ} = f_{k + 1} - \sum\limits_{j = 1}^{k} (f_{k + 1}, e_j)
+  \end{equation*}
+  Осталось ортонормировать наш вектор, а именно пусть
+  \begin{equation*}
+    e_{k + 1} = \frac{1}{e_{k + 1}^{\circ}} e_{k + 1}^{\circ}
+  \end{equation*}
+  Легко видеть, что никакие нужные свойства от домножения на константу не поменяются, поэтому:
+  \begin{equation*}
+    \begin{gathered}
+      (e_{k + 1}, e_1) = \dotsb = (e_{k + 1}, e_k) = 0 \\
+      (e_{k + 1}, e_{k + 1}) = 1
+    \end{gathered}
+  \end{equation*}
+  Таким образом повторяя эту операцию нужно количество раз мы получаем искомый базис. Что и требовалось доказать.
+\end{proof}
+
+\begin{remark}
+  Процесс построения ортонормированного базиса, описанный в предложении \ref{non:8.3} называется \textbf{ортогонализацией Грама-Шмидта}.
+\end{remark}
+
 \end{document}
