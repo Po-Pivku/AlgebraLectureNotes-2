@@ -1,0 +1,518 @@
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{definition}
+  Матрица $A \in M_n(K)$ называется \textbf{ортогональной}, если
+  \begin{equation*}
+    A A^{T} = E_n
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  Посмотрим на произведение матриц $A$ и $A^T$:
+  \begin{equation*}
+    AA^{T}[i, j] = \sum\limits_{k = 1}^{n} a_{i,k} a_{j, k}
+  \end{equation*}
+  Легко видеть, что $(i, j)$-ый элемент нашей матрицы это стандартное скалярное произведение соответственно $i$-ой и $j$-ой строки нашей матрицы. При этом, если матрица $A$ ортогональна, то $AA^T[i, j] = 0$ в случае $i \neq j$, то есть строки нашей матрицы друг другу ортогональны, и $AA^T[i, j] = 1$ в случае $i = j$, а значит наши строки еще и нормированы. Более того, эти рассуждения верны и для столбцов $A$, что становится легко видно в результате доказательства следующей леммы.
+\end{remark}
+
+\begin{lemma}
+\label{lem:8.1}
+  Если $A$ ортогональная, то $A^T$ тоже ортогональная.
+\end{lemma}
+\begin{proof}
+  Действительно,
+  \begin{equation*}
+    A^T A^{TT} = A^TA = E_n
+  \end{equation*}
+\end{proof}
+
+\begin{theorem-non}
+  Пусть $\mathcal{O}(n, K) = \{A \in M(n, K) \, | \, A\text{ --- ортогональная}\}$. Тогда $\mathcal{O}(n, K) < \GL(n, K)$.
+\end{theorem-non}
+\begin{proof}
+  \begin{enumerate}
+    \item Обратимость очевидна по определению.
+    \item Замкнутость относительно умножения. Пусть $A, B \in \mathcal{O}(n, K)$. Тогда
+    \begin{equation*}
+      (AB)(AB)^T = A\underbrace{BB^T}_{E_n}A^T = AA^T = E_n
+    \end{equation*}
+    \item Замкнутость относительно взятия обратного. Пусть $A \in \mathcal{O}(n, K)$. Тогда заметим, что $AA^T = E_n \implies A^{-1} = A^T$. Но $A^T$ является ортогональной по лемме \ref{lem:8.1}, а значит $A^{-1} \in \mathcal{O}(n, K)$.
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}
+  $\mathcal{O}(n, K)$ называется \textbf{ортогональной группой} степени $n$ над $K$.
+\end{definition}
+
+\begin{theorem-non}
+  Пусть $V$ --- евклидово пространство, $E$ --- ортонормированный базис, $E'$ --- какой-либо базис $V$, $C$ --- матрица перехода от $E$ к $E'$. Тогда $E'$ --- ортонормированный $\iff C \in \mathcal{O}(n, K)$.
+\end{theorem-non}
+\begin{proof}
+  Пусть $\Gamma_E$ --- матрица Грама в базисе $E$. Тогда мы знаем, что
+  \begin{equation*}
+    \Gamma_{E'} = C^T \Gamma_{E} C
+  \end{equation*}
+  Но раз $E$ --- ортонормированный, то $\Gamma_E = E_n$, а значит
+  \begin{equation*}
+    \Gamma_{E'} = C^T C
+  \end{equation*}
+  И уже отсюда получаем нужную равносильность:
+  \begin{equation*}
+    \Gamma_{E'} = E_n \iff C^TC = E_n \iff C \in \mathcal{O}(n, K)
+  \end{equation*}
+  Что и требовалось доказать.
+\end{proof}
+
+\begin{definition}
+  Пусть $V$ --- евклидово пространство, $U$ --- линейное подпространство $V$. Тогда \textbf{ортогональным дополнением} к $U$ называется множество
+  \begin{equation*}
+    U^\perp = \{v \in V \, | \, \forall u \in U\colon u \perp v\}
+  \end{equation*}
+\end{definition}
+
+\begin{theorem-non}
+\label{non:8.6}
+  Пусть $\dim V < \infty$. Тогда верны следующие свойства ортогонального дополнения:
+  \begin{enumerate}
+    \item $U^\perp$ --- линейное подпространство $V$.
+    \item $V = U \oplus U^\perp$.
+    \item $U_1 \subset U_2 \implies U_1^\perp \supset U_2^\perp$.
+    \item $(U^\perp)^\perp = U$.
+    \item $(U_1 + U_2)^\perp = U_1^\perp \cap U_2^\perp$.
+    \item $(U_1 \cap U_2)^\perp = U_1^\perp + U_2^\perp$.
+    \item $V^\perp = 0,\, 0^\perp = V$.
+  \end{enumerate}
+\end{theorem-non}
+\begin{proof}
+  \begin{enumerate}
+    %\item[]
+    \item Пусть $v_1, v_2 \in U^\perp,\, \alpha, \beta \in K$. Тогда $\forall u \in U$:
+    \begin{equation*}
+      \begin{cases}
+        &(v_1, u) = 0 \\
+        &(v_2, u) = 0
+      \end{cases}
+      \implies
+      (\alpha v_1 + \beta v_2, u) = \alpha (v_1, u) + \beta (v_2, u) = 0
+      \implies
+      \alpha v_1 + \beta v_2 \in U^\perp
+    \end{equation*}
+
+    \item Пусть $f_1, \dotsc, f_m$ --- какой-либо базис $U$, а $f_{m + 1}, \dotsc, f_n$ --- его дополнение до базиса $V$. Тогда по предложению \ref{non:7.3} существует $e_1, \dotsc, e_n$ --- ортонормированный базис $V$ такой, что $\forall l\colon \Lin(e_1, \dotsc, e_l) = \Lin(f_1, \dotsc, f_l)$. В частности
+    \begin{equation*}
+      \Lin(e_1, \dotsc, e_m) = U
+    \end{equation*}
+    Пусть $v = \alpha_1 e_1 + \dotsb + \alpha_n e_n$. Тогда
+    \begin{equation*}
+      \hphantom{,\, i = 1,\dotsc,m}
+      v \in U^\perp
+      \iff
+      v \perp e_i,
+      \, i = 1,\dotsc,m
+    \end{equation*}
+    Но $(v, e_i) = \alpha_i$, а значит:
+    \begin{equation*}
+      \begin{gathered}
+        \hphantom{\, i = 1, \dotsc, m}
+        v \in U^\perp
+        \iff
+        \alpha_i = 0,
+        \, i = 1, \dotsc, m
+        \iff
+        v \in \Lin(e_{m + 1}, \dotsc, e_n) \\
+        U^\perp = \Lin(e_{m + 1}, \dotsc, e_n)
+      \end{gathered}
+    \end{equation*}
+    Тогда заметим, что линейная оболочка первых $m$ векторов базиса это $U$, линейная оболочка оставшихся $n - m$ векторов это $U^\perp$, а значит все пространство является прямой суммой данных подпространств, то есть $V = U \oplus U^\perp$, что и требовалось доказать.
+
+    \item Пусть $v \in U_2^{\perp}$. Тогда $v$ ортогонален каждому вектору из $U_2$, но $U_1 \subset U_2$, а значит $v$ ортогонален в частности каждому вектору из $U_1$, а значит $v \in U_1^{\perp}$. Таким образом $U_2^{\perp} \subset U_1^{\perp}$, что и требовалось доказать.
+
+    \item Пусть $v \in U$, тогда $\forall u \in U^\perp\colon v \perp u$ --- по определению ортогонального дополнения. Значит $ U \subset (U^\perp)^\perp $. При этом по свойству 2:
+      \begin{equation*}
+        \dim U^\perp = \dim V - \dim U
+        \implies
+        \dim (U^\perp)^\perp = \dim V - \dim U^\perp = \dim U
+      \end{equation*}
+    Таким образом:
+    \begin{equation*}
+      \begin{cases}
+        U \subset (U^\perp)^\perp \\
+        \dim U = \dim (U^\perp)^\perp
+      \end{cases}
+      \implies
+      U = (U^\perp)^\perp
+    \end{equation*}
+    Что и требовалось доказать.
+
+    \item Докажем два включения:
+    \begin{enumerate}
+      \item Пусть $v \in (U_1 + U_2)^\perp$. То есть $\forall u_1 \in U_1, u_2 \in U_2\colon (v, u_1 + u_2) = 0$. Но тогда заметим, что $0 \in U_1$ и $0 \in U_2$, а значит:
+      \begin{equation*}
+        \begin{cases}
+          \forall u_1 \in U_1\colon (v, u_1 + 0) = 0 \implies (v, u_1) = 0 \\
+          \forall u_2 \in U_2\colon (v, 0 + u_2) = 0 \implies (v, u_2) = 0
+        \end{cases}
+        \implies
+        \begin{cases}
+          v \in U_1^\perp \\
+          v \in U_2^\perp
+        \end{cases}
+        \implies
+        v \in U_1^\perp \cap U_2^\perp
+      \end{equation*}
+      Таким образом $(U_1 + U_2)^\perp \subset U_1^\perp \cap U_2^\perp$.
+
+      \item Пусть $v \in U_1^\perp \cap U_2^\perp$. То есть $\forall u_1 \in U_1\colon (v, u_1) = 0$ и $\forall u_2 \in U_2\colon (v, u_2) = 0$, а значит:
+      \begin{equation*}
+        \forall u_1 \in U_1, u_2 \in U_2\colon
+        (v, u_1 + u_2) = (v, u_1) + (v, u_2) = 0
+        \implies
+        v \in (U_1 + U_2)^\perp
+        \hphantom{\forall u_1 \in U_1, u_2 \in U_2\colon}
+      \end{equation*}
+      Таким образом $U_1^\perp \cap U_2^\perp \subset (U_1 + U_2)^\perp$.
+    \end{enumerate}
+    Оба включения доказаны, а значит $(U_1 + U_2)^\perp = U_1^\perp \cap U_2^\perp$. Что и требовалось доказать.
+
+    \item Покажем , используя уже доказанные свойства:
+    \begin{equation*}
+      U_1^\perp + U_2^\perp
+      \overset{\text{св. 4}}{=}
+      ((U_1^\perp + U_2^\perp)^\perp)^\perp
+      \overset{\text{св. 5}}{=}
+      ((U_1^\perp)^\perp \cap (U_2^\perp)^\perp)^\perp
+      \overset{\text{св. 4}}{=}
+      (U_1 \cap U_2)^\perp
+    \end{equation*}
+    Что и требовалось доказать.
+
+    \item Легко видеть, что $\dim V^\perp = \dim V - \dim V = 0$, а значит $V^\perp = 0$. При этом $0^\perp = (V^\perp)^\perp = V$. Что и требовалось доказать.
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}
+  Пусть $V$ --- евклидово пространство, $U$ --- линейное подпространство $V$ и $v \in V$. Тогда по пункту 2 предложения \ref{non:8.6} существуют единственные $u_1 \in U, u_2 \in U^\perp$ такие, что
+  \begin{equation*}
+    v = u_1 + u_2
+  \end{equation*}
+  где $u_1$ называют \textbf{ортогональной проекцией} $v$ на $U$, а $u_2$ называют \textbf{ортогональным дополнением} $v$ по отношению к $U$.
+\end{definition}
+
+\begin{definition}
+  Пусть $M$ --- метрическое пространство, $x \in M, N \subset M$. Тогда \textbf{расстоянием от точки $x$ до множества $N$} называется
+  \begin{equation*}
+    \rho(x, N) = \inf\limits_{y \in N} \rho(x, y)
+  \end{equation*}
+\end{definition}
+
+\begin{theorem-non}
+  Пусть $V$ --- конечномерное евклидово пространство, $U$ --- подпространство $V$ и $v \in V$. При этом $v = u_1 + u_2$ для $u_1 \in U, u_2 \in U^\perp$. Тогда
+  \begin{equation*}
+    \rho(v, U) = \| u_2 \| = \rho(v, u_1)
+  \end{equation*}
+\end{theorem-non}
+\begin{proof}
+  Возьмем произвольное $z \in U$. Тогда:
+  \begin{equation*}
+    \rho(v, u_1 + z)^2 = \rho(u_1 + u_2, u_1 + z)^2 = \| z - u_2 \|^2 = (z - u_2, z - u_2) \overset{z \perp u_2}{=} \| z \|^2 + \| u_2 \|^2 \geq \| u_2 \|^2
+  \end{equation*}
+  Таким образом $\rho(v, U)$ не меньше чем $\| u_2 \|$. При этом минимум достигается в случае $z = 0$, а значит $\rho(v, U) = \| u_2 \|$. При этом, подставляя $z = 0$ в формулу выше мы получаем второе равенство $\rho(v, u_1) = \| u_2 \|$. Что и требовалось доказать.
+\end{proof}
+
+\section{Унитарные пространства}
+
+\begin{definition}
+  Пусть $V$ --- линейное пространство над $\C$. \textbf{Полуторалинейной формой} на $V$ называют отображение $\mathcal{B}\colon V \times V \to \C$ такое, что:
+  \begin{enumerate}
+    \item $\mathcal{B}(\alpha_1 v_1 + \alpha_2 v_2, w) = \alpha_1 \mathcal{B}(v_1, w) + \alpha_2 \mathcal{B}(v_2, w)$
+    \item $\mathcal{B}(v, \alpha_1 w_1 + \alpha_2 w_2) = \overline{\alpha}_1 \mathcal{B}(v, w_1) + \overline{\alpha}_2 \mathcal{B}(v, w_2)$
+  \end{enumerate}
+\end{definition}
+
+\begin{examples}
+  \begin{enumerate}
+    \item Пусть $V = \C^n$. Тогда
+    \begin{equation*}
+      \mathcal{B}\left(
+        \begin{pmatrix}
+          \alpha_1 \\
+          \vdots \\
+          \alpha_n
+        \end{pmatrix},
+        \begin{pmatrix}
+          \beta_1 \\
+          \vdots \\
+          \beta_n
+        \end{pmatrix}
+      \right) =
+      \alpha_1 \overline{\beta}_1 + \dotsb + \alpha_n \overline{\beta}_n
+    \end{equation*}
+
+    \item Пусть $V = C_\C[0, 1]$. Тогда
+    \begin{equation*}
+      \mathcal{B}(f, g) = \int_{0}^{1} f \overline{g}
+    \end{equation*}
+  \end{enumerate}
+\end{examples}
+
+\begin{definition}
+  Пусть $V$ --- линейное пространство. \textbf{Эрмитовой формой} на $V$ называют полторалинейную форму $\mathcal{B}$ такую, что
+  \begin{equation*}
+    \forall u,v\colon
+    \mathcal{B}(v, u) = \overline{\mathcal{B}(u, v)}
+    \hphantom{\forall u,v\colon}
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Матрицей, \textbf{сопряженной} к матрице $A$ называют
+  \begin{equation*}
+    A^{*} \coloneqq \overline{(A^T)}
+  \end{equation*}
+\end{definition}
+
+\begin{theorem}[Лагранжа]
+  Пусть $V$ --- конечномерное линейное пространство, $\mathcal{B}$ --- эрмитова форма на $V$. Тогда в $V$ существует базис $E$ такой, что $[\mathcal{B}]_E$ --- диагональная.
+\end{theorem}
+
+\begin{remark}
+  $\mathcal{B}$ эрмитова $\iff [\mathcal{B}]_E^{*} = [\mathcal{B}]_E$. В частности, если $[\mathcal{B}]_E$ диагональная, то она вещественная.
+\end{remark}
+
+\begin{theorem}[закон инерции]
+  Число положительных и число отрицательных чисел в диагональной матрице $[\mathcal{B}]_E$ --- инвариант $\mathcal{B}$.
+\end{theorem}
+
+\begin{definition}
+  \textbf{Скалярным произведением} на $V$ называется положительно определенная эрмитова форма на $V$, т.е. такая, что:
+  \begin{enumerate}
+    \item $\forall v \in V\colon \mathcal{B}(v, v) \geq 0$.
+    \item $\mathcal{B}(v, v) = 0 \iff v = 0$.
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}
+  \textbf{Унитарным пространством} называется линейное пространство над $\C$ с фиксированным скалярным произведением $(u, v)$.
+\end{definition}
+
+\begin{definition}
+  Базис $e_1, \dotsc, e_n$ унитарного пространства $V$ называется \textbf{ортонормированным}, если $\Gamma_E = E_n$.
+\end{definition}
+
+Давайте зададимся вопросом --- какой должна быть матрица перехода между базисами чтобы свойство ортонормированности сохранилось. Пусть $E, E'$ --- ортонормированные базисы и $E' = EC$ для $C \in \GL(n, \C)$. Мы знаем, что
+\begin{equation*}
+  \Gamma_{E'} = C^T \cdot \Gamma_E \cdot \overline{C} = C^T \cdot \overline{C}
+\end{equation*}
+Таким образом
+\begin{equation*}
+  E' \text{ --- ортонормированный } \iff C^T \cdot \overline{C} = E_n \iff \overline{C^T \cdot \overline{C}} = \overline{E_n} \iff C^{*} C = E_n
+\end{equation*}
+
+\begin{definition}
+  Матрица $C \in \GL(n, \C)$ называется \textbf{унитарной}, если $C^{*}C = E_n$.
+\end{definition}
+
+\begin{definition}
+  Множество $U(n) = \{C \in \GL(n, \C) \, | \, C \text{ --- унитарная}\}$ называется \textbf{унитарной подгруппой} степени $n$.
+\end{definition}
+
+\begin{exercise}
+  Доказать неравенство Коши-Буняковского для случая унитарных пространств.
+\end{exercise}
+
+Пусть $V$ --- линейное пространство над $\R$. Оно определяет $V_\C$ --- линейное пространство над $\C$. Возьмем $V_\C = V \times V$ со следующими операциями сложения и умножения на скаляр соответственно:
+\begin{equation*}
+  \begin{gathered}
+    (v, w) + (v', w') = (v + v', w + w') \\
+    (\alpha + i\beta)(v, w) = (\alpha v - \beta w, \alpha w + \beta v)
+  \end{gathered}
+\end{equation*}
+
+\begin{exercise}
+  Проверить, что $V_\C$ с заданными выше операциями --- линейное пространство над $\C$.
+\end{exercise}
+
+\begin{theorem-non}
+\label{non:8.8}
+  Пусть $e_1, \dotsc, e_n$ --- базис $V$. Тогда $(e_1, 0), \dotsc, (e_n, 0)$ --- базис $V_\C$.
+\end{theorem-non}
+\begin{proof}
+  Во-первых заметим, что
+  \begin{equation*}
+    (\alpha + i \beta)(v, 0) = (\alpha v, \beta v)
+  \end{equation*}
+  Но тогда
+  \begin{equation*}
+    \sum\limits_{j = 1}^{n} (\alpha_j + i \beta_j)(e_j, 0)
+    =
+    \left(\sum\limits_{j = 1}^{n} \alpha_j e_j, \sum\limits_{j = 1}^{n} \beta_j e_j\right)
+  \end{equation*}
+  Таким образом выбрав правильный набор коэффициентов $\alpha_j + i \beta_j$(или даже если быть точным мы можем отдельно выбрать набор $\alpha_j$, отдельно набор $\beta_j$ в зависимости от того какой вектор мы хотим получить слева, а какой справа) мы можем получить любую пару векторов из $V \times V$, а значит
+  \begin{equation*}
+    \Lin \{ (e_j, 0), \, j = 1,\dotsc,n \} = V_\C
+  \end{equation*}
+  При этом легко видеть, что такие вектора линейно независимы. Действительно, $\sum \alpha_j e_j = 0 \iff \alpha_j = 0,\, \forall j$ и $\sum \beta_j e_j = 0 \iff \beta_j = 0,\, \forall j$ --- из линейной независимости базиса $e_1, \dotsc, e_n$. А значит 0 мы можем получить только в случае $\forall j\colon \alpha_j = \beta_j = 0$. Таким образом наш набор является образующей для $V_\C$, при это он ЛНС, а значит $(e_1, 0), \dotsc, (e_n, 0)$ --- базис $V_\C$. Что и требовалось доказать.
+\end{proof}
+
+\begin{corollary*}
+  Размерность $V_\C$ над $\C$ равна размерности $V$ над $\R$.
+\end{corollary*}
+
+\begin{definition}
+  Пространство $V_\C$ называется \textbf{комплексификацией} пространства $V$.
+\end{definition}
+
+\begin{remark}
+  Вектор $(v, 0) \in V_\C$ можно отождествить с вектором $v \in V$. Тогда:
+  \begin{equation*}
+    (v, w) = (v, 0) + (0, w) = (v, 0) + i(w, 0) = v + iw
+  \end{equation*}
+  Можно показать, что такое отождествление корректно, более того операции с такими парами будут происходить по стандартным правилам работы с комплексными числами.
+\end{remark}
+
+Попробуем связать понятия евклидова и унитарного пространства используя комплексификацию. Пусть $V$ --- евклидово пространство, $V_\C$ --- его комплексификация. Положим
+\begin{equation*}
+  (v + iw, v' + iw') = (v, v') + (w, w') + i((w, v') - (v, w'))
+\end{equation*}
+
+\begin{editremark}
+  Важно понимать --- таким образом мы выражаем наше новое скалярное произведение через уже определенное скалярное произведение в $V$. Для старого скалярного произведения все свойства работают просто по определению, этим мы будем пользоваться в доказательстве следующего предложения.
+\end{editremark}
+
+\begin{theorem-non}
+  Вышеопределенная операция $(v + iw, v' + iw')$ является скалярным произведением на $V_\C$.
+\end{theorem-non}
+\begin{proof}
+  \begin{enumerate}
+    \item Линейность по первому аргументу.
+    \begin{equation*}
+      \begin{gathered}
+        (\alpha(v_1 + iw_1) + \beta(v_2 + iw_2), v_3 + iw_3)
+        =
+        ((\alpha v_1 + \beta v_2) + i(\alpha w_1 + \beta w_2), v_3 + iw_3)
+        = \\ =
+        (\alpha_1 v_1 + \beta v_2, v_3) + (\alpha w_1 + \beta w_2, w_3) + i((\alpha w_1 + \beta w_2, v_3) - (\alpha v_1 + \beta v_2, w_3))
+        = \\ =
+        \alpha((v_1, v_3) + (w_1, w_3) + i((w_1, v_3) - (v_1, w_3))) +
+        \beta((v_2, v_3) + (w_2, w_3) + i((w_2, v_3) - (v_2, w_3)))
+        = \\ =
+        \alpha(v_1 + iw_1, v_3 + iw_3) +
+        \beta(v_2 + iw_2, v_3 + iw_3)
+      \end{gathered}
+    \end{equation*}
+
+    \item Условие необходимое для эрмитовой формы.
+    \begin{equation*}
+      (v + iw, v' + iw') =
+      (v, v') + (w, w') + i((w, v') - (v, w')) =
+      (v', v) + (w', w) - i((w', v) - (v', w)) =
+      \overline{(v' + iw', v + iw)}
+    \end{equation*}
+
+    \item Полулинейность по второму аргументу.
+
+    \begin{equation*}
+      \begin{gathered}
+        (v_1 + iw_1, \alpha(v_2 + iw_2) + \beta(v_3, iw_3))
+        \overset{\text{п.2}}{=}
+        \overline{(\alpha(v_2 + iw_2) + \beta(v_3, iw_3), v_1 + iw_1)}
+        \overset{\text{п.1}}{=} \\ =
+        \overline{\alpha(v_2 + iw_2, v_1 + iw_1) + \beta(v_3 + iw_3, v_1 + iw_1)}
+        =
+        \overline{\alpha} \cdot \overline{(v_2 + iw_2, v_1 + iw_1)} +
+        \overline{\beta} \cdot \overline{(v_3 + iw_3, v_1 + iw_1)}
+        \overset{\text{п.2}}{=} \\ =
+        \overline{\alpha} \cdot (v_1 + iw_1, v_2 + iw_2) +
+        \overline{\beta} \cdot (v_1 + iw_1, v_3 + iw_3)
+      \end{gathered}
+    \end{equation*}
+
+    \item
+    \begin{equation*}
+      (v + iw, v + iw) =
+      (v, v) + (w, w) + i((w, v) - (v, w)) =
+      (v, v) + (w, w) \geq 0
+    \end{equation*}
+    При этом легко видеть, что $(v + iw, v + iw) = 0 \iff v = w = 0$.
+  \end{enumerate}
+  Таким образом по пунктам 1, 3 наше отображение является полуторалинейной формой, добавляя пункт 2 мы получаем эрмитову форму, и наконец добавляя пункт 4 мы получаем скалярное произведение. Что и требовалось доказать.
+\end{proof}
+
+Таким образом поняли, что из любого евклидового пространства $V$ можно получить унитарное пространство $V_\C$ с соответствующим скалярным произведением. Также можно заметить, что если $E$ --- базис $V$, то $(e_i, e_j)_V = (e_i, e_j)_{V_\C}$. Действительно, базисным векторам $e_i$ из $V$ мы ставили соответствие вектора $(e_i, 0)$ из $V_\C$(что является базисом в $V_\C$ по предложению \ref{non:8.8}). Тогда легко видеть чему равно наше скалярное произведение если подставить в него вектора такого вида:
+\begin{equation*}
+  ((e_i, 0), (e_j, 0)) = (e_i + i \cdot 0, e_j + i \cdot 0) =
+  (e_i, e_j) + (0, 0) + i((0, e_j) - (e_i, 0)) = (e_i, e_j)
+\end{equation*}
+Но тогда понятно, что это будет верно вообще для любых двух векторов с нулевой мнимой частью. Действительно, достаточно подставить любые два вектора $v, u \in V$ вместо $e_i$ и $e_j$ в равенство выше. Поэтому полученное нами новое скалярное произведение на $V_\C$ является \textbf{продолжением} скалярного произведения на $V$.
+
+И в частности, как мы уже выяснили, это верно для базисных векторов, а значит матрицы Грама базиса в $V$ и в $V_\C$ равны. Более того, для любого ортонормированного базиса $V$, соответствующий ему базис в $V_\C$ также будет ортонормированным.
+
+\section{Двойственное пространство}
+
+\begin{definition}
+  Пусть $V$ --- линейное пространство над $K$. \textbf{Двойственным(дуальным, сопряженным) к $V$ пространством} называют пространство
+  \begin{equation*}
+    V^{*} = \Hom(V, K)
+  \end{equation*}
+  Элементы $V^{*}$ называют \textbf{линейными функционалами} на $V$.
+\end{definition}
+
+\begin{example}
+  Пусть $V = C[0, 1]$. Примером линейного функционала будет отображение, переводящее функцию в её значение в нуле, то есть $\varphi\colon f \mapsto f(0)$ --- элемент $V^{*}$.
+\end{example}
+
+\begin{theorem-non}
+\label{non:8.10}
+  Пусть $\dim V = n < \infty$. Тогда $\dim V^{*} = n$.
+\end{theorem-non}
+\begin{proof}
+  Действительно, мы знаем, что если $V, W$ --- конечномерные пространства, то
+  \begin{equation*}
+    \Hom(V, W) \cong M(n, m, K')
+  \end{equation*}
+  где $n = \dim V,\, m = \dim W$. В нашем случае $m = 1$(так как наши отображения действуют в поле, размерность которого равна единице). А значит:
+  \begin{equation*}
+    V^{*} = \Hom(V, K) \cong M(n, 1, K') \implies \dim V^{*} = \dim M(n, 1, K') = n \cdot 1 = n
+  \end{equation*}
+  Что и требовалось доказать.
+\end{proof}
+
+\begin{definition}
+  Пусть $e_1, \dotsc, e_n$ --- базис $V$. \textbf{Двойственным(дуальным) к $E$ базисом} называется базис $e^1, \dotsc, e^n$ пространства $V^{*}$ такой, что
+  \begin{align*}
+    e^i\colon V &\longrightarrow K \\
+    e_j &\longmapsto \delta_{i,j}
+  \end{align*}
+  Мы написали образы отображений только для базисных векторов, но как мы знаем любое отображение однозначно задается образами для базисных векторов, поэтому каждое из $e^i$ задано корректно. Смысл следующий: отображение $e^i$ сопоставляет каждому вектору его $i$-ую координату в базисе $E$.
+\end{definition}
+
+\begin{theorem-non}
+  $(e^1, \dotsc, e^n)$ --- базис $V^{*}$.
+\end{theorem-non}
+\begin{proof}
+  По предложению \ref{non:8.10} мы уже знаем, что размерность $V^{*}$ равна $n$, поэтому нам осталось проверить лишь линейную независимость нашего набора векторов. Рассмотрим линейную комбинацию наших векторов, равную нулю:
+  \begin{equation*}
+    \alpha_1 e^1 + \dotsb + \alpha_n e^n = 0
+  \end{equation*}
+  Тогда для любого вектора его образ по такому отображению равен нулю, в частности $\forall j$:
+  \begin{equation*}
+    \begin{gathered}
+      (\alpha_1 e^1 + \dotsb + \alpha_n e^n)(e_j) = 0 \\
+      \sum\limits_{j = 1}^{n} \alpha_j e^{i}(e_j) = 0 \\
+      \sum\limits_{j = 1}^{n} \alpha_j \delta_{i, j} = 0\\
+      \alpha_j = 0
+    \end{gathered}
+  \end{equation*}
+  Таким образом все коэффициенты равны нулю, а значит наша линейная комбинация тривиальна в случае равенства нулю. Значит наш набор векторо --- ЛНС, при этом его размер равен размерность пространства, а значит он является базисом. Что и требовалось доказать.
+\end{proof}
+
+\begin{exercise}
+  Пусть $E, E'$ --- базисы $V$; $E^{*}, E_1^{*}$ --- соответствующие двойственные базисы и $C$ --- матрица перехода от $E$ к $E_1$. Доказать, что матрица перехода от $E^{*}$ к $E_1^{*}$ равна $C^T$.
+\end{exercise}
+
+\end{document}
