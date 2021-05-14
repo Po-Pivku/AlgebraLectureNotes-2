@@ -1,0 +1,314 @@
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+Заметим, что пространства $V$ и $V^{*}$ изоморфны. Действительно, возьмем базис $E$ в $V$ и базис $E'$ в $V^{*}$. Тогда отображение
+\begin{equation*}
+  \begin{gathered}
+    \varphi(\alpha_1 e_1 + \dotsb + \alpha_n e_n) = \alpha_1 e_1' + \dotsb + \alpha_n e_n'
+  \end{gathered}
+\end{equation*}
+является изоморфизмом(сюръективность и инъективность проверяются тривиально). Однако легко видеть, что этот изоморфизм напрямую зависит от выбора базиса $E'$ и какого-то выделенного изоморфизма $V \to V^{*}$ не существует.
+
+При этом можно рассмотреть так называемое \textbf{дважды двойственное пространство}
+\begin{equation*}
+  V^{**} = (V^{*})^{*}
+\end{equation*}
+Оно уже будет канонически изоморфно $V$. Действительно, любой вектор $v \in V$ однозначно определяет линейный функционал на $V^{*}$:
+\begin{align*}
+  V^{*} &\overset{\alpha_v}{\longrightarrow} K \\
+  f &\longmapsto f(v)
+\end{align*}
+Таким образом у нас существует отображение
+\begin{align*}
+  V &\overset{\alpha}{\longrightarrow} V^{**} \\
+  v &\longmapsto \alpha_v
+\end{align*}
+Докажем, что мы получили инъективное отображение(ядро нулевое). Возьмем $v \in V, v \neq 0$. Дополним его до базиса $v = e_1, \dotsc, e_n$. И возьмем первый элемент в двойственном к $E$ базисе. Тогда
+\begin{equation*}
+  \alpha_v(e^{1}) = e^{1}(v) = e^{1}(e_1) = 1
+\end{equation*}
+Таким образом $\alpha_v \neq 0$ в случае $v \neq 0$, а значит $\alpha$ --- инъективное отображение. В совокупности с равенством размерностей получаем, что $V$ изоморфно $V^{**}$. Что и требовалось доказать.
+
+Оказывается, в евклидовых пространствах существует канонический изоморфизм между $V$ и $V^{*}$. Пусть $V$ --- евклидово пространство и $w \in V$. Рассмотрим отображение:
+\begin{align*}
+  V &\overset{l_w}{\longrightarrow} K \\
+  v &\longmapsto (v, w)
+\end{align*}
+Но $l_w \in V^{*}$. Таким образом мы любому вектору $w \in V$ поставили в соответствие некий элемент $l_w$ из $V^{*}$.
+
+\begin{theorem-non}
+\label{non:8.12}
+  Отображение
+  \begin{align*}
+    l\colon V &\to V^{*} \\
+            w &\mapsto l_w
+  \end{align*}
+  является изоморфизмом линейных пространств.
+\end{theorem-non}
+\begin{proof}
+  Заметим, что $\dim V = \dim V^{*} = n$. Проверим инъективность($\Ker l = 0$). Пусть $w \in \Ker l$. Тогда
+  \begin{equation*}
+    \forall v \in V\colon (v, w) = 0 \implies (w, w) = 0 \implies w = 0
+  \end{equation*}
+  Таким образом $\Ker l = 0 \implies \dim \Im l = n - 0 = n \implies \Im l = V^{*}$, то есть $l$ инъективно и сюръективно. Что и требовалось доказать.
+\end{proof}
+
+Пусть $V$ --- унитарное пространство и $w \in V$. Аналогичным образом определим следующее отображение:
+\begin{align*}
+  l_w\colon V &\to K \\
+            v &\mapsto (v, w)
+\end{align*}
+У скалярных произведенй в унитарных пространствах верна линейность по первому аргументу, поэтому $l_w \in V^{*}$.
+\begin{definition}
+  Отображение $\varphi\colon V \to U$ называется \textbf{полулинейным}, если:
+  \begin{enumerate}
+    \item $\varphi(v + u) = \varphi(v) + \varphi(u)$
+    \item $\varphi(\alpha v) = \overline{\alpha} \varphi(v)$
+  \end{enumerate}
+\end{definition}
+
+\begin{theorem-non}
+\label{non:8.13}
+  Отображение
+  \begin{align*}
+    l\colon V &\to V^{*} \\
+            w &\mapsto l_w
+  \end{align*}
+  является полулинейной биекцией.
+\end{theorem-non}
+\begin{proof}
+  \begin{enumerate}
+    \item Полулинейность $l$:
+    \begin{enumerate}
+      \item $\forall v, w_1, w_2 \in V\colon$
+      \begin{equation*}
+        l_{w_1}(v) + l_{w_2}(v) = (v, w_1) + (v, w_2) = (v, w_1 + w_2) = l_{w_1 + w_2}(v)
+      \end{equation*}
+
+      \item $\forall \alpha \in K, v, w \in V\colon$
+      \begin{equation*}
+        l_{\alpha w}(v) = (v, \alpha w) = \overline{\alpha} (v, w) = \overline{\alpha} l_w(v)
+      \end{equation*}
+    \end{enumerate}
+    \item $\Ker l = 0$ --- аналогично предложению \ref{non:8.12} $\implies l$ --- инъективно.
+    \item Рассмотрим линейное пространство $\widetilde{V}$, равным множеству $V$, при этом имеющим следующее умножение на скаляр: $\alpha * v = \overline{\alpha} v$. Рассмотрим следующую цепочку отображений:
+    \begin{equation*}
+      \widetilde{V} \overset{\varepsilon}{\longrightarrow} V \overset{l}{\longrightarrow} V^{*}
+    \end{equation*}
+    Так как $\varepsilon, l$ полулинейны, то отображение $l \circ \varepsilon \in \Hom(\widetilde{V}, V^{*})$. Ядро такого отображения будет нулевым(действительно, $\varepsilon$ --- отображение векторов самих в себя, поэтому $\Ker (l \circ \varepsilon) = \Ker l$), при этом
+    \begin{equation*}
+      \dim \widetilde{V} = \dim V = n \implies \dim \Im (l \circ \varepsilon) = n \implies \Im (l \circ \varepsilon) = V^{*}
+    \end{equation*}
+    Но $\Im (l \circ \varepsilon) = \Im l$(потому что $\varepsilon$ переводит все вектора сами в себя), а значит $\Im l = V^{*} \implies l$ --- сюръективно.
+  \end{enumerate}
+\end{proof}
+
+\begin{remark}
+  Пусть $e_1, \dotsc, e_n$ --- ортонормированный базис $V$. Тогда $l_{e_1}, \dotsc, l_{e_n}$ --- двойственный базис $V$.
+\end{remark}
+\begin{proof}
+  Действительно, возьмем $i, j \in 1, \dotsc, n$.
+  \begin{enumerate}
+    \item $i \neq j$. Тогда:
+    \begin{equation*}
+      l_{e_i}(e_j) = (e_j, e_i) \underbrace{=}_{\mathclap{\text{ортонормированность $\implies$ ортогональность}}} 0
+    \end{equation*}
+    \item $i = j$. Тогда:
+    \begin{equation*}
+      l_{e_i}(e_j) = (e_i, e_i) \underbrace{=}_{\mathclap{\text{ортонормированность}}} = 1
+    \end{equation*}
+  \end{enumerate}
+  Таким образом $l_i(e_j) = \delta_{i, j}$, а значит базис $l_{e_1}, \dotsc, l_{e_n}$ является двойственным по определению.
+\end{proof}
+
+\section{Сопряжённый оператор}
+Пусть $V$ --- конечномерное евклидово или унитарное пространство, $\mathcal{A} \in \End V$ и $w \in V$. Тогда рассмотрим отображение
+\begin{align*}
+  h \colon V &\to K \\
+           v &\mapsto (\mathcal{A} v, w)
+\end{align*}
+Заметим, что $h$ --- линейно. Действительно, скалярные произведения в евклидовом или унитарном пространстве всегда линейны по первому аргументу, а $\mathcal{A}$ линеен просто потому что это линейный оператор. Таким образом $h \in V^{*}$. Но мы знаем(из предложений \ref{non:8.12} и \ref{non:8.13}), что любой линейный функционал соответствует скалярному умножению на какой-то единственный(потому что у нас биекция) вектор $w \in V$, то есть:
+\begin{equation*}
+  \exists ! w' \in V \colon h(v) = (\mathcal{A} v, w) =  (v, w'),\; \forall v \in V
+\end{equation*}
+
+Заметим, что каждому вектору $w$ будет сопоставлен какой-то свой вектор $w'$. Таким образом мы можем задать отображение
+\begin{align*}
+  \A^{*}\colon V &\to V \\
+               w &\mapsto w'
+\end{align*}
+
+\begin{theorem-non}
+  $\A^{*}$ --- это линейный оператор.
+\end{theorem-non}
+\begin{proof}
+    Пусть $w_1, w_2 \in V$ и $\alpha, \beta \in K$. Тогда $\forall v \in V$:
+    \begin{equation*}
+      \begin{gathered}
+        (v, \A^{*}(\alpha w_1 + \beta w_2)) = (\A v, \alpha w_1 + \beta w_2) = \overline{\alpha}(\A v, w_1) + \overline{\beta}(\A v, w_2)
+        = \\ =
+        \overline{\alpha}(v, \A^{*} w_1) + \overline{\beta}(v, \A^{*} w_2) = (v, \alpha \A^{*} w_1 + \beta \A^{*} w_2)
+      \end{gathered}
+    \end{equation*}
+    Заметим, что в случае евклидова пространства мы работает над полем вещественных чисел, а значит комплексное сопряжение не меняет коэффициенты $\alpha$ и $\beta$ и у нас на самом деле написана просто линейность по второму аргументу. В случае же унитарного пространства верна полулинейность по второму аргументу, что и написано в доказательстве.
+
+    Таким образом $\A^{*}(\alpha w_1 + \beta w_2) = \alpha \A^{*} w_1 + \beta \A^{*} w_2$, так как это верно для любого вектора $v \in V$. А значит $\A^{*}$ --- линейный оператор. Что и требовалось доказать.
+\end{proof}
+
+\begin{remark}
+  Имеем $\forall v, w \in V\colon (\A v, w) = (v, \A^{*} w)$ и $\A^{*}$ --- единственный элемент $\End V$ с этим свойством.
+\end{remark}
+
+\begin{definition}
+  $\A^{*}$ называется \textbf{сопряженным к $\A$ оператором}.
+\end{definition}
+
+\begin{theorem-non}
+  Верны следующие свойства сопряженного оператора:
+  \begin{enumerate}
+    \item $(\A^{*})^{*} = \A$
+    \item $(\A + \B)^{*} = \A^{*} + \B^{*}$
+    \item $(\alpha \A)^{*} = \overline{\alpha} \A^{*}$
+    \item $(\A \B)^{*} = \B^{*} \A^{*}$
+  \end{enumerate}
+\end{theorem-non}
+\begin{proof}
+  \begin{enumerate}
+    \item Достаточно проверить, что $\forall v \in V$:
+    \begin{equation*}
+      (\A^{*} v, w) \overset{?}{=} (v, \A w)
+    \end{equation*}
+    Заметим, что $\forall w_1, w_2 \in V\colon (w_1, w_2) = \overline{(w_2, w_1)}$. Действительно, если наше пространство евклидово --- то это верно, так как наше скалярное произведение является симметрической билинейной формой(а значит от того что мы поменяли местами аргументы значение не поменяется), при этом мы работаем в поле вещественных чисел, а значит сопряжение также не поменяет результат. При этом если наше пространство унитарно, то это выполнено просто по определению эрмитовой формы. Тогда:
+    \begin{equation*}
+      (\A^{*} v, w) =
+      \overline{(w, \A^{*}, v)} =
+      \overline{(\A w, v)} =
+      (v, \A w)
+    \end{equation*}
+    Что и требовалось доказать.
+
+    \item Достаточно проверить, что $\forall v \in V$:
+    \begin{equation*}
+      ((\A + \B)v, w) \overset{?}{=} (v, (\A^{*} + \B^{*}) w)
+    \end{equation*}
+    Действительно:
+    \begin{equation*}
+      (v, (\A^{*} + \B^{*}) w) =
+      (v, \A^{*} w) + (v, \B^{*} w) =
+      (\A v, w) + (\B v, w) =
+      (\A v + \B v, w) =
+      ((\A + \B)v, w)
+    \end{equation*}
+
+    \item Достаточно проверить, что $\forall v \in V$:
+    \begin{equation*}
+      (\alpha \A v, w) \overset{?}{=} (v, \overline{\alpha} \A^{*} w)
+    \end{equation*}
+    Действительно:
+    \begin{equation*}
+      (v, \overline{\alpha} \A^{*} w) =
+      \alpha (v, \A^{*} w) =
+      \alpha (\A v, w) =
+      (\alpha \A v, w)
+    \end{equation*}
+
+    \item Достаточно проверить, что $\forall v \in V$:
+    \begin{equation*}
+      (\A \B v, w) \overset{?}{=} (v, \B^{*} \A^{*} w)
+    \end{equation*}
+    Действительно:
+    \begin{equation*}
+      (v, \B^{*} \A^{*} w) =
+      (\B v, \A^{*} w) =
+      (\A \B v, w)
+    \end{equation*}
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem-non}
+  Пусть $E$ --- ортонормированный базис $V, A \in \End V, [\A]_E = A$. Тогда $[\A^{*}]_E = A^{*}$.
+\end{theorem-non}
+\begin{proof}
+  Пусть $A = (a_{ij})$. Тогда
+  \begin{equation*}
+    \A e_j = a_{1 j} e_1 + \dotsb + a_{n j} e_n \implies
+    \underbrace{(\A e_j, e_i)}_{(e_j, \A^{*} e_i)} = a_{i j}
+  \end{equation*}
+  Пусть $[\A^{*}]_E = (b_{i j})$. Тогда:
+  \begin{equation*}
+    a_{i j} =
+    (\A e_j e_i) =
+    (e_j, \A^{*} e_i) =
+    (e_j, b_{1 i} e_1 + \dotsb + b_{n i} e_n) =
+    \overline{b_{j i}}
+  \end{equation*}
+  Таким образом $b_{j i} = \overline{a_{i j}},\; \forall i, j \implies [\A^{*}]_E = A^{*}$.
+\end{proof}
+
+\begin{remark}
+  Если $E$ --- не обязательно ортонормированный, то $[\A^{*}]_{E^{*}} = [\A]_E^{*}$, где $E^{*}$ --- базис $V$, соответствующий базису $V^{*}$, двойственному к $E$. Читателю предлагается доказать этот факт самостоятельно.
+\end{remark}
+
+\section{Нормальные операторы}
+\begin{definition}
+  Пусть $V$ --- конечномерное евклидово или унитарное пространство. Оператор $\A \in \End V$ называется \textbf{нормальным}, если
+  \begin{equation*}
+    \A \A^{*} = \A^{*} \A
+  \end{equation*}
+  В частности:
+  \begin{enumerate}
+    \item[\rom{1}.] $A = \A^{*}$ --- \textbf{самосопряженный оператор}.
+    \item[\rom{2}.] $\A \A^{*} = \varepsilon$ называется \textbf{ортогональным оператором}, если $V$ евклидово или \textbf{унитарным оператором}, если $V$ унитарное.
+  \end{enumerate}
+\end{definition}
+
+\begin{theorem-non}
+  Пусть $\A \in \End V,\; W \subset V$ инв. относительно $\A$. Тогда $W^\perp$ инв. относительно $\A^{*}$.
+\end{theorem-non}
+\begin{proof}
+  Пусть $w' \in W^\perp$. Тогда $\forall w \in W$:
+  \begin{equation*}
+    (w, \A^{*} w') = (\overbrace{\A w}^{\in W}, w') = 0
+  \end{equation*}
+  Таким образом $\A^{*} w' \in W^\perp \implies \A(W^\perp) \subset W^\perp$, что и требовалось доказать.
+\end{proof}
+
+\begin{theorem-non}
+  Пусть $\A \in \End V$ нормальный, $\alpha \in \C$(соответственно $\R$). Тогда $\B = \A - \alpha \varepsilon$ --- нормальный.
+\end{theorem-non}
+\begin{proof}
+  \begin{equation*}
+    \begin{gathered}
+      \B \B^{*} = (\A - \alpha \varepsilon)(\A^{*} - \overline{\alpha}\varepsilon)
+                = \A \A^{*} - \alpha \A^{*} - \overline{\alpha} \A + | \alpha |^2 \varepsilon \\
+      \B^{*} \B = (\A - \overline{\alpha} \varepsilon)(\A^{*} - \alpha\varepsilon)
+                = \A \A^{*} - \alpha \A^{*} - \overline{\alpha} \A + | \alpha |^2 \varepsilon = \B \B^{*}
+    \end{gathered}
+  \end{equation*}
+\end{proof}
+
+\begin{theorem-non}
+  Пусть $\A \in \End V$ --- нормальный, $v$ --- собственный вектор $\A$, соответствующий собственному значению $\lambda$. Тогда $v$ --- собственный вектор $\A^{*}$, соответствующий собственному значению $\overline{\lambda}$.
+\end{theorem-non}
+\begin{proof}
+  Пусть $\B = \A - \lambda \varepsilon$. Тогда $\B v = \A v - \lambda v = \lambda v - \lambda v = 0$. То есть:
+  \begin{align*}
+    (\B v, \B v) &= 0 \\
+    (v, \B^{*} \B v) &= 0 \\
+    (v, \B \B^{*} v) &= 0 \\
+    (\B^{*} v, \B^{*} v) &= 0 \\
+    \B^{*} v &= 0 \\
+    (\A^{*} - \overline{\lambda} \varepsilon)(v) &= 0 \\
+    \A^{*} v &= \overline{\lambda} v
+  \end{align*}
+  Что и требовалось доказать.
+\end{proof}
+
+\begin{theorem}
+  Пусть $V$ --- унитарное, $\A \in \End V$ --- нормальный. Тогда в $V$ есть ортонормированный базис $E$ такой, что $[\A]_E$ диагональная.
+\end{theorem}
+
+\end{document}
